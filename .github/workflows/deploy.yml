@@ -25,19 +25,17 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          # Кеш повністю видалено
-      
-      - name: Debug - list files
-        run: ls -la
-      
-      - name: Debug - check package.json
-        run: cat package.json
+          # Повністю прибрано cache
       
       - name: Install dependencies
-        run: npm install --no-package-lock
+        run: |
+          echo "Installing dependencies..."
+          npm install --no-package-lock --no-audit --no-fund
       
       - name: Build project
-        run: npm run build
+        run: |
+          echo "Building project..."
+          npm run build
       
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
