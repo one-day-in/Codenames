@@ -1,0 +1,377 @@
+/* src/styles/qr-modal.css */
+
+/* Затемнення фону */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    backdrop-filter: blur(5px);
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Основний контейнер модалки */
+.modal {
+    background: linear-gradient(135deg, #1e2a3a 0%, #0f1a24 100%);
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 0 2px rgba(255, 255, 255, 0.1) inset;
+    width: 90%;
+    max-width: 450px;
+    transform: scale(0.8);
+    transition: transform 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+}
+
+.modal-overlay.active .modal {
+    transform: scale(1);
+}
+
+/* Спеціальні стилі для QR-модалки */
+.modal--qr {
+    max-width: 400px;
+}
+
+/* Заголовок модалки */
+.modal__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 25px;
+    background: linear-gradient(135deg, #2a3a4a 0%, #1a2a3a 100%);
+    border-bottom: 2px solid #ffd966;
+    position: relative;
+}
+
+.modal__header::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #ffd966, #ffa500, #ffd966, transparent);
+}
+
+.modal__title {
+    margin: 0;
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    background: linear-gradient(135deg, #ffd966, #ffa500);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Кнопка закриття */
+.modal__close {
+    background: none;
+    border: none;
+    font-size: 28px;
+    cursor: pointer;
+    color: #ffd966;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.1);
+    line-height: 1;
+    padding: 0;
+}
+
+.modal__close:hover {
+    background: rgba(255, 217, 102, 0.2);
+    color: #ffa500;
+    transform: rotate(90deg);
+}
+
+/* Контент модалки */
+.modal__content {
+    padding: 30px 25px;
+}
+
+.modal__content--qr {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 300px;
+}
+
+/* Контейнер для QR-коду */
+.qr-container {
+    text-align: center;
+    animation: fadeInUp 0.5s ease;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Зображення QR-коду */
+.qr-image {
+    max-width: 280px;
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 0 3px #ffd966, 0 0 20px rgba(255, 217, 102, 0.5);
+    transition: all 0.3s ease;
+    background: white;
+    padding: 15px;
+}
+
+.qr-image:hover {
+    transform: scale(1.05);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 0 0 0 3px #ffa500, 0 0 30px rgba(255, 165, 0, 0.6);
+}
+
+/* Опис під QR-кодом */
+.qr-description {
+    margin-top: 25px;
+    color: #e0e0e0;
+    font-size: 16px;
+    line-height: 1.6;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    position: relative;
+    padding-top: 15px;
+}
+
+.qr-description::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #ffd966, #ffa500, #ffd966, transparent);
+    border-radius: 2px;
+}
+
+/* Футер модалки */
+.modal__footer {
+    padding: 20px 25px;
+    background: linear-gradient(135deg, #1e2a3a 0%, #0f1a24 100%);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    justify-content: center;
+}
+
+/* Кнопка в футері */
+.modal__button {
+    padding: 14px 40px;
+    font-size: 18px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.modal__button--primary {
+    background: linear-gradient(135deg, #ffd966, #ffa500);
+    color: #1e2a3a;
+    box-shadow: 0 5px 15px rgba(255, 217, 102, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.modal__button--primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255, 217, 102, 0.5);
+    background: linear-gradient(135deg, #ffe085, #ffb347);
+}
+
+.modal__button--primary:active {
+    transform: translateY(0);
+    box-shadow: 0 3px 10px rgba(255, 217, 102, 0.3);
+}
+
+.modal__button--primary::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.modal__button--primary:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+/* Анімація пульсації для QR-коду */
+@keyframes pulse {
+    0% {
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 0 3px #ffd966, 0 0 20px rgba(255, 217, 102, 0.5);
+    }
+
+    50% {
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 0 3px #ffa500, 0 0 30px rgba(255, 165, 0, 0.8);
+    }
+
+    100% {
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 0 3px #ffd966, 0 0 20px rgba(255, 217, 102, 0.5);
+    }
+}
+
+.qr-image {
+    animation: pulse 2s infinite ease-in-out;
+}
+
+/* Адаптивність для мобільних пристроїв */
+@media (max-width: 768px) {
+    .modal {
+        width: 95%;
+        max-width: 350px;
+    }
+
+    .modal__title {
+        font-size: 24px;
+    }
+
+    .qr-image {
+        max-width: 220px;
+        padding: 10px;
+    }
+
+    .qr-description {
+        font-size: 14px;
+    }
+
+    .modal__button {
+        padding: 12px 30px;
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .modal__header {
+        padding: 15px 20px;
+    }
+
+    .modal__content {
+        padding: 20px;
+    }
+
+    .qr-image {
+        max-width: 180px;
+    }
+
+    .qr-description {
+        font-size: 13px;
+    }
+}
+
+/* Стилі для різних команд (якщо потрібно змінювати колір акцентів) */
+.team-red .modal__header {
+    border-bottom-color: #ff4444;
+}
+
+.team-red .modal__header::after {
+    background: linear-gradient(90deg, transparent, #ff4444, #ff8888, #ff4444, transparent);
+}
+
+.team-red .modal__title {
+    background: linear-gradient(135deg, #ff8888, #ff4444);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.team-red .modal__close {
+    color: #ff8888;
+}
+
+.team-red .modal__close:hover {
+    color: #ff4444;
+}
+
+.team-red .qr-image {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 0 3px #ff4444, 0 0 20px rgba(255, 68, 68, 0.5);
+}
+
+.team-red .qr-image:hover {
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 0 0 0 3px #ff8888, 0 0 30px rgba(255, 136, 136, 0.6);
+}
+
+.team-red .modal__button--primary {
+    background: linear-gradient(135deg, #ff8888, #ff4444);
+}
+
+.team-red .modal__button--primary:hover {
+    background: linear-gradient(135deg, #ff9999, #ff5555);
+}
+
+.team-blue .modal__header {
+    border-bottom-color: #4a90e2;
+}
+
+.team-blue .modal__header::after {
+    background: linear-gradient(90deg, transparent, #4a90e2, #7bb0ff, #4a90e2, transparent);
+}
+
+.team-blue .modal__title {
+    background: linear-gradient(135deg, #7bb0ff, #4a90e2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.team-blue .modal__close {
+    color: #7bb0ff;
+}
+
+.team-blue .modal__close:hover {
+    color: #4a90e2;
+}
+
+.team-blue .qr-image {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 0 3px #4a90e2, 0 0 20px rgba(74, 144, 226, 0.5);
+}
+
+.team-blue .qr-image:hover {
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 0 0 0 3px #7bb0ff, 0 0 30px rgba(123, 176, 255, 0.6);
+}
+
+.team-blue .modal__button--primary {
+    background: linear-gradient(135deg, #7bb0ff, #4a90e2);
+}
+
+.team-blue .modal__button--primary:hover {
+    background: linear-gradient(135deg, #8bb9ff, #5a9ef2);
+}

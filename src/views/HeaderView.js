@@ -1,4 +1,6 @@
 // HeaderView.js
+import qrCodeImage from '../data/images/qr-code.png';
+
 export function renderHeaderView({ container, store }) {
   container.innerHTML = `
     <header class="header">
@@ -34,17 +36,16 @@ export function renderHeaderView({ container, store }) {
     modalOverlay.className = 'modal-overlay';
 
     modalOverlay.innerHTML = `
-      <div class="modal">
+      <div class="modal modal--qr">
         <div class="modal__header">
-          <h2 class="modal__title">MENU</h2>
+          <h2 class="modal__title">MINI MAP</h2>
           <button class="modal__close">✕</button>
         </div>
-        <div class="modal__content">
-          <p>⚡ Модалка-заглушка ⚡</p>
-          <p>Тут буде меню гри</p>
-        </div>
-        <div class="modal__footer">
-          <button class="modal__button modal__button--primary">OK</button>
+        <div class="modal__content modal__content--qr">
+          <div class="qr-container">
+            <img src="${qrCodeImage}" alt="QR Code" class="qr-image">
+            <p class="qr-description">Scan this to open</p>
+          </div>
         </div>
       </div>
     `;
