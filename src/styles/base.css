@@ -1,0 +1,81 @@
+/* base.css - додати/оновити */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: "PT Serif", serif;
+    background: url("../data/images/background.jpg") center / cover no-repeat;
+    color: #222;
+    transition: background 0.5s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Затемнення фону */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: -2;
+}
+
+/* Фонове зображення */
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: blur(2px);
+    z-index: -3;
+}
+
+/* Неонова підсвітка фону для червоної команди */
+body.team-red::before {
+    background: rgba(0, 0, 0, 0.5);
+    box-shadow: inset 0 0 150px rgba(220, 53, 69, 0.3);
+    animation: neonPulseRed 3s ease-in-out infinite;
+}
+
+/* Неонова підсвітка фону для синьої команди */
+body.team-blue::before {
+    background: rgba(0, 0, 0, 0.5);
+    box-shadow: inset 0 0 150px rgba(13, 110, 253, 0.3);
+    animation: neonPulseBlue 3s ease-in-out infinite;
+}
+
+@keyframes neonPulseRed {
+
+    0%,
+    100% {
+        box-shadow: inset 0 0 150px rgba(220, 53, 69, 0.3);
+    }
+
+    50% {
+        box-shadow: inset 0 0 300px rgba(220, 53, 69, 0.5);
+    }
+}
+
+@keyframes neonPulseBlue {
+
+    0%,
+    100% {
+        box-shadow: inset 0 0 150px rgba(13, 110, 253, 0.3);
+    }
+
+    50% {
+        box-shadow: inset 0 0 300px rgba(13, 110, 253, 0.5);
+    }
+}

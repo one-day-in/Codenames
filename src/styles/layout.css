@@ -1,0 +1,26 @@
+/* layout.css */
+html,
+body {
+  height: 100%;
+  margin: 0;
+  overflow: hidden; /* запобігаємо скролу */
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.app__header {
+  flex-shrink: 0; /* хедер не стискається */
+}
+
+.app__grid {
+  flex: 1 1 auto; /* займає весь доступний простір */
+  min-height: 0; /* важливо для flex-контейнера */
+  padding: 16px;
+  overflow: auto; /* якщо контент не влазить */
+}

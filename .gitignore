@@ -1,0 +1,22 @@
+# Залежності - НІКОЛИ не заливаємо node_modules!
+node_modules/
+package-lock.json
+
+# Папка збірки - буде створюватись автоматично
+dist/
+dist-ssr/
+
+# Локальні файли середовища
+.env
+.env.local
+.env.*.local
+
+# Логи
+*.log
+npm-debug.log*
+
+# Файли редакторів та ОС
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

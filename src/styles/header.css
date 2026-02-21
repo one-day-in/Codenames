@@ -1,0 +1,432 @@
+/* header.css */
+.header {
+    height: 130px;
+    /* Збільшили висоту */
+    background: transparent;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 24px;
+    position: relative;
+    z-index: 10;
+    margin-bottom: 20px;
+}
+
+/* Ефект лампи зверху */
+.header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    background: linear-gradient(180deg,
+            rgba(255, 255, 255, 0.15) 0%,
+            rgba(255, 255, 255, 0.05) 50%,
+            transparent 100%);
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* Неонова підсвітка для червоної команди */
+body.team-red .header::after {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 10%;
+    right: 10%;
+    height: 20px;
+    background: rgba(220, 53, 69, 0.5);
+    filter: blur(15px);
+    border-radius: 50%;
+    animation: neonGlow 2s ease-in-out infinite;
+    z-index: -2;
+}
+
+/* Неонова підсвітка для синьої команди */
+body.team-blue .header::after {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 10%;
+    right: 10%;
+    height: 20px;
+    background: rgba(13, 110, 253, 0.5);
+    filter: blur(15px);
+    border-radius: 50%;
+    animation: neonGlow 2s ease-in-out infinite;
+    z-index: -2;
+}
+
+@keyframes neonGlow {
+
+    0%,
+    100% {
+        opacity: 0.7;
+        filter: blur(15px);
+        transform: scaleY(1);
+    }
+
+    50% {
+        opacity: 1;
+        filter: blur(20px);
+        transform: scaleY(1.3);
+    }
+}
+
+.header__left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+/* Контейнер для назви команди */
+.header__team-container {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.header__team-label {
+    font-size: 1.3rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    opacity: 0.7;
+    color: #ccc;
+}
+
+.header__team {
+    font-weight: 800;
+    font-size: 3.4rem;
+    /* Збільшили */
+    line-height: 1;
+    transition: all 0.3s ease;
+    position: relative;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Червона команда */
+body.team-red .header__team {
+    color: #dc3545;
+    text-shadow: 0 0 20px rgba(220, 53, 69, 0.7);
+    background: linear-gradient(180deg, #ff6b7c, #dc3545);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Синя команда */
+body.team-blue .header__team {
+    color: #0d6efd;
+    text-shadow: 0 0 20px rgba(13, 110, 253, 0.7);
+    background: linear-gradient(180deg, #5e9eff, #0d6efd);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Game Over стан */
+body:not(.team-red):not(.team-blue) .header__team {
+    color: #999;
+    text-shadow: 0 0 20px rgba(153, 153, 153, 0.5);
+    background: linear-gradient(180deg, #ccc, #999);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Блок з кнопками */
+.header__buttons {
+    display: flex;
+    gap: 6px;
+}
+
+/* Базові стилі для кнопок */
+.header__button {
+    padding: 32px 58px;
+    /* Збільшили */
+    border-radius: 40px;
+    /* Більш округлі */
+    border: none;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 1.1rem;
+    /* Збільшили */
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Ефект блиску на кнопках */
+.header__button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(255, 255, 255, 0.2),
+            transparent);
+    transition: left 0.5s ease;
+}
+
+.header__button:hover::before {
+    left: 100%;
+}
+
+.header__button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.header__button:active {
+    transform: translateY(0);
+}
+
+/* Стилі для кнопки End Turn */
+.header__button--turn {
+    background: linear-gradient(135deg, #333, #222);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Підсвітка кнопки End Turn кольором команди */
+body.team-red .header__button--turn {
+    background: linear-gradient(135deg, #dc3545, #b02a37);
+    box-shadow: 0 4px 15px rgba(220, 53, 69, 0.3);
+    border: 1px solid rgba(220, 53, 69, 0.3);
+}
+
+body.team-red .header__button--turn:hover {
+    background: linear-gradient(135deg, #b02a37, #dc3545);
+    box-shadow: 0 6px 20px rgba(220, 53, 69, 0.5);
+}
+
+body.team-blue .header__button--turn {
+    background: linear-gradient(135deg, #0d6efd, #0a58ca);
+    box-shadow: 0 4px 15px rgba(13, 110, 253, 0.3);
+    border: 1px solid rgba(13, 110, 253, 0.3);
+}
+
+body.team-blue .header__button--turn:hover {
+    background: linear-gradient(135deg, #0a58ca, #0d6efd);
+    box-shadow: 0 6px 20px rgba(13, 110, 253, 0.5);
+}
+
+/* Стилі для кнопки New Game */
+.header__button--new {
+    background: linear-gradient(135deg, #444, #333);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Підсвітка для New Game (менш інтенсивна) */
+body.team-red .header__button--new {
+    background: linear-gradient(135deg, #4a4a4a, #3a3a3a);
+    border: 1px solid rgba(220, 53, 69, 0.3);
+}
+
+body.team-blue .header__button--new {
+    background: linear-gradient(135deg, #4a4a4a, #3a3a3a);
+    border: 1px solid rgba(13, 110, 253, 0.3);
+}
+
+.header__button--new:hover {
+    background: linear-gradient(135deg, #555, #444);
+}
+
+/* Стилі для Game Over */
+body:not(.team-red):not(.team-blue) .header__button--turn {
+    background: linear-gradient(135deg, #666, #555);
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+body:not(.team-red):not(.team-blue) .header__button--turn:hover {
+    transform: none;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* header.css - додати в кінець файлу */
+
+/* Стилі для кнопки Menu */
+.header__button--menu {
+    background: linear-gradient(135deg, #555, #444);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 1rem;
+}
+
+/* Підсвітка для кнопки Menu в залежності від команди */
+body.team-red .header__button--menu {
+    background: linear-gradient(135deg, #4a4a4a, #3a3a3a);
+    border: 1px solid rgba(220, 53, 69, 0.3);
+}
+
+body.team-blue .header__button--menu {
+    background: linear-gradient(135deg, #4a4a4a, #3a3a3a);
+    border: 1px solid rgba(13, 110, 253, 0.3);
+}
+
+.header__button--menu:hover {
+    background: linear-gradient(135deg, #666, #555);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Стилі для модального вікна */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+}
+
+.modal {
+    background: linear-gradient(135deg, #1a1a1a, #222);
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    width: 90%;
+    max-width: 400px;
+    transform: scale(0.9) translateY(20px);
+    opacity: 0;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+}
+
+.modal-overlay.active .modal {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+}
+
+/* Підсвітка модалки кольором команди */
+body.team-red .modal {
+    box-shadow: 0 20px 60px rgba(220, 53, 69, 0.3);
+    border: 1px solid rgba(220, 53, 69, 0.3);
+}
+
+body.team-blue .modal {
+    box-shadow: 0 20px 60px rgba(13, 110, 253, 0.3);
+    border: 1px solid rgba(13, 110, 253, 0.3);
+}
+
+.modal__header {
+    padding: 20px 24px;
+    background: linear-gradient(90deg, #2a2a2a, #333);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.modal__title {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    background: linear-gradient(135deg, #fff, #ccc);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.modal__close {
+    background: none;
+    border: none;
+    color: #999;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.modal__close:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    transform: rotate(90deg);
+}
+
+.modal__content {
+    padding: 30px 24px;
+    color: #fff;
+    text-align: center;
+}
+
+.modal__content p {
+    margin: 10px 0;
+    font-size: 1.1rem;
+    color: #ccc;
+}
+
+.modal__content p:first-child {
+    font-size: 1.3rem;
+    color: #fff;
+    margin-bottom: 15px;
+}
+
+.modal__footer {
+    padding: 16px 24px;
+    background: #2a2a2a;
+    display: flex;
+    justify-content: flex-end;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.modal__button {
+    padding: 10px 24px;
+    border-radius: 30px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+}
+
+.modal__button--primary {
+    background: linear-gradient(135deg, #4a4a4a, #3a3a3a);
+    color: white;
+}
+
+/* Підсвітка кнопки OK кольором команди */
+body.team-red .modal__button--primary {
+    background: linear-gradient(135deg, #dc3545, #b02a37);
+}
+
+body.team-blue .modal__button--primary {
+    background: linear-gradient(135deg, #0d6efd, #0a58ca);
+}
+
+.modal__button--primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}

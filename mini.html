@@ -1,0 +1,23 @@
+<!-- mini.html -->
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Codenames - Міні карта</title>
+    
+    <!-- Ці шляхи теж нормальні, Vite їх обробить -->
+    <link rel="stylesheet" href="/src/styles/main.css">
+    <link rel="stylesheet" href="/src/styles/mini-board.css">
+</head>
+<body>
+    <div class="mini-board">
+        <div class="container">
+            <h1 class="mini-board__title">🎯 Codenames - Міні карта</h1>
+            <div id="board" class="board mini-board__grid"></div>
+            <div id="status" class="status mini-board__status">Завантаження...</div>
+        </div>
+    </div>
+    <script type="module" src="/src/views/MiniBoardView.js"></script>
+</body>
+</html>
