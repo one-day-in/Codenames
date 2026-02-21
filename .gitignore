@@ -1,6 +1,6 @@
 # Залежності - НІКОЛИ не заливаємо node_modules!
 node_modules/
-package-lock.json
+# package-lock.json
 
 # Папка збірки - буде створюватись автоматично
 dist/
