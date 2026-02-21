@@ -25,10 +25,16 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-
+          # Кеш повністю видалено
+      
+      - name: Debug - list files
+        run: ls -la
+      
+      - name: Debug - check package.json
+        run: cat package.json
       
       - name: Install dependencies
-        run: npm install
+        run: npm install --no-package-lock
       
       - name: Build project
         run: npm run build
