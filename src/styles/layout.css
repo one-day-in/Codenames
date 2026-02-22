@@ -3,7 +3,7 @@ html,
 body {
   height: 100%;
   margin: 0;
-  overflow: hidden; /* запобігаємо скролу */
+  overflow: hidden;
 }
 
 .app {
@@ -15,12 +15,12 @@ body {
 }
 
 .app__header {
-  flex-shrink: 0; /* хедер не стискається */
+  flex-shrink: 0;
 }
 
 .app__grid {
-  flex: 1 1 auto; /* займає весь доступний простір */
-  min-height: 0; /* важливо для flex-контейнера */
-  padding: 16px;
-  overflow: auto; /* якщо контент не влазить */
+  flex: 1 1 auto;
+  min-height: 0;
+  padding: var(--space-md);
+  overflow: auto;
 }

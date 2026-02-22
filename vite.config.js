@@ -1,21 +1,25 @@
-// vite.config.js
 import { defineConfig } from 'vite';
 import { resolve } from 'path';
 
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
   server: {
+    host: true,
     port: 5173,
     open: true
   },
-  // Важливо: змініть на назву вашого репозиторію
-  base: '/codenames/', // або як точно називається ваш репозиторій
+  preview: {
+    host: true,
+    port: 4173,
+  },
+  base: mode === 'production' ? '/codenames/' : '/',
   build: {
     outDir: 'dist',
     rollupOptions: {
       input: {
         main: resolve(__dirname, 'index.html'),
         mini: resolve(__dirname, 'mini.html'),
+        controller: resolve(__dirname, 'controller.html'),
       },
     },
   },
-});
+}));

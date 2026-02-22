@@ -1,15 +1,9 @@
 import './styles/main.css';
-import { createGameStore } from './store/gameStore.js';
-import { renderAppView } from './views/AppView.js';
+import { initApp } from './app/initApp.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   const root = document.querySelector('#app');
-  
-  if (!root) {
-    console.error('Root element #app not found');
-    return;
-  }
+  if (!root) return;
 
-  const store = createGameStore({ size: 5 });
-  renderAppView({ root, store });
+  initApp(root);
 });

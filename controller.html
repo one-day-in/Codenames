@@ -4,16 +4,23 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mini Controller</title>
+    <title>Controller</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap"
         rel="stylesheet">
+    <link rel="stylesheet" href="/src/styles/main.css" />
 </head>
 
 <body>
     <div id="app"></div>
-    <script type="module" src="/src/mini.js"></script>
+
+    <script type="module">
+        import { initController } from './src/app/initController.js';
+
+        const root = document.querySelector('#app');
+        initController(root);
+    </script>
 </body>
 
 </html>

@@ -1,19 +1,20 @@
 {
-  "name": "grid-25-cells-bootstrap",
+  "name": "leeloo-codenames25",
   "private": true,
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host",
     "build": "vite build",
-    "preview": "vite preview",
+    "preview": "vite preview --host",
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.97.0",
     "bootstrap": "^5.3.3"
   },
   "devDependencies": {
-    "vite": "^5.0.0",
-    "gh-pages": "^6.0.0"
+    "gh-pages": "^6.0.0",
+    "vite": "^5.0.0"
   }
 }

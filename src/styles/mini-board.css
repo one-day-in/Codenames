@@ -1,234 +1,115 @@
-/* mini-board.css - максимально простий варіант */
-.mini-board {
-    height: 100vh;
-    width: 100vw;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #1a1a1a;
-    overflow: hidden;
-    margin: 0;
-    padding: 2vh 2vw;
-    box-sizing: border-box;
-}
+/* mini-board.css */
 
-.mini-board .container {
-    width: 100%;
-    height: 100%;
+/* ─── LAYOUT ──────────────────────────────────────────────────── */
+.mini-board {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 1vh;
-}
-
-.mini-board__title {
-    font-size: 3vh;
-    color: #aaa;
-    margin: 0;
-    height: 5vh;
-    line-height: 5vh;
-    text-align: center;
-    font-weight: 500;
-}
-
-.mini-board__grid {
-    display: grid;
-    gap: 0.5vh;
-    background: #444;
-    padding: 1vh;
-    border-radius: 1vh;
-    width: 85vh;
-    height: 85vh;
-    max-width: 85vw;
-    max-height: 85vw;
-}
-
-.mini-board .cell {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 3vh;
-    border-radius: 0.8vh;
-    font-weight: bold;
-    text-transform: uppercase;
-    transition: all 0.2s ease;
-    box-sizing: border-box;
-    color: rgb(0, 0, 0);
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-    word-break: break-word;
-    /* розбиває довгі слова */
-    overflow-wrap: break-word;
-    /* альтернатива для переносу */
-    font-size: clamp(1.2vh, 1.5vh, 2rem);
-    /* адаптивний розмір шрифту */
-    line-height: 1.2;
-    padding: 2px;
-}
-
-/* Всі клітинки показують свої справжні кольори (як для ведучого) */
-.mini-board .cell.red {
-    background: #dc2626 !important;
-}
-
-.mini-board .cell.blue {
-    background: #2563eb !important;
-}
-
-.mini-board .cell.neutral {
-    background: #f1ece4 !important;
-}
-
-.mini-board .cell.assassin {
-    background: #000000 !important;
-}
-
-/* Якщо клітинка ВІДКРИТА в грі - затемнюємо її */
-.mini-board .cell[data-revealed="true"] {
-    opacity: 0.4 !important;
-    filter: brightness(0.7) !important;
-}
-
-/* Але колір залишається тим самим */
-.mini-board .cell[data-revealed="true"].red {
-    background: #dc2626 !important;
-    opacity: 0.4 !important;
-}
-
-.mini-board .cell[data-revealed="true"].blue {
-    background: #2563eb !important;
-    opacity: 0.4 !important;
-}
-
-.mini-board .cell[data-revealed="true"].neutral {
-    background: #f2efe9 !important;
-    opacity: 0.4 !important;
-}
-
-.mini-board .cell[data-revealed="true"].assassin {
-    background: #000000 !important;
-    opacity: 0.4 !important;
-}
-
-/* Стилі для статусу */
-.mini-board__status {
-    font-size: 2.5vh;
-    color: #fff;
-    background: #333;
-    padding: 1vh 2vh;
-    border-radius: 1vh;
-    height: 5vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 2vh;
-    width: fit-content;
-    max-width: 90%;
-    margin: 0 auto;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-/* Індикатори команд */
-.mini-board .team-indicator {
-    display: inline-block;
-    width: 2.5vh;
-    height: 2.5vh;
-    border-radius: 50%;
-    margin: 0 1vh;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-.mini-board .team-indicator.red {
-    background: #dc2626;
-}
-
-.mini-board .team-indicator.blue {
-    background: #2563eb;
-}
-
-/* Анімація появи клітинок */
-.mini-board .cell {
-    animation: fadeIn 0.3s ease;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: scale(0.9);
-    }
-
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
-/* Стилі для тексту в статусі */
-.mini-board__status span {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5vh;
-}
-
-/* Глобальні стилі для body */
-body {
-    margin: 0;
-    padding: 0;
+    width: 100vw;
+    height: 100vh;
     overflow: hidden;
-    font-family: 'PT Serif', serif;
+    padding: var(--space-sm);
+    gap: var(--space-sm);
+    font-family: var(--font-family);
 }
 
-/* Стилі для порожнього стану */
-.mini-board__grid:empty {
+/* ─── ХЕДЕР ───────────────────────────────────────────────────── */
+.mini-board__header {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-xs) var(--space-sm);
+    background: rgba(255,255,255,0.05);
+    border-radius: var(--radius-sm);
+}
+
+.mini-board__status {
+    font-size: var(--font-md);
+    color: var(--white);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.mini-board__new-btn {
+    padding: 8px 20px;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--white-20);
+    background: var(--gray-700);
+    color: var(--white);
+    font-family: var(--font-family);
+    font-size: var(--font-sm);
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.mini-board__new-btn:hover {
+    background: var(--gray-600);
+    transform: translateY(-1px);
+}
+
+/* ─── СІТКА ───────────────────────────────────────────────────── */
+.mini-board__grid {
+    flex: 1 1 auto;
+    min-height: 0;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    gap: clamp(3px, 1vw, 8px);
+}
+
+/* ─── КЛІТИНКА МІНІ ───────────────────────────────────────────── */
+.mini-cell {
     display: flex;
     align-items: center;
     justify-content: center;
+    border-radius: var(--radius-sm);
+    font-weight: 700;
+    text-transform: uppercase;
+    overflow: hidden;
+    padding: 0 4px;
+    border: 2px solid transparent;
+    user-select: none;
+    position: relative;
+    transition: opacity var(--transition-fast);
 }
 
-.mini-board__grid:empty::after {
-    content: "🎮";
-    font-size: 10vh;
-    opacity: 0.3;
+.mini-cell span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 100%;
+    font-size: clamp(8px, 2vw, 18px);
 }
 
-/* Адаптація для дуже маленьких екранів */
-@media (max-width: 400px) {
-    .mini-board__title {
-        font-size: 2.5vh;
-        height: 4vh;
-        line-height: 4vh;
-    }
-
-    .mini-board .cell {
-        font-size: 2.5vh;
-    }
-
-    .mini-board__status {
-        font-size: 2vh;
-        padding: 0.8vh 1.5vh;
-        height: 4vh;
-        gap: 1vh;
-    }
+/* ─── РОЛІ ────────────────────────────────────────────────────── */
+.mini-cell--red {
+    background: var(--red);
+    color: var(--card-text-light);
+    border-color: var(--red-dark);
 }
 
-/* Адаптація для дуже високих екранів */
-@media (min-aspect-ratio: 1/1) {
-    .mini-board__grid {
-        width: 85vh;
-        height: 85vh;
-        max-width: 85vh;
-        max-height: 85vh;
-    }
+.mini-cell--blue {
+    background: var(--blue);
+    color: var(--card-text-light);
+    border-color: var(--blue-dark);
 }
 
-/* Адаптація для дуже широких екранів */
-@media (max-aspect-ratio: 1/1) {
-    .mini-board__grid {
-        width: 85vw;
-        height: 85vw;
-        max-width: 85vw;
-        max-height: 85vw;
-    }
+.mini-cell--neutral {
+    background: var(--neutral);
+    color: var(--card-text-dark);
+    border-color: #d4cec6;
+}
+
+.mini-cell--assassin {
+    background: var(--assassin);
+    color: var(--card-text-light);
+    border-color: #000;
+}
+
+/* ─── ВІДКРИТА КАРТА — трохи тьмяніша ────────────────────────── */
+.mini-cell--revealed {
+    opacity: 0.35;
 }

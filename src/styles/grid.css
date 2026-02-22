@@ -1,5 +1,6 @@
 /* grid.css */
 
+/* ─── СІТКА ───────────────────────────────────────────────────── */
 .grid {
     width: 100%;
     height: 100%;
@@ -7,132 +8,59 @@
     grid-template-columns: repeat(5, 1fr);
     grid-template-rows: repeat(5, 1fr);
     gap: 28px;
-    padding: 16px;
-    border-radius: 12px;
+    padding: var(--space-md);
+    border-radius: var(--radius-md);
     backdrop-filter: blur(2px);
 }
 
+/* ─── БАЗОВА КЛІТИНКА ─────────────────────────────────────────── */
 .grid__cell {
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid var(--white-20);
     font-weight: 600;
     text-align: center;
-    padding: 8px;
+    padding: var(--space-sm);
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     user-select: none;
-    transition: all 0.2s ease;
+    transition: all var(--transition-fast);
     border-radius: 15px;
     background: rgba(255, 255, 255, 0.9);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    color: #22222200;
+    box-shadow: var(--shadow-sm);
+    color: transparent;
 }
 
-.grid__cell:hover:not(.grid__cell--hidden) {
-    transform: scale(1.02);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-/* Стилі для прихованих клітинок */
+/* ─── СТАНИ КЛІТИНОК ──────────────────────────────────────────── */
 .grid__cell--hidden {
-    border-color: #ccc;
+    border-color: var(--gray-200);
     background: url("../data/images/card-front.jpg") center / 100% 100% no-repeat;
-    color: #222;
+    color: var(--gray-800);
 }
 
-/* УНІВЕРСАЛЬНА АНІМАЦІЯ для всіх відкритих клітинок */
-.grid__cell--red,
-.grid__cell--blue,
-.grid__cell--neutral-1,
-.grid__cell--neutral-2,
-.grid__cell--neutral-3,
-.grid__cell--neutral-4,
-.grid__cell--neutral-5,
-.grid__cell--neutral-6,
-.grid__cell--assassin {
-    animation: revealCard 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-@keyframes revealCard {
-    0% {
-        transform: scale(0.9);
-        opacity: 0.7;
-    }
-
-    50% {
-        transform: scale(1.05);
-        opacity: 0.95;
-    }
-
-    100% {
-        transform: scale(1);
-        opacity: 1;
-    }
-}
-
-/* Стилі для червоних клітинок */
 .grid__cell--red {
     background: url("../data/images/card-red.png") center / 100% 100% no-repeat;
 }
 
-/* Стилі для синіх клітинок */
 .grid__cell--blue {
     background: url("../data/images/card-blue.png") center / 100% 100% no-repeat;
 }
 
-/* Базові стилі для всіх нейтральних */
 .grid__cell--neutral {
     background: url("../data/images/card-neutral.png") center / 100% 100% no-repeat;
-    color: transparent;
 }
 
-/* Стилі для кожної нейтральної клітинки окремо */
-.grid__cell--neutral-1 {
-    background: url("../data/images/card-neutral-1.png") center / 100% 100% no-repeat;
-}
+.grid__cell--neutral-1 { background: url("../data/images/card-neutral-1.png") center / 100% 100% no-repeat; }
+.grid__cell--neutral-2 { background: url("../data/images/card-neutral-2.png") center / 100% 100% no-repeat; }
+.grid__cell--neutral-3 { background: url("../data/images/card-neutral-3.png") center / 100% 100% no-repeat; }
+.grid__cell--neutral-4 { background: url("../data/images/card-neutral-4.png") center / 100% 100% no-repeat; }
+.grid__cell--neutral-5 { background: url("../data/images/card-neutral-5.png") center / 100% 100% no-repeat; }
+.grid__cell--neutral-6 { background: url("../data/images/card-neutral.png")   center / 100% 100% no-repeat; }
 
-.grid__cell--neutral-2 {
-    background: url("../data/images/card-neutral-2.png") center / 100% 100% no-repeat;
-}
-
-.grid__cell--neutral-3 {
-    background: url("../data/images/card-neutral-3.png") center / 100% 100% no-repeat;
-}
-
-.grid__cell--neutral-4 {
-    background: url("../data/images/card-neutral-4.png") center / 100% 100% no-repeat;
-}
-
-.grid__cell--neutral-5 {
-    background: url("../data/images/card-neutral-5.png") center / 100% 100% no-repeat;
-}
-
-.grid__cell--neutral-6 {
-    background: url("../data/images/card-neutral.png") center / 100% 100% no-repeat;
-}
-
-/* Анімація при наведенні на приховані клітинки */
-.grid__cell--hidden:hover {
-    border: 2px solid transparent;
-    transform: scale(1.08);
-    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
-}
-
-/* Командні кольори при наведенні */
-body.team-red .grid__cell--hidden:hover {
-    box-shadow: 0 0 15px rgba(220, 53, 69, 0.5);
-}
-
-body.team-blue .grid__cell--hidden:hover {
-    box-shadow: 0 0 15px rgba(13, 110, 253, 0.5);
-}
-
-/* ОНОВЛЕНІ стилі для асасина з вибуховою анімацією */
+/* ─── АСАСИН ──────────────────────────────────────────────────── */
 .grid__cell--assassin {
-    background: #212529;
-    color: white;
+    background: var(--assassin);
+    color: var(--white);
     border-color: #000;
     animation: assassinExplosion 0.6s ease-out forwards;
     position: relative;
@@ -140,7 +68,6 @@ body.team-blue .grid__cell--hidden:hover {
     z-index: 10;
 }
 
-/* Додатковий псевдоелемент для ефекту спалаху */
 .grid__cell--assassin::before {
     content: '';
     position: absolute;
@@ -148,7 +75,7 @@ body.team-blue .grid__cell--hidden:hover {
     left: 50%;
     width: 0;
     height: 0;
-    border-radius: 50%;
+    border-radius: var(--radius-circle);
     background: radial-gradient(circle, rgba(255, 200, 50, 0.9) 0%, rgba(255, 80, 0, 0.6) 60%, transparent 100%);
     transform: translate(-50%, -50%);
     animation: explosionFlash 0.5s ease-out forwards;
@@ -156,7 +83,6 @@ body.team-blue .grid__cell--hidden:hover {
     z-index: 11;
 }
 
-/* Псевдоелемент для "уламків" */
 .grid__cell--assassin::after {
     content: '💥';
     position: absolute;
@@ -170,124 +96,57 @@ body.team-blue .grid__cell--hidden:hover {
     z-index: 12;
 }
 
-@keyframes assassinExplosion {
-    0% {
-        transform: scale(1);
-        background-color: #212529;
-        box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
-        border-color: #000;
-    }
-
-    20% {
-        transform: scale(1.3);
-        background-color: #ff6b35;
-        box-shadow: 0 0 30px rgba(255, 107, 53, 0.9), 0 0 60px rgba(255, 200, 50, 0.5);
-        border-color: #ffd700;
-    }
-
-    40% {
-        transform: scale(1.1);
-        background-color: #ff4d00;
-        box-shadow: 0 0 40px #ff4d00, 0 0 80px #ffaa00;
-        border-color: #ffaa00;
-    }
-
-    60% {
-        transform: scale(1.05) rotate(2deg);
-        background-color: #dc3545;
-        box-shadow: 0 0 35px #dc3545;
-        border-color: #ff6b6b;
-    }
-
-    80% {
-        transform: scale(1.02) rotate(-1deg);
-        background-color: #a11f2f;
-        box-shadow: 0 0 20px #a11f2f;
-        border-color: #ff4444;
-    }
-
-    100% {
-        transform: scale(1);
-        background-color: #212529;
-        box-shadow: 0 0 10px rgba(220, 53, 69, 0.5);
-        border-color: #8b0000;
-    }
-}
-
-@keyframes explosionFlash {
-    0% {
-        width: 0;
-        height: 0;
-        opacity: 1;
-        background: radial-gradient(circle, rgba(255, 255, 200, 1) 0%, rgba(255, 200, 50, 1) 40%, rgba(255, 80, 0, 0.8) 80%, transparent 100%);
-    }
-
-    50% {
-        width: 150px;
-        height: 150px;
-        opacity: 0.9;
-        background: radial-gradient(circle, rgba(255, 255, 255, 1) 0%, rgba(255, 200, 50, 0.9) 50%, rgba(255, 80, 0, 0.5) 90%, transparent 100%);
-    }
-
-    100% {
-        width: 200px;
-        height: 200px;
-        opacity: 0;
-        background: radial-gradient(circle, rgba(255, 255, 255, 0) 0%, rgba(255, 200, 50, 0) 60%, transparent 100%);
-    }
-}
-
-@keyframes explosionDebris {
-    0% {
-        font-size: 0;
-        opacity: 0;
-        transform: translate(-50%, -50%) scale(0);
-    }
-
-    30% {
-        font-size: 40px;
-        opacity: 1;
-        transform: translate(-50%, -50%) scale(1.2) rotate(0deg);
-        text-shadow: 0 0 20px #ffaa00, 0 0 40px #ff5500;
-    }
-
-    60% {
-        font-size: 50px;
-        opacity: 0.9;
-        transform: translate(-30%, -70%) scale(1.5) rotate(20deg);
-        text-shadow: 0 0 30px #ffaa00, 0 0 60px #ff5500;
-    }
-
-    80% {
-        font-size: 30px;
-        opacity: 0.4;
-        transform: translate(-10%, -120%) scale(0.8) rotate(40deg);
-        text-shadow: 0 0 15px #ffaa00;
-    }
-
-    100% {
-        font-size: 20px;
-        opacity: 0;
-        transform: translate(20%, -150%) scale(0.5) rotate(60deg);
-        text-shadow: 0 0 10px #ffaa00;
-    }
-}
-
-/* Додатковий ефект "ударної хвилі" для сусідніх клітинок (опціонально) */
-.grid__cell--assassin:active~.grid__cell {
+.grid__cell--assassin:active ~ .grid__cell {
     animation: shockwave 0.3s ease-out;
 }
 
+/* ─── АНІМАЦІЇ ────────────────────────────────────────────────── */
+
+/* Поява відкритої картки */
+.grid__cell--red,
+.grid__cell--blue,
+.grid__cell--neutral,
+.grid__cell--neutral-1,
+.grid__cell--neutral-2,
+.grid__cell--neutral-3,
+.grid__cell--neutral-4,
+.grid__cell--neutral-5,
+.grid__cell--neutral-6,
+.grid__cell--assassin {
+    animation: revealCard 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes revealCard {
+    0%   { transform: scale(0.9); opacity: 0.7; }
+    50%  { transform: scale(1.05); opacity: 0.95; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes assassinExplosion {
+    0%   { transform: scale(1);    background-color: var(--assassin); box-shadow: 0 0 5px var(--white-50);           border-color: #000; }
+    20%  { transform: scale(1.3);  background-color: #ff6b35;         box-shadow: 0 0 30px rgba(255, 107, 53, 0.9);  border-color: #ffd700; }
+    40%  { transform: scale(1.1);  background-color: #ff4d00;         box-shadow: 0 0 40px #ff4d00;                  border-color: #ffaa00; }
+    60%  { transform: scale(1.05) rotate(2deg);  background-color: var(--red);      box-shadow: 0 0 35px var(--red);      border-color: #ff6b6b; }
+    80%  { transform: scale(1.02) rotate(-1deg); background-color: var(--red-dark); box-shadow: 0 0 20px var(--red-dark); border-color: #ff4444; }
+    100% { transform: scale(1);    background-color: var(--assassin); box-shadow: 0 0 10px var(--red-neon-md);       border-color: #8b0000; }
+}
+
+@keyframes explosionFlash {
+    0%   { width: 0;     height: 0;     opacity: 1; }
+    50%  { width: 150px; height: 150px; opacity: 0.9; }
+    100% { width: 200px; height: 200px; opacity: 0; }
+}
+
+@keyframes explosionDebris {
+    0%   { font-size: 0;    opacity: 0;   transform: translate(-50%, -50%) scale(0); }
+    30%  { font-size: 40px; opacity: 1;   transform: translate(-50%, -50%) scale(1.2) rotate(0deg); }
+    60%  { font-size: 50px; opacity: 0.9; transform: translate(-30%, -70%) scale(1.5) rotate(20deg); }
+    80%  { font-size: 30px; opacity: 0.4; transform: translate(-10%, -120%) scale(0.8) rotate(40deg); }
+    100% { font-size: 20px; opacity: 0;   transform: translate(20%, -150%) scale(0.5) rotate(60deg); }
+}
+
 @keyframes shockwave {
-    0% {
-        transform: scale(1);
-    }
-
-    50% {
-        transform: scale(0.98);
-    }
-
-    100% {
-        transform: scale(1);
-    }
+    0%   { transform: scale(1); }
+    50%  { transform: scale(0.98); }
+    100% { transform: scale(1); }
 }
