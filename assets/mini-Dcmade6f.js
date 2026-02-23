@@ -1,4 +1,4 @@
-import{b as s,o as d,a as c,d as l}from"./fullscreen-B6UZMS3G.js";async function m(i){const a=s();if(!a){i.innerHTML=`
+import{b as s,o as d,a as c,d as l}from"./fullscreen-iz1ArBrx.js";async function m(i){const a=s();if(!a){i.innerHTML=`
       <div class="waiting-screen">
         <p style="color:white;text-align:center;">Відскануй QR з головного екрану.</p>
       </div>
