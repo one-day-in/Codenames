@@ -18,7 +18,11 @@ import{c as h,g as _,a as u,f as $}from"./fullscreen-Ds68ld_W.js";import{g as b}
             <div class="header__controller-qr header__controller-qr--red">
               <span class="header__controller-label">RED</span>
               ${t(o,80)}
-              <span class="header__controller-hint">scan to open controller</span>
+              <span class="header__controller-hint">
+  scan<br>
+  to open<br>
+  controller
+</span>
             </div>
           </div>
           <div class="header__center">
@@ -29,7 +33,11 @@ import{c as h,g as _,a as u,f as $}from"./fullscreen-Ds68ld_W.js";import{g as b}
             <div class="header__controller-qr header__controller-qr--blue">
               <span class="header__controller-label">BLUE</span>
               ${t(v,80)}
-              <span class="header__controller-hint">scan to open controller</span>
+              <span class="header__controller-hint">
+  scan<br>
+  to open<br>
+  controller
+</span>
             </div>
           </div>
         </header>
