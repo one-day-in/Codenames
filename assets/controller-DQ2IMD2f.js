@@ -1,4 +1,4 @@
-import{b as g,o as f,a as $,f as L}from"./fullscreen-3JFAUp60.js";import{g as T}from"./renderCell-B3ZMaWK7.js";async function w(n){const r=new URLSearchParams(window.location.search).get("team"),i=g();if(!i||!r||r!=="red"&&r!=="blue"){n.innerHTML=`
+import{b as g,o as f,a as $,f as L}from"./fullscreen-DUPn-YfO.js";import{g as T}from"./renderCell-B3ZMaWK7.js";async function w(n){const r=new URLSearchParams(window.location.search).get("team"),i=g();if(!i||!r||r!=="red"&&r!=="blue"){n.innerHTML=`
       <div class="error-screen">
         <p>Невірне посилання.<br>Відскануй QR з головного екрану.</p>
       </div>
