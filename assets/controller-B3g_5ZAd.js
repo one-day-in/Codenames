@@ -1,4 +1,4 @@
-import{a as $,c as f,f as L}from"./fitText-D_iAn_DC.js";async function T(s){const r=new URLSearchParams(window.location.search).get("team"),i=$();if(!i||!r||r!=="red"&&r!=="blue"){s.innerHTML=`
+import{a as $,c as f,f as L}from"./fitText-DseCvXUw.js";async function T(s){const r=new URLSearchParams(window.location.search).get("team"),i=$();if(!i||!r||r!=="red"&&r!=="blue"){s.innerHTML=`
       <div class="error-screen">
         <p>Невірне посилання.<br>Відскануй QR з головного екрану.</p>
       </div>
