@@ -1,4 +1,4 @@
-import{a as o,c as s,b as d}from"./fitText-D8vKGhni.js";async function c(i){const a=o();if(!a){i.innerHTML=`
+import{a as o,c as s,b as d}from"./fitText-D_iAn_DC.js";async function c(i){const a=o();if(!a){i.innerHTML=`
       <div class="waiting-screen">
         <p style="color:white;">Невірне посилання — немає roomId.<br>Відскануй QR з головного екрану.</p>
       </div>

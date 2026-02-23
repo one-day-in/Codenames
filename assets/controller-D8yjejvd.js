@@ -1,4 +1,4 @@
-import{a as $,c as f,f as L}from"./fitText-D8vKGhni.js";async function T(s){const r=new URLSearchParams(window.location.search).get("team"),i=$();if(!i||!r||r!=="red"&&r!=="blue"){s.innerHTML=`
+import{a as $,c as f,f as L}from"./fitText-D_iAn_DC.js";async function T(s){const r=new URLSearchParams(window.location.search).get("team"),i=$();if(!i||!r||r!=="red"&&r!=="blue"){s.innerHTML=`
       <div class="error-screen">
         <p>Невірне посилання.<br>Відскануй QR з головного екрану.</p>
       </div>
@@ -15,10 +15,12 @@ import{a as $,c as f,f as L}from"./fitText-D8vKGhni.js";async function T(s){cons
       </div>
     `}function m(e){const n=e.activeTeam===r,{redLeft:o,blueLeft:l}=_(e);document.body.classList.remove("team-red","team-blue"),document.body.classList.add(`team-${e.activeTeam}`),s.innerHTML=`
       <div class="controller controller--${r}">
+
         <header class="controller__header">
           <div class="controller__team-badge controller__team-badge--${r}">
             ${r.toUpperCase()}
           </div>
+
           <div class="controller__score">
             <div class="controller__score-row">
               <div class="controller__score-dot controller__score-dot--red"></div>
@@ -31,6 +33,7 @@ import{a as $,c as f,f as L}from"./fitText-D8vKGhni.js";async function T(s){cons
               <span class="controller__score-label">BLUE</span>
             </div>
           </div>
+
           <div class="controller__actions">
             <span class="controller__turn-label ${n?"controller__turn-label--active":""}">
               ${n?"ВАШ ХІД":`ХІД ${e.activeTeam.toUpperCase()}`}
@@ -45,12 +48,16 @@ import{a as $,c as f,f as L}from"./fitText-D8vKGhni.js";async function T(s){cons
           </div>
         </header>
 
-        <div class="grid controller__grid">
-          ${e.cells.map((c,p)=>{const d=c.revealed,b=d?`grid__cell--${c.role}`:"grid__cell--hidden",g=!d&&n&&!e.gameOver;return`
-              <div class="grid__cell ${b} ${g?"grid__cell--clickable":""}" data-index="${p}">
-                <span>${c.word}</span>
-              </div>
-            `}).join("")}
+        <div class="controller__grid-wrapper">
+          <div class="controller__grid">
+            ${e.cells.map((c,p)=>{const d=c.revealed,b=d?`grid__cell--${c.role}`:"grid__cell--hidden",g=!d&&n&&!e.gameOver;return`
+                <div class="grid__cell ${b} ${g?"grid__cell--clickable":""}"
+                     data-index="${p}">
+                  <span>${c.word}</span>
+                </div>
+              `}).join("")}
+          </div>
         </div>
+
       </div>
     `,requestAnimationFrame(()=>L(s)),s.querySelectorAll(".grid__cell--clickable").forEach(c=>{c.addEventListener("click",async()=>{await a.reveal(parseInt(c.dataset.index,10))})});const t=document.getElementById("endTurnBtn");t&&!t.disabled&&t.addEventListener("click",async()=>{await a.endTurn()})}a.subscribe(e=>{if(!e){v();return}if(e.gameOver){u(e);return}m(e)})}const w=document.querySelector("#app");T(w);

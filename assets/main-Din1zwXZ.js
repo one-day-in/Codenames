@@ -1,4 +1,4 @@
-import{g as _,c as p,f as h}from"./fitText-D8vKGhni.js";async function u(a){const n=_(),s=p(n);await s.init();function o(){const{origin:e,pathname:r}=window.location,d=r.split("?")[0].replace(/\/[^/]*$/,"")||"";return e+d}function t(e,r=120){return`<img class="qr-image" src="https://api.qrserver.com/v1/create-qr-code/?size=${r}x${r}&data=${encodeURIComponent(e)}" width="${r}" height="${r}" />`}function c(){document.body.classList.remove("team-red","team-blue");const r=`${o()}/mini.html?room=${n}`;a.innerHTML=`
+import{g as _,c as p,f as h}from"./fitText-D_iAn_DC.js";async function u(a){const n=_(),s=p(n);await s.init();function o(){const{origin:e,pathname:r}=window.location,d=r.split("?")[0].replace(/\/[^/]*$/,"")||"";return e+d}function t(e,r=120){return`<img class="qr-image" src="https://api.qrserver.com/v1/create-qr-code/?size=${r}x${r}&data=${encodeURIComponent(e)}" width="${r}" height="${r}" />`}function c(){document.body.classList.remove("team-red","team-blue");const r=`${o()}/mini.html?room=${n}`;a.innerHTML=`
       <div class="waiting-screen">
         <h1 class="waiting-screen__title">Codenames</h1>
         <div class="qr-container">
