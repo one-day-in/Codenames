@@ -1,8 +1,8 @@
-import{b as s,o as c,c as l,d as m,a as u}from"./fullscreen-Bf1d3Yil.js";async function v(i){const a=s();if(!a){i.innerHTML=`
+import{b as s,o as c,c as l,a as m,d as u}from"./footer-D3JG57G1.js";async function v(i){const t=s();if(!t){i.innerHTML=`
       <div class="waiting-screen">
         <p style="color:white;text-align:center;">Відскануй QR з головного екрану.</p>
       </div>
-    `;return}const t=l(a);await t.init(),t.getState()||await t.createGame();function o(e){const n=e.role==="neutral"?"mini-cell--neutral":`mini-cell--${e.role}`;return e.revealed?`${n} mini-cell--revealed`:n}function r(e){i.innerHTML=`
+    `;return}const a=l(t);await a.init(),a.getState()||await a.createGame();function o(e){const n=e.role==="neutral"?"mini-cell--neutral":`mini-cell--${e.role}`;return e.revealed?`${n} mini-cell--revealed`:n}function r(e){i.innerHTML=`
       <div class="mini-board">
         <header class="mini-board__header">
           <div class="mini-board__status">
@@ -21,4 +21,4 @@ import{b as s,o as c,c as l,d as m,a as u}from"./fullscreen-Bf1d3Yil.js";async f
           </div>
         </div>
       </div>
-    `,requestAnimationFrame(()=>{i.querySelectorAll(".mini-cell").forEach(n=>m(n))}),document.getElementById("newGameBtn").addEventListener("click",async()=>{await t.createGame()})}function d(){const e=t.getState();e&&r(e)}c(d),t.subscribe(e=>{e&&r(e)})}document.addEventListener("DOMContentLoaded",()=>{const i=document.querySelector("#app");i&&(document.body.appendChild(u()),v(i))});
+    `,i.querySelector(".mini-board").appendChild(m()),requestAnimationFrame(()=>{i.querySelectorAll(".mini-cell").forEach(n=>u(n))}),document.getElementById("newGameBtn").addEventListener("click",async()=>{await a.createGame()})}function d(){const e=a.getState();e&&r(e)}c(d),a.subscribe(e=>{e&&r(e)})}document.addEventListener("DOMContentLoaded",()=>{const i=document.querySelector("#app");i&&v(i)});
