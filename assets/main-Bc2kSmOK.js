@@ -1,23 +1,23 @@
-import{g as h,c as _,a as p,f as u}from"./footer-DTI09qC9.js";import{g as $}from"./renderCell-B3ZMaWK7.js";async function b(a){const n=h(),s=_(n);await s.init();function c(){const{origin:e,pathname:r}=window.location,i=r.split("?")[0].replace(/\/[^/]*$/,"")||"";return e+i}function t(e,r=120){return`<img class="qr-image" src="https://api.qrserver.com/v1/create-qr-code/?size=${r}x${r}&data=${encodeURIComponent(e)}" width="${r}" height="${r}" />`}function d(){document.body.classList.remove("team-red","team-blue");const r=`${c()}/mini.html?room=${n}`;a.innerHTML=`
+import{c as h,g as u,a as _,f as $}from"./fullscreen-C7_yIPH0.js";import{g as b}from"./renderCell-B3ZMaWK7.js";function p(){const r=document.createElement("footer");return r.className="app-footer",r.appendChild(h()),r}async function g(r){const n=u(),t=_(n);await t.init();function c(){const{origin:e,pathname:a}=window.location,o=a.split("?")[0].replace(/\/[^/]*$/,"")||"";return e+o}function s(e,a=120){return`<img class="qr-image" src="https://api.qrserver.com/v1/create-qr-code/?size=${a}x${a}&data=${encodeURIComponent(e)}" width="${a}" height="${a}" />`}function d(){document.body.classList.remove("team-red","team-blue");const a=`${c()}/mini.html?room=${n}`;r.innerHTML=`
       <div class="app">
         <div class="waiting-screen">
           <h1 class="waiting-screen__title">Codenames</h1>
           <div class="qr-container">
             <div class="qr-wrapper">
-              ${t(r,280)}
+              ${s(a,280)}
             </div>
             <div class="qr-scan-hint">Scan to start</div>
-            <p class="qr-url">${r}</p>
+            <p class="qr-url">${a}</p>
           </div>
         </div>
       </div>
-    `,a.querySelector(".app").appendChild(p())}function o(e){document.body.classList.remove("team-red","team-blue"),document.body.classList.add(`team-${e.activeTeam}`);const r=c(),i=`${r}/controller.html?room=${n}&team=red`,v=`${r}/controller.html?room=${n}&team=blue`;a.innerHTML=`
+    `,r.querySelector(".app").appendChild(p())}function i(e){document.body.classList.remove("team-red","team-blue"),document.body.classList.add(`team-${e.activeTeam}`);const a=c(),o=`${a}/controller.html?room=${n}&team=red`,v=`${a}/controller.html?room=${n}&team=blue`;r.innerHTML=`
       <div class="app">
         <header class="header">
           <div class="header__corner header__corner--left">
             <div class="header__controller-qr header__controller-qr--red">
               <span class="header__controller-label">RED</span>
-              ${t(i,80)}
+              ${s(o,80)}
             </div>
           </div>
           <div class="header__center">
@@ -27,7 +27,7 @@ import{g as h,c as _,a as p,f as u}from"./footer-DTI09qC9.js";import{g as $}from
           <div class="header__corner header__corner--right">
             <div class="header__controller-qr header__controller-qr--blue">
               <span class="header__controller-label">BLUE</span>
-              ${t(v,80)}
+              ${s(v,80)}
             </div>
           </div>
         </header>
@@ -40,10 +40,10 @@ import{g as h,c as _,a as p,f as u}from"./footer-DTI09qC9.js";import{g as $}from
 
         <div class="grid">
           ${e.cells.map(m=>`
-            <div class="grid__cell ${$(m)}">
+            <div class="grid__cell ${b(m)}">
               <span>${m.word}</span>
             </div>
           `).join("")}
         </div>
       </div>
-    `,a.querySelector(".app").appendChild(p()),requestAnimationFrame(()=>u(a))}s.subscribe(e=>{if(!e){d();return}o(e)});const l=s.getState();l?o(l):d()}document.addEventListener("DOMContentLoaded",()=>{const a=document.querySelector("#app");a&&b(a)});
+    `,r.querySelector(".app").appendChild(p()),requestAnimationFrame(()=>$(r))}t.subscribe(e=>{if(!e){d();return}i(e)});const l=t.getState();l?i(l):d()}document.addEventListener("DOMContentLoaded",()=>{const r=document.querySelector("#app");r&&g(r)});
