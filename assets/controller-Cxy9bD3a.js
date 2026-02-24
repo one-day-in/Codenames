@@ -1,8 +1,8 @@
-import{b as g,o as f,a as $}from"./fullscreen-BVWN89gb.js";import{a as L}from"./renderCell-BLtbsjKK.js";async function T(n){const r=new URLSearchParams(window.location.search).get("team"),i=g();if(!i||!r||r!=="red"&&r!=="blue"){n.innerHTML=`
+import{o as g,a as f}from"./fullscreen-mDCptqA1.js";import{g as $}from"./room-DjrEdXuX.js";import{a as L}from"./renderCell-BLtbsjKK.js";async function T(n){const r=new URLSearchParams(window.location.search).get("team"),i=$();if(!i||!r||r!=="red"&&r!=="blue"){n.innerHTML=`
       <div class="error-screen">
         <p>Невірне посилання.<br>Відскануй QR з головного екрану.</p>
       </div>
-    `;return}document.body.classList.add(`team-${r}`);const a=$(i);await a.init();function u(e){const o=e.cells.filter(l=>l.role==="red"&&!l.revealed).length,c=e.cells.filter(l=>l.role==="blue"&&!l.revealed).length;return{redLeft:o,blueLeft:c}}function d(){n.innerHTML=`
+    `;return}document.body.classList.add(`team-${r}`);const a=f(i);await a.init();function m(e){const o=e.cells.filter(l=>l.role==="red"&&!l.revealed).length,c=e.cells.filter(l=>l.role==="blue"&&!l.revealed).length;return{redLeft:o,blueLeft:c}}function d(){n.innerHTML=`
       <div class="waiting-screen">
         <p class="waiting-screen__hint">Очікуємо початку гри...</p>
       </div>
@@ -13,7 +13,7 @@ import{b as g,o as f,a as $}from"./fullscreen-BVWN89gb.js";import{a as L}from"./
           <div class="gameover-screen__team">${r.toUpperCase()}</div>
         </div>
       </div>
-    `}function _(e){const o=e.activeTeam===r,{redLeft:c,blueLeft:l}=u(e);document.body.classList.remove("team-red","team-blue"),document.body.classList.add(`team-${e.activeTeam}`),n.innerHTML=`
+    `}function _(e){const o=e.activeTeam===r,{redLeft:c,blueLeft:l}=m(e);document.body.classList.remove("team-red","team-blue"),document.body.classList.add(`team-${e.activeTeam}`),n.innerHTML=`
       <div class="controller controller--${r}">
         <header class="controller__header">
           <div class="controller__team-badge controller__team-badge--${r}">
@@ -52,4 +52,4 @@ import{b as g,o as f,a as $}from"./fullscreen-BVWN89gb.js";import{a as L}from"./
             `}).join("")}
         </div>
       </div>
-    `,n.querySelectorAll(".controller__cell--clickable").forEach(t=>{t.addEventListener("click",async()=>{await a.reveal(parseInt(t.dataset.index,10))})});const s=document.getElementById("endTurnBtn");s&&!s.disabled&&s.addEventListener("click",async()=>{await a.endTurn()})}function m(){const e=a.getState();if(!e){d();return}if(e.gameOver){v(e);return}_(e)}f(m),a.subscribe(e=>{if(!e){d();return}if(e.gameOver){v(e);return}_(e)})}document.addEventListener("DOMContentLoaded",()=>{const n=document.querySelector("#app");n&&T(n)});
+    `,n.querySelectorAll(".controller__cell--clickable").forEach(t=>{t.addEventListener("click",async()=>{await a.reveal(parseInt(t.dataset.index,10))})});const s=document.getElementById("endTurnBtn");s&&!s.disabled&&s.addEventListener("click",async()=>{await a.endTurn()})}function u(){const e=a.getState();if(!e){d();return}if(e.gameOver){v(e);return}_(e)}g(u),a.subscribe(e=>{if(!e){d();return}if(e.gameOver){v(e);return}_(e)})}document.addEventListener("DOMContentLoaded",()=>{const n=document.querySelector("#app");n&&T(n)});
