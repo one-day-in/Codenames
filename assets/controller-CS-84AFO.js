@@ -1,23 +1,23 @@
-const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["assets/keepAlive-JCSCQkeA.js","assets/keepAlive-Bs_83nby.css"])))=>i.map(i=>d[i]);
-import{t as i,D as d,R as $,k as G,c as M,b as I,g as O,e as B}from"./keepAlive-JCSCQkeA.js";import{_ as D,o as H}from"./fullscreen-D1PshyVK.js";function N(){const t=new URLSearchParams(window.location.search);return{roomId:t.get("room"),token:t.get("token"),team:t.get("team")}}async function P(t){const{roomId:_,token:g,team:s}=N();if(!_||!g||!s||s!=="resonant"&&s!=="dissonant"){t.innerHTML=`<div class="error-screen">
+const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["assets/i18n-BSQgICzt.js","assets/i18n-Bs_83nby.css"])))=>i.map(i=>d[i]);
+import{t as i,D as d,g as G}from"./i18n-BSQgICzt.js";import{_ as M}from"./preload-helper-Dg2ainw4.js";import{R as $,k as I,c as O,a as B,d as D}from"./keepAlive-DqUUpVTB.js";import{o as H}from"./fullscreen-DHe8HjSE.js";function N(){const t=new URLSearchParams(window.location.search);return{roomId:t.get("room"),token:t.get("token"),team:t.get("team")}}async function P(t){const{roomId:_,token:g,team:s}=N();if(!_||!g||!s||s!=="resonant"&&s!=="dissonant"){t.innerHTML=`<div class="error-screen">
             <p>${i(d).wrongLink.replace(`
 `,"<br>")}</p>
-        </div>`;return}const{supabase:L}=await D(async()=>{const{supabase:n}=await import("./keepAlive-JCSCQkeA.js").then(o=>o.f);return{supabase:n}},__vite__mapDeps([0,1])),{data:b,error:f}=await L.from("rooms").select("id, guest_token").eq("id",_).eq("guest_token",g).maybeSingle();if(!b||f){t.innerHTML=`<div class="error-screen">
+        </div>`;return}const{supabase:L}=await M(async()=>{const{supabase:n}=await import("./i18n-BSQgICzt.js").then(o=>o.a);return{supabase:n}},__vite__mapDeps([0,1])),{data:f,error:b}=await L.from("rooms").select("id, guest_token").eq("id",_).eq("guest_token",g).maybeSingle();if(!f||b){t.innerHTML=`<div class="error-screen">
             <p>${i(d).wrongLink.replace(`
 `,"<br>")}</p>
-        </div>`;return}const v=s==="resonant"?$.WALKER_RESONANT:$.WALKER_DISSONANT,u=M(_);if(await u.isRoleTaken(v)){t.innerHTML=`<div class="waiting-screen">
+        </div>`;return}const u=s==="resonant"?$.WALKER_RESONANT:$.WALKER_DISSONANT,m=O(_);if(await m.isRoleTaken(u)){t.innerHTML=`<div class="waiting-screen">
             <div class="taken-screen">
                 <p class="taken-screen__icon">🔒</p>
                 <p class="taken-screen__text">${s} ${i(d).dreamwalker}<br>${i(d).controllerTaken.replace(`
 `,"<br>")}</p>
             </div>
-        </div>`;return}u.join(v),G(u,v),document.body.classList.add(`team-${s}`);const c=I(_);await c.init();function T(n=d){t.innerHTML=`<div class="waiting-screen">
+        </div>`;return}m.join(u),I(m,u),document.body.classList.add(`team-${s}`);const c=B(_);await c.init();function T(n=d){t.innerHTML=`<div class="waiting-screen">
             <p class="waiting-screen__hint">${i(n).waitingStart}</p>
         </div>`}function E(n,o){const e=i(o),r=n.winner===s;t.innerHTML=`
             <div class="awake-screen awake-screen--${n.winner}">
                 <div class="awake-screen__content">
                     <div class="awake-screen__title">${e.awake}</div>
-                    <div class="awake-screen__awakening">${O(n.winner,o)}</div>
+                    <div class="awake-screen__awakening">${G(n.winner,o)}</div>
                     <div class="awake-screen__role">${r?"🏆":"💀"} ${s} ${e.dreamwalker}</div>
                     <button class="awake-screen__new-game-btn" id="newGameBtn">${e.newGame}</button>
                 </div>
@@ -42,7 +42,7 @@ import{t as i,D as d,R as $,k as G,c as M,b as I,g as O,e as B}from"./keepAlive-
 
                 <div class="controller__grid">
                     ${n.cells.map((a,R)=>`
-                        <div class="controller__cell ${B(a)}${l&&!a.revealed?" controller__cell--clickable":""}"
+                        <div class="controller__cell ${D(a)}${l&&!a.revealed?" controller__cell--clickable":""}"
                              data-index="${R}">
                             <span>${a.word}</span>
                         </div>`).join("")}
@@ -51,4 +51,4 @@ import{t as i,D as d,R as $,k as G,c as M,b as I,g as O,e as B}from"./keepAlive-
                 <button class="controller__end-turn" id="endTurnBtn" ${l?"":"disabled"}>
                     ${l?e.endTurn:p?e.waitingGuide:`${e.turn}: ${r.team.toUpperCase()}`}
                 </button>
-            </div>`,t.querySelectorAll(".controller__cell--clickable").forEach(a=>{a.addEventListener("click",()=>c.reveal(parseInt(a.dataset.index,10)))}),(k=document.getElementById("endTurnBtn"))==null||k.addEventListener("click",()=>{l&&c.endTurn()})}function m({state:n,language:o}={}){const e=n??c.getState(),r=o??c.getLanguage();if(!e||e.phase==="lobby"){T(r);return}if(e.gameOver){E(e,r);return}y(e,r)}c.subscribe(m),u.onChange(()=>m()),H(()=>m())}document.addEventListener("DOMContentLoaded",()=>{const t=document.querySelector("#app");t&&P(t)});
+            </div>`,t.querySelectorAll(".controller__cell--clickable").forEach(a=>{a.addEventListener("click",()=>c.reveal(parseInt(a.dataset.index,10)))}),(k=document.getElementById("endTurnBtn"))==null||k.addEventListener("click",()=>{l&&c.endTurn()})}function v({state:n,language:o}={}){const e=n??c.getState(),r=o??c.getLanguage();if(!e||e.phase==="lobby"){T(r);return}if(e.gameOver){E(e,r);return}y(e,r)}c.subscribe(v),m.onChange(()=>v()),H(()=>v())}document.addEventListener("DOMContentLoaded",()=>{const t=document.querySelector("#app");t&&P(t)});

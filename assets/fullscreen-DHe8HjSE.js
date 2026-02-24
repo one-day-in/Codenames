@@ -1,0 +1,1 @@
+function s(r){let n=window.innerWidth,e=window.innerHeight;const t=new ResizeObserver(()=>{const i=window.innerWidth,o=window.innerHeight;(i!==n||o!==e)&&(n=i,e=o,r())});return t.observe(document.documentElement),()=>t.disconnect()}export{s as o};
