@@ -1,8 +1,8 @@
-const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["assets/i18n-oKl8HJk8.js","assets/i18n-EydkaueC.css"])))=>i.map(i=>d[i]);
-import{t as l,D as m,g as C}from"./i18n-oKl8HJk8.js";import{_ as G,o as I}from"./fullscreen-D1PshyVK.js";import{R as $,k as M,c as O,a as P,d as U}from"./keepAlive-CpoPdX36.js";function D(){const n=new URLSearchParams(window.location.search);return{roomId:n.get("room"),token:n.get("token"),team:n.get("team")}}function H(){const{origin:n,pathname:i}=window.location;return n+i.split("?")[0].replace(/\/[^/]*$/,"")}async function N(n){const{roomId:i,token:g,team:a}=D();if(!i||!g||!a||a!=="resonant"&&a!=="dissonant"){n.innerHTML=`<div class="error-screen">
+const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["assets/i18n-BwlAWuOW.js","assets/i18n-AohV0cxf.css"])))=>i.map(i=>d[i]);
+import{t as l,D as m,g as C}from"./i18n-BwlAWuOW.js";import{_ as G,o as I}from"./fullscreen-D1PshyVK.js";import{R as $,k as M,c as O,a as P,d as U}from"./keepAlive-D1x8_-Il.js";function D(){const n=new URLSearchParams(window.location.search);return{roomId:n.get("room"),token:n.get("token"),team:n.get("team")}}function H(){const{origin:n,pathname:i}=window.location;return n+i.split("?")[0].replace(/\/[^/]*$/,"")}async function N(n){const{roomId:i,token:g,team:a}=D();if(!i||!g||!a||a!=="resonant"&&a!=="dissonant"){n.innerHTML=`<div class="error-screen">
             <p>${l(m).wrongLink.replace(`
 `,"<br>")}</p>
-        </div>`;return}const{supabase:L}=await G(async()=>{const{supabase:e}=await import("./i18n-oKl8HJk8.js").then(o=>o.a);return{supabase:e}},__vite__mapDeps([0,1])),{data:b,error:f}=await L.from("rooms").select("id, guest_token").eq("id",i).eq("guest_token",g).maybeSingle();if(!b||f){n.innerHTML=`<div class="error-screen">
+        </div>`;return}const{supabase:L}=await G(async()=>{const{supabase:e}=await import("./i18n-BwlAWuOW.js").then(o=>o.a);return{supabase:e}},__vite__mapDeps([0,1])),{data:b,error:f}=await L.from("rooms").select("id, guest_token").eq("id",i).eq("guest_token",g).maybeSingle();if(!b||f){n.innerHTML=`<div class="error-screen">
             <p>${l(m).wrongLink.replace(`
 `,"<br>")}</p>
         </div>`;return}const u=a==="resonant"?$.WALKER_RESONANT:$.WALKER_DISSONANT,_=O(i);if(await _.isRoleTaken(u)){const e=l(m);n.innerHTML=`
