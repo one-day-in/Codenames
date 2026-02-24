@@ -1,0 +1,1 @@
+function c(e,i=.85,n=.45){const t=e.querySelector("span");if(!t)return;t.style.whiteSpace="nowrap";const o=e.clientWidth*i;let l=e.clientHeight*n;for(t.style.fontSize=l+"px";t.scrollWidth>o&&l>6;)l-=.5,t.style.fontSize=l+"px"}function r(e){e.querySelectorAll(".main-cell, .controller__cell, .mini-cell").forEach(i=>c(i))}export{c as a,r as f};
