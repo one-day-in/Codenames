@@ -1,1 +1,0 @@
-function r(e){return e.revealed?e.role==="neutral"?`main-cell--neutral-${e.neutralVariant}`:`main-cell--${e.role}`:"main-cell--hidden"}function l(e){return e.revealed?e.role==="neutral"?"controller__cell--neutral":`controller__cell--${e.role}`:"controller__cell--hidden"}export{l as a,r as g};
