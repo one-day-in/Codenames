@@ -19,7 +19,10 @@ import{s as d,G as b,D as h,L as _,g as w,t as y}from"./url-DqvqMluG.js";async f
                                 ${a.newGame}
                             </button>
                         </div>
-                        <button class="sign-out-btn" id="signOutBtn">${o.email}</button>
+                        <button class="sign-out-btn"
+        id="signOutBtn"
+        title="${o.email}">
+</button>
                     `:`
                         <button class="lobby__btn lobby__btn--google" id="loginBtn">
                             <svg width="20" height="20" viewBox="0 0 48 48" style="margin-right:10px;vertical-align:middle">
