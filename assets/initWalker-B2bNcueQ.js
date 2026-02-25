@@ -1,4 +1,4 @@
-import{i as h,o as E}from"./initGuestPage-DV4Hb3A9.js";import{d as G}from"./keepAlive-hefo0P0Z.js";import{t as i,D as p,b as B,g as C}from"./url-DqvqMluG.js";async function M(l){const u=await h(l,{roleType:"walker",invalidParamsHtml:`<div class="error-screen">
+import{i as h,o as E}from"./initGuestPage-DS5klKfZ.js";import{d as G}from"./keepAlive-Ces2sVWx.js";import{t as i,D as p,b as B,g as C}from"./url-DqvqMluG.js";async function M(l){const u=await h(l,{roleType:"walker",invalidParamsHtml:`<div class="error-screen">
             <p>${i(p).wrongLink.replace(`
 `,"<br>")}</p>
         </div>`});if(!u)return;const{presence:w,store:r,team:a}=u;function g(n=p){l.innerHTML=`<div class="waiting-screen">

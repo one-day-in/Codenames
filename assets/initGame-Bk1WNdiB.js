@@ -1,4 +1,4 @@
-import{k as M,c as G,a as B,A as h,g as C,R as g}from"./keepAlive-hefo0P0Z.js";import{f as T}from"./fitText-DhGiXhRH.js";import{a as x,g as c,G as y,t as d,b as I,D as R}from"./url-DqvqMluG.js";function O(s,i=130){return`<img class="qr-image"
+import{k as M,c as G,a as B,A as h,g as C,R as g}from"./keepAlive-Ces2sVWx.js";import{f as T}from"./fitText-DhGiXhRH.js";import{a as x,g as c,G as y,t as d,b as I,D as R}from"./url-DqvqMluG.js";function O(s,i=130){return`<img class="qr-image"
         src="https://api.qrserver.com/v1/create-qr-code/?size=${i}x${i}&color=8B7355&bgcolor=2a1f1a&data=${encodeURIComponent(s)}"
         width="${i}" height="${i}" />`}async function D(s){const{roomId:i,token:f}=x();if(!i||!f){window.location.href=c()+"/index.html";return}s.innerHTML=`
         <div class="app">
