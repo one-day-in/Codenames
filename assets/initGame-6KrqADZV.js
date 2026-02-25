@@ -1,4 +1,4 @@
-import{_ as A}from"./entry-C8CiW-wf.js";import{k as R,c as T,g as B}from"./keepAlive-CwTVj7YU.js";import{f as G}from"./fitText-DhGiXhRH.js";import{R as c,c as M,A as f}from"./presence-JaBJnldC.js";import{t as d,g as C,D as I}from"./i18n-pkrfkOVn.js";import{a as O,g as m}from"./url-DMe9pim_.js";function x(s,l=130){return`<img class="qr-image"
+import{_ as A}from"./entry-Ct80tB_C.js";import{k as R,c as T,g as B}from"./keepAlive-CwTVj7YU.js";import{f as G}from"./fitText-DhGiXhRH.js";import{R as c,c as M,A as f}from"./presence-JaBJnldC.js";import{t as d,g as C,D as I}from"./i18n-pkrfkOVn.js";import{a as O,g as m}from"./url-DMe9pim_.js";function x(s,l=130){return`<img class="qr-image"
         src="https://api.qrserver.com/v1/create-qr-code/?size=${l}x${l}&color=8B7355&bgcolor=2a1f1a&data=${encodeURIComponent(s)}"
         width="${l}" height="${l}" />`}async function W(s){const{roomId:l,token:h}=O();if(!l||!h){window.location.href=m()+"/index.html";return}s.innerHTML=`
         <div class="app">
