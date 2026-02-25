@@ -1,4 +1,4 @@
-import{i as h,o as E}from"./initGuestPage-DS5klKfZ.js";import{d as G}from"./keepAlive-Ces2sVWx.js";import{t as i,D as p,b as B,g as C}from"./url-DqvqMluG.js";async function M(l){const u=await h(l,{roleType:"walker",invalidParamsHtml:`<div class="error-screen">
+import{i as h,o as E}from"./initGuestPage-DCAYmGnr.js";import{b as G}from"./presence-D0FYVyKi.js";import{t as i,D as p,b as B,g as C}from"./url-DqvqMluG.js";async function M(l){const u=await h(l,{roleType:"walker",invalidParamsHtml:`<div class="error-screen">
             <p>${i(p).wrongLink.replace(`
 `,"<br>")}</p>
         </div>`});if(!u)return;const{presence:w,store:r,team:a}=u;function g(n=p){l.innerHTML=`<div class="waiting-screen">
@@ -11,7 +11,7 @@ import{i as h,o as E}from"./initGuestPage-DS5klKfZ.js";import{d as G}from"./keep
                     <div class="awake-screen__role">${s?"🏆":"💀"} ${a} ${e.dreamwalker}</div>
                     <button class="awake-screen__new-game-btn" id="newGameBtn">${e.newGame}</button>
                 </div>
-            </div>`,document.getElementById("newGameBtn").addEventListener("click",async()=>{await r.resetGame(),window.location.href=C()+"/index.html"})}function k(n,o){var m;const e=i(o),s=n.turn,_=s.team===a,v=s.guideLimit!==null,c=_&&v&&!n.gameOver,b=v?s.guideLimit-s.dreamwalkerMoves:null,f=n.cells.filter(t=>t.role==="resonant"&&!t.revealed).length,L=n.cells.filter(t=>t.role==="dissonant"&&!t.revealed).length,y=_?v?`${b} ${e.movesLeft}`:e.waitingGuide:`${e.turn}: ${s.team.toUpperCase()}`;document.body.classList.remove("team-resonant","team-dissonant"),document.body.classList.add(`team-${s.team}`),l.innerHTML=`
+            </div>`,document.getElementById("newGameBtn").addEventListener("click",async()=>{await r.resetGame(),window.location.href=C()+"/index.html"})}function b(n,o){var m;const e=i(o),s=n.turn,_=s.team===a,v=s.guideLimit!==null,c=_&&v&&!n.gameOver,k=v?s.guideLimit-s.dreamwalkerMoves:null,f=n.cells.filter(t=>t.role==="resonant"&&!t.revealed).length,L=n.cells.filter(t=>t.role==="dissonant"&&!t.revealed).length,y=_?v?`${k} ${e.movesLeft}`:e.waitingGuide:`${e.turn}: ${s.team.toUpperCase()}`;document.body.classList.remove("team-resonant","team-dissonant"),document.body.classList.add(`team-${s.team}`),l.innerHTML=`
             <div class="controller controller--${a}">
                 <div class="controller__status">
                     <span class="controller__status-team controller__status-team--${a}">${a.toUpperCase()}</span>
@@ -41,4 +41,4 @@ import{i as h,o as E}from"./initGuestPage-DS5klKfZ.js";import{d as G}from"./keep
                 <button class="controller__end-turn" id="endTurnBtn" ${c?"":"disabled"}>
                     ${c?e.endTurn:_?e.waitingGuide:`${e.turn}: ${s.team.toUpperCase()}`}
                 </button>
-            </div>`,l.querySelectorAll(".controller__cell--clickable").forEach(t=>{t.addEventListener("click",()=>r.reveal(parseInt(t.dataset.index,10)))}),(m=document.getElementById("endTurnBtn"))==null||m.addEventListener("click",()=>{c&&r.endTurn()})}function d({state:n,language:o}={}){const e=n??r.getState(),s=o??r.getLanguage();if(!e||e.phase==="lobby"){g(s);return}if(e.gameOver){$(e,s);return}k(e,s)}r.subscribe(d),w.onChange(()=>d()),E(()=>d())}export{M as initWalker};
+            </div>`,l.querySelectorAll(".controller__cell--clickable").forEach(t=>{t.addEventListener("click",()=>r.reveal(parseInt(t.dataset.index,10)))}),(m=document.getElementById("endTurnBtn"))==null||m.addEventListener("click",()=>{c&&r.endTurn()})}function d({state:n,language:o}={}){const e=n??r.getState(),s=o??r.getLanguage();if(!e||e.phase==="lobby"){g(s);return}if(e.gameOver){$(e,s);return}b(e,s)}r.subscribe(d),w.onChange(()=>d()),E(()=>d())}export{M as initWalker};
