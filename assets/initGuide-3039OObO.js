@@ -1,4 +1,4 @@
-import{a as y,b as A}from"./renderCell-j9Yfrae9.js";import{o as C}from"./resize-Cd5pde_8.js";import{t as u,D as v}from"./url-oOUZ7you.js";import{i as G}from"./initGuestPage-Dsuy32t7.js";const w=8;async function x(s){const l=await G(s,{roleType:"guide",invalidParamsHtml:`<div class="waiting-screen">
+import{a as y,b as A}from"./renderCell-j9Yfrae9.js";import{o as C,e as G}from"./sanitize-s2klz6Q2.js";import{t as u,D as v}from"./url-oOUZ7you.js";import{i as H}from"./initGuestPage-BMHdV60b.js";const w=8;async function N(s){const l=await H(s,{roleType:"guide",invalidParamsHtml:`<div class="waiting-screen">
             <p>${u(v).scanQr}</p>
         </div>`});if(!l)return;const{presence:$,store:a,team:r}=l;function b(i=v){s.innerHTML=`<div class="waiting-screen">
             <p>${u(i).waitingLobby}</p>
@@ -13,7 +13,7 @@ import{a as y,b as A}from"./renderCell-j9Yfrae9.js";import{o as C}from"./resize-
             <div class="grid grid--5">
                 ${i.cells.map(e=>`
                     <div class="${y(e)}">
-                        <span class="cell__content">${e.word}</span>
+                        <span class="cell__content">${G(e.word)}</span>
                     </div>
                 `).join("")}
             </div>
@@ -21,4 +21,4 @@ import{a as y,b as A}from"./renderCell-j9Yfrae9.js";import{o as C}from"./resize-
 
         <div class="guide__status">${f}</div>
         <div class="guide__btns">${L}</div>
-    `,requestAnimationFrame(()=>{s.querySelectorAll(".cell").forEach(e=>A(e))}),s.querySelectorAll(".guide__num-btn:not([disabled])").forEach(e=>{e.addEventListener("click",()=>a.setGuideLimit(parseInt(e.dataset.limit,10)))})}function c({state:i,language:o}={}){const n=i??a.getState(),t=o??a.getLanguage();if(!n||n.phase==="lobby"){b(t);return}_(n,t)}a.subscribe(c),$.onChange(()=>c()),C(()=>c())}export{x as initGuide};
+    `,requestAnimationFrame(()=>{s.querySelectorAll(".cell").forEach(e=>A(e))}),s.querySelectorAll(".guide__num-btn:not([disabled])").forEach(e=>{e.addEventListener("click",()=>a.setGuideLimit(parseInt(e.dataset.limit,10)))})}function c({state:i,language:o}={}){const n=i??a.getState(),t=o??a.getLanguage();if(!n||n.phase==="lobby"){b(t);return}_(n,t)}a.subscribe(c),$.onChange(()=>c()),C(()=>c())}export{N as initGuide};
