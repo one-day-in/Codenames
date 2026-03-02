@@ -9,6 +9,43 @@
     isolation: isolate;
 }
 
+@keyframes home-mist-in {
+    0% {
+        opacity: 0;
+        transform: translateY(14px) scale(0.985);
+        filter: blur(14px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+    }
+}
+
+body[data-page="home"] .lobby__title-wrap {
+    opacity: 0;
+    animation: home-mist-in 0.78s ease-out 0.08s forwards;
+}
+
+body[data-page="home"] .lang-toggle,
+body[data-page="home"] .lobby-screen__actions,
+body[data-page="home"] #loginBtn,
+body[data-page="home"] .btn-profile,
+body[data-page="home"] .fullscreen-btn {
+    opacity: 0;
+    animation: home-mist-in 0.74s ease-out 0.4s forwards;
+}
+
+body[data-page="home"] .lobby-screen__actions .lobby__btn,
+body[data-page="home"] #loginBtn {
+    animation-delay: 0.48s;
+}
+
+body[data-page="home"] .btn-profile,
+body[data-page="home"] .fullscreen-btn {
+    animation-delay: 0.56s;
+}
+
 .app::before,
 .app::after {
     content: '';
@@ -320,5 +357,19 @@
     .lobby-screen__actions {
         width: min(92vw, 420px);
         padding: 0.8rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    body[data-page="home"] .lobby__title-wrap,
+    body[data-page="home"] .lang-toggle,
+    body[data-page="home"] .lobby-screen__actions,
+    body[data-page="home"] #loginBtn,
+    body[data-page="home"] .btn-profile,
+    body[data-page="home"] .fullscreen-btn {
+        opacity: 1;
+        animation: none;
+        filter: none;
+        transform: none;
     }
 }
