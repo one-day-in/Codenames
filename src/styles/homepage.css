@@ -102,10 +102,10 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    padding: var(--space-xl);
+    justify-content: flex-start;
+    padding: calc(var(--safe-area-top) + 20vh) var(--space-xl) var(--space-xl);
     text-align: center;
-    gap: clamp(16px, 13vh, 32px);
+    gap: clamp(20px, 3.4vh, 42px);
 }
 
 .lobby__title-wrap {
@@ -283,6 +283,11 @@
 }
 
 @media (max-width: 720px) {
+    .lobby-screen {
+        padding-top: calc(var(--safe-area-top) + 18vh);
+        gap: clamp(16px, 3vh, 28px);
+    }
+
     .lang-toggle {
         margin-top: clamp(10px, 3vw, 14px);
         gap: 0.35rem;
