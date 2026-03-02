@@ -41,6 +41,7 @@ export async function initHome(root) {
     let lang = getSavedLang();
     let user = null;
     let room = null;
+    let warmedLanguage = null;
 
     function confirmNewGameModal(tr) {
         return new Promise(resolve => {
@@ -81,6 +82,32 @@ export async function initHome(root) {
             document.addEventListener('keydown', onKeyDown);
             document.body.appendChild(modal);
             modal.querySelector('.confirm-modal__btn--confirm')?.focus();
+        });
+    }
+
+    function showNewGameLoading(tr) {
+        const modal = document.createElement('div');
+        modal.className = 'newgame-loading-modal';
+        modal.innerHTML = `
+            <div class="newgame-loading-modal__backdrop"></div>
+            <div class="newgame-loading-modal__content">
+                <p class="newgame-loading-modal__title">${tr.loading}</p>
+                <p class="newgame-loading-modal__text">${tr.preparingGame}</p>
+                <div class="loader__dots">
+                    <span></span><span></span><span></span>
+                </div>
+            </div>
+        `;
+        document.body.appendChild(modal);
+        return () => modal.remove();
+    }
+
+    function warmWordsCache(nextLang) {
+        if (!user) return;
+        if (warmedLanguage === nextLang) return;
+        warmedLanguage = nextLang;
+        loadWords(nextLang).catch(() => {
+            warmedLanguage = null;
         });
     }
 
@@ -137,6 +164,7 @@ export async function initHome(root) {
         `;
 
         bindEvents(tr);
+        warmWordsCache(lang);
     }
 
     function bindEvents(tr) {
@@ -188,7 +216,7 @@ export async function initHome(root) {
             if (!isConfirmed) return;
         }
         btn.disabled = true;
-        btn.textContent = tr.loading;
+        const hideLoading = showNewGameLoading(tr);
         try {
             const words = await loadWords(lang);
             const { cells, startsFirst } =
@@ -226,7 +254,8 @@ export async function initHome(root) {
             console.error('New game failed:', error);
             window.alert(tr.newGameFailed);
             btn.disabled = false;
-            btn.textContent = tr.newGame;
+        } finally {
+            hideLoading();
         }
     }
 
