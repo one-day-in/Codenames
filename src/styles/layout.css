@@ -1,26 +1,413 @@
-/* layout.css */
-html,
-body {
-  height: 100%;
-  margin: 0;
-  overflow: hidden;
+/* ─── LAYOUT — контейнери сторінок ──────────────────────────── */
+
+/* ─── СПІЛЬНА БАЗА ──────────────────────────────────────────────
+   Всі ігрові сторінки: повний вьюпорт,
+   flex-центрування для сітки,
+   position:relative → якір для абс. панелей
+─────────────────────────────────────────────────────────────── */
+
+.game,
+.guide,
+.walker {
+    position: relative;
+    width: 100dvw;
+    height: 100dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
 }
 
-.app {
-  display: flex;
-  flex-direction: column;
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
+/* ─── СПІЛЬНІ КУТОВІ КНОПКИ ──────────────────────────────────── */
+
+/* Назад — лівий верхній кут (game.html) */
+.btn-back {
+    position: absolute;
+    top: var(--ui-edge-top);
+    left: var(--ui-edge-left);
+    z-index: 10;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width:  var(--icon-btn-size);
+    height: var(--icon-btn-size);
 }
 
-.app__header {
-  flex-shrink: 0;
+/* ─── GAME (хост / десктоп / ТВ) ────────────────────────────── */
+
+/* Рахунок — верхній центр */
+.game__score {
+    position: absolute;
+    top: var(--score-top);
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+
+    display: flex;
+    align-items: center;
+    gap: var(--score-gap);
+    padding: var(--score-panel-pad);
+    border-radius: var(--indicator-radius);
+    border: var(--indicator-border);
+    background: var(--indicator-bg);
+    box-shadow: var(--indicator-shadow);
+    backdrop-filter: blur(var(--glass-blur));
+    font-size: var(--score-font-size);
+    font-weight: 800;
+    letter-spacing: var(--score-letter-spacing);
+    white-space: nowrap;
+    text-transform: uppercase;
 }
 
-.app__grid {
-  flex: 1 1 auto;
-  min-height: 0;
-  padding: var(--space-md);
-  overflow: auto;
+.game__score-item {
+    padding: var(--score-item-pad);
+    border-radius: var(--indicator-radius);
+    border: var(--score-item-border);
+    line-height: 1;
+    min-width: 4.5em;
+    text-align: center;
+}
+
+.game__score-item--resonant {
+    background: var(--score-resonant-bg);
+    color: var(--card-text-light);
+}
+
+.game__score-item--dissonant {
+    background: var(--score-dissonant-bg);
+    color: var(--card-text-light);
+}
+
+.game-qr-dock {
+    position: absolute;
+    top: 50%;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(12px, 2.2vh, 20px);
+    transform: translateY(-50%);
+}
+
+.game-qr-dock--left {
+    left: calc(var(--safe-area-left) + clamp(10px, 1.8vw, 24px));
+}
+
+.game-qr-dock--right {
+    right: calc(var(--safe-area-right) + clamp(10px, 1.8vw, 24px));
+}
+
+.game-qr-dock__item {
+    position: relative;
+}
+
+.game-qr-dot {
+    width: clamp(42px, 4.3vw, 56px);
+    height: clamp(42px, 4.3vw, 56px);
+    border-radius: 50%;
+    font-size: clamp(0.9rem, 1.4vw, 1.1rem);
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    padding: 0;
+}
+
+.game-qr-dock__item--resonant .game-qr-dot {
+    border-color: var(--resonant-light);
+    box-shadow: 0 0 20px rgba(245, 200, 138, 0.24);
+}
+
+.game-qr-dock__item--dissonant .game-qr-dot {
+    border-color: var(--dissonant-light);
+    box-shadow: 0 0 20px rgba(155, 195, 255, 0.24);
+}
+
+.game-qr-popover {
+    position: absolute;
+    top: 50%;
+    z-index: 15;
+    width: clamp(190px, 18vw, 250px);
+    padding: var(--space-sm);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--gray-600);
+    background: rgba(16, 20, 30, 0.96);
+    box-shadow: 0 16px 38px rgba(6, 8, 12, 0.68);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-50%) scale(0.96);
+    transition: opacity var(--transition-fast), transform var(--transition-fast);
+}
+
+.game-qr-dock--left .game-qr-popover {
+    left: calc(100% + 12px);
+}
+
+.game-qr-dock--right .game-qr-popover {
+    right: calc(100% + 12px);
+}
+
+.game-qr-dock__item:hover .game-qr-popover,
+.game-qr-dock__item:focus-within .game-qr-popover {
+    opacity: 1;
+    transform: translateY(-50%) scale(1);
+}
+
+.game-qr-popover__title {
+    margin: 0 0 var(--space-sm);
+    font-size: clamp(0.7rem, 1.1vw, 0.82rem);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-main);
+}
+
+.game-qr-popover__image .qr-image {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-sm);
+}
+
+.gameover-banner {
+    position: absolute;
+    top: calc(var(--score-top) + var(--icon-btn-size) + var(--space-sm));
+    left: 0;
+    right: 0;
+    z-index: 10;
+
+    padding: 0.5rem 1rem;
+    text-align: center;
+    font-size: clamp(0.75rem, 2vw, 1rem);
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    box-sizing: border-box;
+}
+
+/* ─── GUIDE (мобайл) ─────────────────────────────────────────── */
+
+/* Статус — лівий верхній кут */
+.guide__status {
+    position: absolute;
+    top: var(--ui-edge-top);
+    left: var(--ui-edge-left);
+    z-index: 10;
+
+    font-size: var(--indicator-font-size);
+    font-weight: 800;
+    letter-spacing: var(--indicator-letter-spacing);
+    text-transform: uppercase;
+    line-height: 1.2;
+    padding: var(--indicator-pad-y) var(--indicator-pad-x);
+    border-radius: var(--indicator-radius);
+    border: var(--indicator-border);
+    background: var(--indicator-bg);
+    box-shadow: var(--indicator-shadow);
+    backdrop-filter: blur(var(--glass-blur));
+}
+
+.team-resonant .guide__status {
+    border-color: var(--resonant-neon-lg);
+    background: rgba(58, 44, 30, 0.78);
+}
+
+.team-dissonant .guide__status {
+    border-color: var(--dissonant-neon-lg);
+    background: rgba(31, 42, 58, 0.78);
+}
+
+/* Кнопки ліміту — плавають знизу */
+.guide__btns {
+    position: absolute;
+    bottom: calc(var(--safe-area-bottom) + var(--guide-panel-offset-bottom));
+    left: var(--safe-area-left);
+    right: var(--safe-area-right);
+    z-index: 10;
+
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--guide-btn-gap);
+    padding:
+        var(--guide-panel-pad-y)
+        var(--guide-panel-pad-x)
+        calc(var(--guide-panel-pad-bottom-extra) + var(--ui-offset-bottom));
+    box-sizing: border-box;
+}
+
+/* Кнопка числа */
+.guide__num-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: var(--guide-btn-min-size);
+    min-height: var(--guide-btn-min-size);
+    padding: 0;
+    font-size: var(--guide-btn-font-size);
+    font-weight: 700;
+}
+
+.guide__num-btn:not([disabled]):hover {
+    border-color: var(--resonant-light);
+    background: #2C3248;
+    box-shadow: 0 0 20px rgba(255, 223, 174, 0.6);
+}
+
+.guide__num-btn--chosen {
+    border: 1px solid var(--resonant-light);
+    background: #2C3248;
+    color: var(--text-main);
+    box-shadow: 0 0 20px rgba(255, 223, 174, 0.4);
+}
+
+.team-dissonant .guide__num-btn:not([disabled]):hover {
+    border-color: var(--dissonant-light);
+    box-shadow: 0 0 20px rgba(155, 195, 255, 0.6);
+}
+
+.team-dissonant .guide__num-btn--chosen {
+    border-color: var(--dissonant-light);
+    box-shadow: 0 0 20px rgba(155, 195, 255, 0.4);
+}
+
+/* ─── WALKER (мобайл) ────────────────────────────────────────── */
+
+/* Статус (ходи) — лівий верхній кут */
+.walker__status {
+    position: absolute;
+    top: var(--ui-edge-top);
+    left: var(--ui-edge-left);
+    z-index: 10;
+
+    font-size: var(--indicator-font-size);
+    font-weight: 800;
+    letter-spacing: var(--indicator-letter-spacing);
+    text-transform: uppercase;
+    line-height: 1.2;
+    padding: var(--indicator-pad-y) var(--indicator-pad-x);
+    border-radius: var(--indicator-radius);
+    border: var(--indicator-border);
+    background: var(--indicator-bg);
+    box-shadow: var(--indicator-shadow);
+    backdrop-filter: blur(var(--glass-blur));
+}
+
+.team-resonant .walker__status {
+    border-color: var(--resonant-neon-lg);
+    background: rgba(58, 44, 30, 0.78);
+}
+
+.team-dissonant .walker__status {
+    border-color: var(--dissonant-neon-lg);
+    background: rgba(31, 42, 58, 0.78);
+}
+
+/* Кнопка «закінчити хід» — правий нижній кут */
+.walker__end-turn {
+    position: absolute;
+    bottom: var(--ui-edge-bottom);
+    right: var(--ui-edge-right);
+    z-index: 10;
+
+    padding: var(--action-btn-pad-y) var(--action-btn-pad-x);
+    font-size: var(--action-btn-font-size);
+    font-weight: 700;
+    letter-spacing: var(--action-btn-letter-spacing);
+    text-transform: uppercase;
+}
+
+.walker__end-turn:not(:disabled):hover {
+    border-color: var(--game-btn-border-active);
+    background: var(--game-btn-bg-active);
+}
+
+.team-resonant .walker__end-turn:not(:disabled):hover {
+    border-color: var(--resonant-light);
+    box-shadow: 0 0 20px rgba(255, 223, 174, 0.6);
+}
+
+.team-dissonant .walker__end-turn:not(:disabled):hover {
+    border-color: var(--dissonant-light);
+    box-shadow: 0 0 20px rgba(155, 195, 255, 0.6);
+}
+
+/* ─── AWAKE SCREEN ───────────────────────────────────────────── */
+
+.awake-screen {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100dvw;
+    min-height: 100dvh;
+}
+
+.awake-screen__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-lg);
+    text-align: center;
+    padding: var(--space-xl);
+}
+
+.awake-screen__title {
+    font-size: clamp(0.9rem, 3vw, 1.4rem);
+    font-weight: 800;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+}
+
+.awake-screen__awakening {
+    font-size: clamp(1.4rem, 6vw, 3rem);
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    line-height: 1.2;
+}
+
+.awake-screen__role {
+    font-size: clamp(0.85rem, 2.5vw, 1.1rem);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.awake-screen__new-game-btn {
+    padding: clamp(12px, 3vw, 18px) clamp(28px, 6vw, 56px);
+    font-size: clamp(0.85rem, 2.5vw, 1.1rem);
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+/* ─── WAITING SCREEN ─────────────────────────────────────────── */
+
+.waiting-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-lg);
+    width: 100dvw;
+    min-height: 100dvh;
+    padding: var(--space-xl);
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.waiting-screen__title {
+    font-size: clamp(1.2rem, 4vw, 2rem);
+    font-weight: 800;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+}
+
+/* ─── ERROR SCREEN ───────────────────────────────────────────── */
+
+.error-screen {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100dvw;
+    min-height: 100dvh;
+    padding: var(--space-xl);
+    text-align: center;
+    box-sizing: border-box;
+    font-size: clamp(0.9rem, 2.5vw, 1.1rem);
 }

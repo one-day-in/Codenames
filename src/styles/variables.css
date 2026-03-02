@@ -1,108 +1,224 @@
 /* variables.css */
 :root {
 
-  /* ─── КОМАНДИ ─────────────────────────────────────────────── */
-  --red:              #dc3545;
-  --red-dark:         #b02a37;
-  --red-darker:       #a11f2f;
-  --red-light:        #ff6b7c;
-  --red-neon:         rgba(220, 53, 69, 0.3);
-  --red-neon-md:      rgba(220, 53, 69, 0.5);
-  --red-neon-lg:      rgba(220, 53, 69, 0.7);
+  /* ─── FACTIONS (mapped to existing roles) ─────────────────── */
+  /* resonant -> Light Memories */
+  --resonant: #F5C88A;
+  --resonant-dark: #fab515;
+  --resonant-darker: #2A1E13;
+  --resonant-light: #FFDFAE;
+  --resonant-neon: rgba(255, 223, 174, 0.28);
+  --resonant-neon-md: rgba(255, 223, 174, 0.44);
+  --resonant-neon-lg: rgba(255, 223, 174, 0.6);
 
-  --blue:             #0d6efd;
-  --blue-dark:        #0a58ca;
-  --blue-light:       #5e9eff;
-  --blue-neon:        rgba(13, 110, 253, 0.3);
-  --blue-neon-md:     rgba(13, 110, 253, 0.5);
-  --blue-neon-lg:     rgba(13, 110, 253, 0.7);
+  /* dissonant -> Sad Memories */
+  --dissonant: #6F8FAF;
+  --dissonant-dark: #1F2A3A;
+  --dissonant-darker: #161F2C;
+  --dissonant-light: #9BC3FF;
+  --dissonant-neon: rgba(155, 195, 255, 0.28);
+  --dissonant-neon-md: rgba(155, 195, 255, 0.44);
+  --dissonant-neon-lg: rgba(155, 195, 255, 0.6);
 
-  /* ─── РОЛІ КАРТОК ─────────────────────────────────────────── */
-  --assassin:         #212529;
-  --neutral:          #f1ece4;
+  /* anomaly */
+  --anomaly: #B04DFF;
+  --anomaly-light: #E056FF;
+  --anomaly-accent: #00F0FF;
+  --anomaly-dark: #1B1025;
+  --anomaly-neon: rgba(224, 86, 255, 0.5);
 
-  /* Колір тексту на картках (для міні-карти де видно ролі) */
-  --card-text-light:  rgba(255, 255, 255, 0.9);  /* на red/blue/assassin */
-  --card-text-dark:   rgba(0, 0, 0, 0.75);       /* на neutral */
+  /* nightmare */
+  --nightmare: #8B1E2D;
+  --nightmare-dark: #1A0C12;
+  --nightmare-neon: rgba(255, 58, 79, 0.7);
+  --nightmare-glow: rgba(255, 58, 79, 0.35);
 
-  /* ─── НЕЙТРАЛЬНІ / UI ─────────────────────────────────────── */
-  --white:            #ffffff;
-  --gray-100:         #f8f9fa;
-  --gray-200:         #ccc;
-  --gray-300:         #999;
-  --gray-400:         #666;
-  --gray-500:         #555;
-  --gray-600:         #444;
-  --gray-700:         #333;
-  --gray-800:         #222;
-  --gray-900:         #1a1a1a;
+  /* ─── TEXT ─────────────────────────────────────────────────── */
+  --text-main: #E8E6E3;
+  --text-secondary: #A9B0C0;
+  --text-disabled: #5B6275;
+  --title-color: #F4F1EC;
 
-  /* ─── ФОНИ МОДАЛОК / ПАНЕЛЕЙ ──────────────────────────────── */
-  --modal-bg:         #1e2a3a;
-  --modal-bg-dark:    #0f1a24;
-  --modal-panel:      #2a3a4a;
-  --panel-dark:       #2a2a2a;
+  --card-text-light: #E8E6E3;
+  --card-text-dim: #A9B0C0;
+  --card-text-dark: #A9B0C0;
 
-  /* ─── АКЦЕНТ (QR-модалка) ─────────────────────────────────── */
-  --gold:             #ffd966;
-  --gold-dark:        #ffa500;
-  --gold-neon:        rgba(255, 217, 102, 0.5);
+  /* ─── BASE SURFACES ────────────────────────────────────────── */
+  --black: #0E0F14;
+  --bg-deep: #0E0F14;
+  --bg-mid: #121420;
+  --bg-surface: #161824;
+  --bg-card: #1B1E2A;
+  --panel-float: rgba(22, 24, 36, 0.75);
 
-  /* ─── ЧОРНІ ОВЕРЛЕЇ ───────────────────────────────────────── */
-  --overlay-sm:       rgba(0, 0, 0, 0.2);
-  --overlay-md:       rgba(0, 0, 0, 0.3);
-  --overlay-lg:       rgba(0, 0, 0, 0.5);
-  --overlay-xl:       rgba(0, 0, 0, 0.7);
+  /* ─── NEUTRALS / UI ────────────────────────────────────────── */
+  --white: #F4F1EC;
+  --gray-100: #E8E6E3;
+  --gray-200: #A9B0C0;
+  --gray-300: #8991A4;
+  --gray-400: #6D758A;
+  --gray-500: #5B6275;
+  --gray-600: #3A4055;
+  --gray-700: #2A2F3F;
+  --gray-800: #232738;
+  --gray-900: #161824;
 
-  /* ─── БІЛІ ОВЕРЛЕЇ ────────────────────────────────────────── */
-  --white-10:         rgba(255, 255, 255, 0.1);
-  --white-20:         rgba(255, 255, 255, 0.2);
-  --white-50:         rgba(255, 255, 255, 0.5);
+  /* ─── ОВЕРЛЕЇ ─────────────────────────────────────────────── */
+  --overlay-sm: rgba(14, 15, 20, 0.25);
+  --overlay-md: rgba(14, 15, 20, 0.45);
+  --overlay-lg: rgba(14, 15, 20, 0.65);
+  --overlay-xl: rgba(14, 15, 20, 0.82);
+
+  --white-10: rgba(232, 230, 227, 0.08);
+  --white-20: rgba(232, 230, 227, 0.16);
+  --white-50: rgba(232, 230, 227, 0.42);
+  --white-70: rgba(232, 230, 227, 0.68);
 
   /* ─── ТІНІ ────────────────────────────────────────────────── */
-  --shadow-sm:        0 2px 4px rgba(0, 0, 0, 0.2);
-  --shadow-md:        0 4px 15px rgba(0, 0, 0, 0.2);
-  --shadow-lg:        0 6px 20px rgba(0, 0, 0, 0.3);
-  --shadow-xl:        0 20px 60px rgba(0, 0, 0, 0.5);
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.6);
+  --shadow-xl: 0 20px 60px rgba(0, 0, 0, 0.8);
 
   /* ─── РАДІУСИ ─────────────────────────────────────────────── */
-  --radius-sm:        6px;
-  --radius-md:        12px;
-  --radius-lg:        20px;
-  --radius-xl:        40px;
-  --radius-pill:      50px;
-  --radius-circle:    50%;
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-xl: 40px;
+  --radius-pill: 50px;
+  --radius-circle: 50%;
 
   /* ─── ПЕРЕХОДИ ────────────────────────────────────────────── */
-  --transition-fast:  0.2s ease;
-  --transition-base:  0.3s ease;
-  --transition-slow:  0.5s ease;
+  --transition-fast: 0.2s ease;
+  --transition-base: 0.3s ease;
+  --transition-slow: 0.5s ease;
   --transition-bounce: 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
   --transition-smooth: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 
   /* ─── ТИПОГРАФІЯ ──────────────────────────────────────────── */
-  --font-family:      "PT Serif", serif;
+  --font-family: "EB Garamond", "Times New Roman", serif;
+  --font-title: "EB Garamond", "Times New Roman", serif;
+  --font-ui: "EB Garamond", "Times New Roman", serif;
 
-  /* Розміри для карток (десктоп) */
-  --font-card-xs:     28px;   /* 13+ символів */
-  --font-card-sm:     36px;   /* 11–12 символів */
-  --font-card-md:     40px;   /* 9–10 символів */
-  --font-card-lg:     44px;   /* 5–8 символів */
-  --font-card-xl:     52px;   /* 1–4 символи */
+  --font-xs: 0.8rem;
+  --font-sm: 0.95rem;
+  --font-md: 1.1rem;
+  --font-lg: 1.3rem;
+  --font-xl: 1.6rem;
+  --font-2xl: 2.2rem;
+  --font-3xl: 3.4rem;
 
-  /* Розміри UI */
-  --font-xs:          0.9rem;
-  --font-sm:          1rem;
-  --font-md:          1.1rem;
-  --font-lg:          1.3rem;
-  --font-xl:          1.5rem;
-  --font-2xl:         2rem;
-  --font-3xl:         3.4rem;
+  /* ─── ВІДСТУПИ ────────────────────────────────────────────── */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
 
-  /* Відступи */
-  --space-xs:         4px;
-  --space-sm:         8px;
-  --space-md:         16px;
-  --space-lg:         24px;
-  --space-xl:         32px;
+  /* ─── РОЗМІРИ UI ──────────────────────────────────────────── */
+  --icon-btn-size: 44px;
+  --icon-btn-size-sm: 40px;
+  --icon-size: 24px;
+  --modal-close-size: 32px;
+  --loader-dot-size: 7px;
+  --loader-dot-gap: 10px;
+  --loader-fade-duration: 0.7s;
+
+  /* ─── SAFE AREA + UI OFFSETS (mobile app/webview tuning) ───── */
+  --safe-area-top: env(safe-area-inset-top, 0px);
+  --safe-area-right: env(safe-area-inset-right, 0px);
+  --safe-area-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-area-left: env(safe-area-inset-left, 0px);
+
+  /* Global adjustable offsets for HUD/buttons over safe area */
+  --ui-offset-top: 0px;
+  --ui-offset-right: 0px;
+  --ui-offset-bottom: 0px;
+  --ui-offset-left: 0px;
+
+  --ui-edge-top: calc(var(--safe-area-top) + var(--space-sm) + var(--ui-offset-top));
+  --ui-edge-right: calc(var(--safe-area-right) + var(--space-sm) + var(--ui-offset-right));
+  --ui-edge-bottom: calc(var(--safe-area-bottom) + var(--space-sm) + var(--ui-offset-bottom));
+  --ui-edge-left: calc(var(--safe-area-left) + var(--space-sm) + var(--ui-offset-left));
+
+  /* Game/guide panel tuning knobs */
+  --score-offset-top: 0px;
+  --score-top: calc(var(--ui-edge-top) + var(--score-offset-top));
+
+  --guide-panel-offset-bottom: 0px;
+  --guide-panel-offset-right: 0px;
+  --guide-panel-pad-x: var(--space-sm);
+  --guide-panel-pad-y: var(--space-sm);
+  --guide-panel-pad-bottom-extra: 8%;
+
+  --game-footer-h: 56px;
+
+  /* ─── GRID ────────────────────────────────────────────────── */
+  --grid-gap: clamp(3px, 1vw, 8px);
+  --grid-gap-sm: clamp(2px, 0.8vw, 4px);
+  --grid-pad: clamp(1%, 3.5vw, 3%);
+
+  /* ─── ІНДИКАТОРИ / SCOREBOARD ────────────────────────────── */
+  --indicator-font-size: clamp(0.85rem, 2.8vw, 1.15rem);
+  --indicator-letter-spacing: 2px;
+  --indicator-bg: var(--overlay-lg);
+  --indicator-border: 1px solid var(--white-20);
+  --indicator-radius: var(--radius-pill);
+  --indicator-shadow: var(--shadow-sm);
+  --indicator-pad-y: 0.35rem;
+  --indicator-pad-x: 0.75rem;
+
+  --score-gap: clamp(8px, 2vw, 16px);
+  --score-font-size: clamp(0.9rem, 2.4vw, 1.2rem);
+  --score-letter-spacing: 2px;
+  --score-panel-pad: 4px;
+  --score-item-pad: 0.35rem 0.65rem;
+  --score-resonant-bg: rgba(245, 200, 138, 0.32);
+  --score-dissonant-bg: rgba(111, 143, 175, 0.32);
+  --score-item-border: 1px solid var(--white-20);
+
+  --guide-btn-gap: clamp(4px, 1.5vw, 10px);
+  --guide-btn-min-size: clamp(36px, 9vw, 52px);
+  --guide-btn-font-size: clamp(0.8rem, 3vw, 1rem);
+  --guide-btn-panel-width-landscape: clamp(90px, 20vw, 140px);
+  --guide-btn-min-height-landscape: clamp(28px, 6vw, 42px);
+  --guide-btn-font-size-landscape: clamp(0.7rem, 2.5vw, 0.9rem);
+  --guide-btn-bg: #1B1E2A;
+  --guide-btn-bg-active: #232738;
+  --guide-btn-bg-selected: #2C3248;
+  --guide-btn-border: 1px solid #2A2F3F;
+  --guide-btn-border-active: 1px solid #4A5270;
+
+  --action-btn-font-size: clamp(0.8rem, 2.5vw, 1rem);
+  --action-btn-letter-spacing: 2px;
+  --action-btn-pad-y: var(--space-xs);
+  --action-btn-pad-x: var(--space-md);
+  --action-btn-bg: #1B1E2A;
+  --action-btn-border: 1px solid #2A2F3F;
+
+  /* ─── SHARED GAME BUTTONS ─────────────────────────────────── */
+  --game-btn-bg: #181f2d;
+  --game-btn-bg-hover: #243048;
+  --game-btn-bg-active: #2c3b5b;
+  --game-btn-border: 1px solid rgba(122, 137, 167, 0.56);
+  --game-btn-border-hover: 1px solid rgba(166, 186, 226, 0.82);
+  --game-btn-border-active: 1px solid rgba(193, 214, 255, 0.9);
+  --game-btn-color: #E8E6E3;
+  --game-btn-color-hover: #E8E6E3;
+  --game-btn-shadow: 0 10px 28px rgba(8, 9, 13, 0.58);
+  --game-btn-shadow-hover: 0 14px 36px rgba(8, 9, 13, 0.68);
+  --game-btn-focus: 0 0 0 2px rgba(169, 176, 192, 0.26);
+  --game-btn-glow: 0 0 18px rgba(155, 195, 255, 0.22);
+  --game-btn-glow-active: 0 0 24px rgba(255, 223, 174, 0.24);
+  --game-btn-radius: var(--radius-md);
+
+  /* ─── GLASS UI (іконні кнопки) ────────────────────────────── */
+  --glass-bg: rgba(36, 42, 59, 0.8);
+  --glass-bg-hover: rgba(49, 56, 83, 0.9);
+  --glass-border: rgba(58, 64, 85, 0.55);
+  --glass-border-hover: rgba(74, 82, 112, 0.82);
+  --glass-color: #A9B0C0;
+  --glass-color-hover: #E8E6E3;
+  --glass-blur: 8px;
 }

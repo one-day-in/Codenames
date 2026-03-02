@@ -1,25 +1,23 @@
+// vite.config.js
 import { defineConfig } from 'vite';
 import { resolve } from 'path';
 
-export default defineConfig(({ mode }) => ({
-  server: {
-    host: true,
-    port: 5173,
-    open: true
-  },
-  preview: {
-    host: true,
-    port: 4173,
-  },
-  base: mode === 'production' ? '/codenames/' : '/',
+export default defineConfig({
+  base: '/sleepwalkers/',
   build: {
-    outDir: 'dist',
     rollupOptions: {
       input: {
-        main: resolve(__dirname, 'index.html'),
-        mini: resolve(__dirname, 'mini.html'),
-        controller: resolve(__dirname, 'controller.html'),
+        main:    resolve(__dirname, 'index.html'),
+        game:    resolve(__dirname, 'game.html'),
+        guide:   resolve(__dirname, 'guide.html'),
+        walker:  resolve(__dirname, 'walker.html'),
+        preview: resolve(__dirname, 'preview.html'),
       },
-    },
-  },
-}));
+      output: {
+        entryFileNames: 'assets/[name]-[hash].js',
+        chunkFileNames: 'assets/[name]-[hash].js',
+        assetFileNames: 'assets/[name]-[hash][extname]',
+      }
+    }
+  }
+});

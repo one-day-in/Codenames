@@ -1,0 +1,36 @@
+/* ========================================
+   RESPONSIVE — оверрайди по орієнтації
+======================================== */
+
+/* ─── LANDSCAPE ─────────────────────────────── */
+
+@media (orientation: landscape) {
+
+    /* ── Guide: кнопки ліворуч ───────────────── */
+
+    .guide__btns {
+        top: var(--safe-area-top);
+        bottom: var(--safe-area-bottom);
+        left: auto;
+        right: calc(var(--safe-area-right) + var(--guide-panel-offset-right));
+        width:  var(--guide-btn-panel-width-landscape);
+
+        grid-template-columns: repeat(2, 1fr);
+        align-content: center;
+    }
+
+    .guide__num-btn {
+        min-width:  0;
+        min-height: var(--guide-btn-min-height-landscape);
+        font-size:  var(--guide-btn-font-size-landscape);
+    }
+
+}
+
+/* ─── ДРІБНІ ЕКРАНИ (< 400px) ───────────────── */
+
+@media (max-width: 400px) {
+    .grid--5 {
+        gap: var(--grid-gap-sm);
+    }
+}

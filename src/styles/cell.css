@@ -1,0 +1,179 @@
+/* ─── CELL — база + всі стани і варіанти ролей ──────────────── */
+
+/* ─── BASE ────────────────────────────────── */
+
+.cell {
+    position: relative;
+    aspect-ratio: 1 / 1;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+
+    min-width: 0;
+    min-height: 0;
+
+    border-radius: var(--radius-sm);
+    user-select: none;
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    transition:
+        transform 120ms ease,
+        opacity 120ms ease;
+}
+
+/* Текст всередині клітинки */
+.cell__content {
+    display: block;
+    max-width: 90%;
+    overflow: hidden;
+    padding: 0 8%;
+
+    font-family: var(--font-family);
+    font-weight: 700;
+    font-size: 1rem;
+    /* fitText.js перевизначить inline */
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-align: center;
+    line-height: 1.2;
+}
+
+/* ─── СТАНИ (state modifiers) ─────────────── */
+
+/* Закрита картка (зворот) */
+.cell--hidden {
+    color: var(--gray-500);
+    background-image: image-set(url("../images/cards/shared/card-hidden.png") 1x,
+            url("../images/cards/shared/card-hidden.png") 2x);
+}
+
+/* Відкрита картка — стилів немає */
+
+/* Guide: відгадані картки затемнюються */
+.guide .cell--revealed {
+    opacity: 0.28;
+    filter: grayscale(0.3);
+}
+
+/* Клікабельна (хід блукача) */
+.cell--clickable {
+    cursor: pointer;
+}
+
+.cell--clickable:active {
+    transform: scale(0.93);
+    opacity: 0.85;
+}
+
+/* ─── РОЛІ: NIGHTMARE (1 картка) ─────────── */
+
+.cell--nightmare {
+    background-color: var(--nightmare-dark);
+    border: 1px solid rgba(255, 58, 79, 0.35);
+    color: var(--card-text-light);
+}
+
+/* ─── РОЛІ: ANOMALY / нейтральні (7 карток) ─ */
+
+.cell--anomaly-1,
+.cell--anomaly-2,
+.cell--anomaly-3,
+.cell--anomaly-4,
+.cell--anomaly-5,
+.cell--anomaly-6,
+.cell--anomaly-7 {
+    background-color: var(--anomaly-dark);
+    border: 1px solid rgba(224, 86, 255, 0.35);
+    color: var(--card-text-dim);
+}
+
+/* ─── РОЛІ: RESONANT (до 9 карток) ──────── */
+
+.cell--resonant-1,
+.cell--resonant-2,
+.cell--resonant-3,
+.cell--resonant-4,
+.cell--resonant-5,
+.cell--resonant-6,
+.cell--resonant-7,
+.cell--resonant-8,
+.cell--resonant-9 {
+    background-color: var(--resonant-dark);
+    border: 1px solid rgba(191, 123, 22, 0.818);
+    color: var(--card-text-light);
+}
+
+/* ─── РОЛІ: DISSONANT (до 9 карток) ─────── */
+
+.cell--dissonant-1,
+.cell--dissonant-2,
+.cell--dissonant-3,
+.cell--dissonant-4,
+.cell--dissonant-5,
+.cell--dissonant-6,
+.cell--dissonant-7,
+.cell--dissonant-8,
+.cell--dissonant-9 {
+    background-color: var(--dissonant-dark);
+    border: 1px solid rgba(155, 195, 255, 0.36);
+    color: var(--card-text-light);
+}
+
+
+/* ─── GUIDE-SPECIFIC OVERRIDES (cell--guide) ────────────────────
+   Guide картки завжди показують роль, але з
+   ІНШИМ зображенням, ніж revealed-стан game/walker.
+   Пізніше: background-image: url("../images/cards/.../guide-XXX.jpg")
+─────────────────────────────────────────────────────────────── */
+
+/* Базова форма guide-картки */
+.cell--guide {
+    /* майбутній guide-стиль (рамка, фактура тощо) */
+}
+
+/* Nightmare — guide */
+.cell--guide.cell--nightmare {
+    /* background-image: url("../images/guide-nightmare.jpg"); */
+}
+
+/* Anomaly — guide (7 варіантів) */
+.cell--guide.cell--anomaly-1,
+.cell--guide.cell--anomaly-2,
+.cell--guide.cell--anomaly-3,
+.cell--guide.cell--anomaly-4,
+.cell--guide.cell--anomaly-5,
+.cell--guide.cell--anomaly-6,
+.cell--guide.cell--anomaly-7 {
+    /* background-image: url("../images/guide-anomaly-N.jpg"); */
+}
+
+/* Resonant — guide (9 варіантів) */
+.cell--guide.cell--resonant-1,
+.cell--guide.cell--resonant-2,
+.cell--guide.cell--resonant-3,
+.cell--guide.cell--resonant-4,
+.cell--guide.cell--resonant-5,
+.cell--guide.cell--resonant-6,
+.cell--guide.cell--resonant-7,
+.cell--guide.cell--resonant-8,
+.cell--guide.cell--resonant-9 {
+    /* background-image: url("../images/guide-resonant-N.jpg"); */
+}
+
+/* Dissonant — guide (9 варіантів) */
+.cell--guide.cell--dissonant-1,
+.cell--guide.cell--dissonant-2,
+.cell--guide.cell--dissonant-3,
+.cell--guide.cell--dissonant-4,
+.cell--guide.cell--dissonant-5,
+.cell--guide.cell--dissonant-6,
+.cell--guide.cell--dissonant-7,
+.cell--guide.cell--dissonant-8,
+.cell--guide.cell--dissonant-9 {
+    /* background-image: url("../images/guide-dissonant-N.jpg"); */
+}

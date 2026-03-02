@@ -1,6 +1,7 @@
-// utils/random.js
+// src/utils/random.js — random helpers
+
 export function shuffle(array) {
-    const result = [...array]; // Створюємо копію
+    const result = [...array];
     for (let i = result.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [result[i], result[j]] = [result[j], result[i]];
@@ -10,11 +11,7 @@ export function shuffle(array) {
 
 export function pickRandom(array, count) {
     if (count > array.length) {
-        throw new Error(`Cannot pick ${count} items from array of length ${array.length}`);
+        throw new Error(`Cannot pick ${count} from array of ${array.length}`);
     }
-
-    // Створюємо копію масиву і перемішуємо її
-    const arrayCopy = [...array]; // ЯВНО створюємо копію
-    const shuffled = shuffle(arrayCopy);
-    return shuffled.slice(0, count);
+    return shuffle(array).slice(0, count);
 }

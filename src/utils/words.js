@@ -1,17 +1,16 @@
-// utils/words.js
-export function normalizeWords(words) {
-  return words
-    .map(word => String(word || '').trim())
-    .filter(word => word.length > 0);
-}
+// src/utils/words.js
+import { supabase } from '../supabaseClient.js';
 
-export function uniqueWords(words) {
-  return [...new Set(words)];
-}
+export async function loadWords(language = 'uk') {
+    const { data, error } = await supabase
+        .from('words')
+        .select('word')
+        .eq('language', language)
+        .eq('active', true);
 
-export function ensureEnoughWords(words, minCount) {
-  if (words.length < minCount) {
-    throw new Error(`Not enough words: need ${minCount}, have ${words.length}`);
-  }
-  return words;
+    if (error || !data || data.length < 25) {
+        throw new Error(`Cannot load words (language: ${language})`);
+    }
+
+    return data.map(d => d.word);
 }

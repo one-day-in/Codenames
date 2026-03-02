@@ -1,5 +1,5 @@
 {
-  "name": "leeloo-codenames25",
+  "name": "sleepwalkers",
   "private": true,
   "version": "1.0.0",
   "type": "module",
@@ -11,7 +11,8 @@
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.97.0",
-    "bootstrap": "^5.3.3"
+    "bootstrap": "^5.3.3",
+    "sharp": "^0.34.5"
   },
   "devDependencies": {
     "gh-pages": "^6.0.0",

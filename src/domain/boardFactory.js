@@ -1,38 +1,36 @@
-// domain/boardFactory.js
-import { pickRandom } from '../utils/random.js';
+// src/domain/boardFactory.js
+import { shuffle, pickRandom } from '../utils/random.js';
 import { createRoleDistribution } from './rolesFactory.js';
 
+// Кількість варіантів зображень для кожного типу карти
+const IMAGE_VARIANTS = {
+    resonant:  9,
+    dissonant: 9,
+    anomaly:   7,
+    nightmare: 1,
+};
+
+// Перемішаний пул індексів 1..count — гарантує унікальність на дошці
+function makeVariantPool(count) {
+    return shuffle(Array.from({ length: count }, (_, i) => i + 1));
+}
+
 export function createBoard({ size, words }) {
-    const totalCells = size * size;
+    const { roles, startsFirst } = createRoleDistribution(size);
 
-    // Вибираємо випадкові слова
-    const selectedWords = pickRandom(words, totalCells);
+    // Незалежний пул для кожного типу:
+    // resonant/dissonant → 8 або 9 карт із 9 варіантів (1 запасний)
+    // anomaly            → рівно 7 карт із 7 варіантів (всі використані)
+    // nightmare          → рівно 1 карта, variant завжди 1
+    const pools = Object.fromEntries(
+        Object.entries(IMAGE_VARIANTS).map(([role, count]) => [role, makeVariantPool(count)])
+    );
 
-    // Створюємо розподіл ролей - отримуємо ОБ'ЄКТ з roles та startsFirst
-    const roleDistribution = createRoleDistribution(size);
-    const roles = roleDistribution.roles;
-    const startsFirst = roleDistribution.startsFirst;
-
-    // Знаходимо всі нейтральні клітинки і нумеруємо їх
-    let neutralCounter = 1;
-    const neutralNumbers = {};
-
-    // Спочатку визначаємо номери для нейтральних клітинок
-    roles.forEach((role, index) => {
-        if (role === 'neutral') {
-            neutralNumbers[index] = neutralCounter++;
-        }
+    const cells = pickRandom(words, size * size).map((word, index) => {
+        const role = roles[index];
+        const imageVariant = pools[role].shift() ?? 1;
+        return { word, role, imageVariant, revealed: false };
     });
-
-    // Створюємо клітинки з номерами нейтральних
-    const cells = selectedWords.map((word, index) => ({
-        word,
-        row: Math.floor(index / size),
-        col: index % size,
-        role: roles[index],
-        neutralNumber: neutralNumbers[index] || null, // Додаємо номер для нейтральних
-        revealed: false
-    }));
 
     return { cells, startsFirst };
 }

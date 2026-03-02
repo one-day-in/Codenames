@@ -1,0 +1,265 @@
+/* ─── UI — спільні компоненти між екранами ──────────────────── */
+
+/* ─── APP FOOTER ──────────────────────────────────────────────── */
+
+.app-footer {
+    position: absolute;
+    bottom: var(--safe-area-bottom);
+    left: var(--safe-area-left);
+    right: var(--safe-area-right);
+    z-index: 10;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: var(--game-footer-h);
+    padding: 0 calc(var(--space-md) + var(--ui-offset-right)) 0 calc(var(--space-md) + var(--ui-offset-left));
+    box-sizing: border-box;
+}
+
+/* ─── GLASS ICON BUTTON ───────────────────────────────────────── */
+
+.btn-icon {
+    background:      var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    border:          1px solid var(--glass-border);
+    border-radius:   var(--radius-sm);
+    color:           var(--glass-color);
+    cursor:          pointer;
+    transition:      background var(--transition-fast),
+                     border-color var(--transition-fast),
+                     color var(--transition-fast),
+                     box-shadow var(--transition-fast);
+}
+.btn-icon:hover {
+    background:   var(--glass-bg-hover);
+    border-color: var(--glass-border-hover);
+    color:        var(--glass-color-hover);
+    box-shadow:   0 0 20px rgba(155, 195, 255, 0.3);
+}
+.btn-icon:active {
+    transform: scale(0.92);
+}
+.btn-icon svg {
+    display:        block;
+    width:          var(--icon-size);
+    height:         var(--icon-size);
+    pointer-events: none;
+}
+
+/* Кнопка повноекранного режиму — правий нижній кут */
+.fullscreen-btn {
+    position: absolute;
+    bottom: var(--ui-edge-bottom);
+    right: var(--ui-edge-right);
+    z-index: 10;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width:  var(--icon-btn-size);
+    height: var(--icon-btn-size);
+}
+
+body[data-page="home"] .fullscreen-btn {
+    opacity: 0.28;
+    transition: opacity var(--transition-fast);
+}
+
+body[data-page="home"] .fullscreen-btn:hover,
+body[data-page="home"] .fullscreen-btn:focus-visible {
+    opacity: 1;
+}
+
+/* Кнопка профілю — правий верхній кут */
+.btn-profile {
+    position: absolute;
+    top: var(--ui-edge-top);
+    right: var(--ui-edge-right);
+    z-index: 10;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width:  var(--icon-btn-size);
+    height: var(--icon-btn-size);
+}
+
+body[data-page="home"] .btn-profile {
+    width: 56px;
+    height: 56px;
+}
+
+/* Кнопка «назад / logout» (у footer і на home) */
+.sign-out-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ─── QR PANEL ────────────────────────────────────────────────── */
+
+.qr-panel {
+    display: flex;
+    gap: var(--space-md);
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.qr-panel__group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.qr-panel__group-title {
+    font-size:      clamp(0.75rem, 2vw, 0.95rem);
+    font-weight:    700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.qr-panel__group-cards {
+    display: flex;
+    gap: var(--space-md);
+}
+
+.qr-panel__block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.qr-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.qr-image {
+    display: block;
+    border-radius: var(--radius-sm);
+}
+
+.qr-panel__label {
+    font-size:      clamp(0.65rem, 1.5vw, 0.8rem);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.qr-panel__check {
+    font-size: 1.2rem;
+}
+
+/* ─── QR MODAL ────────────────────────────────────────────────── */
+
+.qr-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.qr-modal__backdrop {
+    position: absolute;
+    inset: 0;
+}
+
+.qr-modal__content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-xl);
+    max-width: 90dvw;
+    border-radius: var(--radius-md);
+    background: var(--panel-float);
+    border: 1px solid var(--gray-700);
+    box-shadow: var(--shadow-lg);
+    backdrop-filter: blur(var(--glass-blur));
+}
+
+.qr-modal__close {
+    position: absolute;
+    top:   var(--space-sm);
+    right: var(--space-sm);
+    width:  var(--modal-close-size);
+    height: var(--modal-close-size);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-sm);
+    font-size: 1rem;
+}
+
+/* ─── CONFIRM MODAL (home new game) ───────────────────────────── */
+
+.confirm-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 120;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-lg);
+}
+
+.confirm-modal__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(8, 10, 15, 0.62);
+    backdrop-filter: blur(2px);
+}
+
+.confirm-modal__content {
+    position: relative;
+    z-index: 1;
+    width: min(92vw, 460px);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    padding: clamp(1rem, 2.8vw, 1.4rem);
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(155, 195, 255, 0.3);
+    background:
+        linear-gradient(180deg, rgba(33, 41, 61, 0.9), rgba(14, 18, 27, 0.92)),
+        var(--panel-float);
+    box-shadow: 0 20px 50px rgba(5, 8, 12, 0.7);
+}
+
+.confirm-modal__title {
+    margin: 0;
+    font-size: clamp(1rem, 2.2vw, 1.25rem);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.confirm-modal__text {
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: clamp(0.9rem, 1.9vw, 1rem);
+    line-height: 1.45;
+}
+
+.confirm-modal__actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-sm);
+}
+
+.confirm-modal__btn {
+    min-height: 46px;
+    font-size: clamp(0.84rem, 1.8vw, 0.96rem);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}

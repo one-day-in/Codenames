@@ -1,31 +1,25 @@
+// src/domain/rolesFactory.js
 import { shuffle } from '../utils/random.js';
 
 export function createRoleDistribution(size) {
-  const total = size * size;
+    const total = size * size;
 
-  // Рандомно визначаємо хто ходить першим
-  const startsFirst = Math.random() < 0.5 ? 'red' : 'blue';
+    const startsFirst = Math.random() < 0.5 ? 'resonant' : 'dissonant';
 
-  // Команда яка ходить першою отримує 9 карт, інша — 8
-  const firstCount = Math.ceil(total / 3);  // 9
-  const secondCount = firstCount - 1;       // 8
+    const firstCount  = Math.ceil(total / 3);  // 9
+    const secondCount = firstCount - 1;        // 8
 
-  const redCount  = startsFirst === 'red'  ? firstCount : secondCount;
-  const blueCount = startsFirst === 'blue' ? firstCount : secondCount;
+    const resonantCount  = startsFirst === 'resonant'  ? firstCount : secondCount;
+    const dissonantCount = startsFirst === 'dissonant' ? firstCount : secondCount;
+    const nightmareCount = 1;
+    const anomalyCount   = total - resonantCount - dissonantCount - nightmareCount;
 
-  const assassinCount = 1;
-  const neutralCount = total - (redCount + blueCount + assassinCount);
+    const roles = [
+        ...Array(resonantCount).fill('resonant'),
+        ...Array(dissonantCount).fill('dissonant'),
+        ...Array(anomalyCount).fill('anomaly'),
+        ...Array(nightmareCount).fill('nightmare'),
+    ];
 
-  // Створюємо масив ролей
-  const roles = [];
-
-  for (let i = 0; i < redCount; i++)      roles.push('red');
-  for (let i = 0; i < blueCount; i++)     roles.push('blue');
-  for (let i = 0; i < neutralCount; i++)  roles.push('neutral');
-  for (let i = 0; i < assassinCount; i++) roles.push('assassin');
-
-  return {
-    roles: shuffle(roles),
-    startsFirst
-  };
+    return { roles: shuffle(roles), startsFirst };
 }

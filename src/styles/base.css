@@ -1,118 +1,205 @@
-/* base.css */
+/* base.css — глобальні стилі, спільні компоненти */
+
+/* ─── RESET / ГЛОБАЛЬНІ ───────────────────────────────────────── */
 *,
 *::before,
 *::after {
     box-sizing: border-box;
 }
 
-body {
+/* ─── КНОПКИ — базовий reset ───────────────────────────────────── */
+button {
+    appearance: none;
+    background: transparent;
+    border: none;
+    padding: 0;
     margin: 0;
-    font-family: var(--font-family);
-    background: url("../data/images/background.jpg") center / cover no-repeat;
-    color: var(--gray-800);
-    transition: background var(--transition-slow);
-    position: relative;
+    font-family: var(--font-ui);
+    color: inherit;
+    cursor: pointer;
+    line-height: 1;
+}
+
+button:not(.btn-icon) {
+    border: var(--game-btn-border);
+    border-radius: var(--game-btn-radius);
+    background:
+        linear-gradient(180deg, rgba(232, 230, 227, 0.14), rgba(232, 230, 227, 0) 44%),
+        var(--game-btn-bg);
+    color: var(--game-btn-color);
+    box-shadow:
+        var(--game-btn-shadow),
+        inset 0 1px 0 rgba(244, 241, 236, 0.17),
+        inset 0 -1px 0 rgba(7, 9, 14, 0.5);
+    backdrop-filter: blur(7px);
+    transform: translateY(0);
+    transition:
+        background var(--transition-fast),
+        border-color var(--transition-fast),
+        color var(--transition-fast),
+        transform var(--transition-fast),
+        box-shadow var(--transition-fast);
+}
+
+button:not(.btn-icon):not(:disabled):hover {
+    border: var(--game-btn-border-hover);
+    background:
+        linear-gradient(180deg, rgba(232, 230, 227, 0.2), rgba(232, 230, 227, 0) 48%),
+        var(--game-btn-bg-hover);
+    color: var(--game-btn-color-hover);
+    transform: translateY(-1px);
+    box-shadow:
+        var(--game-btn-shadow-hover),
+        var(--game-btn-glow),
+        inset 0 1px 0 rgba(244, 241, 236, 0.23);
+}
+
+button:not(.btn-icon):not(:disabled):active {
+    border: var(--game-btn-border-active);
+    background:
+        linear-gradient(180deg, rgba(232, 230, 227, 0.24), rgba(232, 230, 227, 0) 50%),
+        var(--game-btn-bg-active);
+    transform: translateY(0) scale(0.97);
+    box-shadow:
+        var(--game-btn-shadow-hover),
+        var(--game-btn-glow-active),
+        inset 0 1px 0 rgba(244, 241, 236, 0.25);
+}
+
+button:not(.btn-icon):focus-visible {
+    outline: none;
+    box-shadow: var(--game-btn-shadow), var(--game-btn-focus);
+}
+
+button:disabled {
+    cursor: not-allowed;
+    color: var(--text-disabled);
+    opacity: 0.55;
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0;
     overflow: hidden;
 }
 
-/* Затемнення фону */
+/* Фолбек-підкладка (чорний) */
+html {
+    background: var(--black);
+}
+
+body {
+    font-family: var(--font-ui);
+    color: var(--text-main);
+    position: relative;
+    background-color: var(--black);
+    /* підкладка під фон */
+    z-index: 0;
+    /* body стає “нульовим” шаром */
+    isolation: isolate;
+    /* створює власний stacking context */
+}
+
+/* Текстурний шар: легке зерно + віньєтка для кінематографічної глибини */
 body::before {
     content: '';
     position: fixed;
     inset: 0;
-    background: var(--overlay-xl);
-    z-index: -2;
+    pointer-events: none;
+    z-index: -1;
+    background:
+        radial-gradient(
+            120% 105% at 50% 46%,
+            rgba(14, 15, 20, 0) 44%,
+            rgba(14, 15, 20, 0.26) 68%,
+            rgba(14, 15, 20, 0.6) 86%,
+            rgba(14, 15, 20, 0.9) 100%
+        ),
+        linear-gradient(to top, rgba(14, 15, 20, 0.72), rgba(14, 15, 20, 0) 28%),
+        linear-gradient(to bottom, rgba(14, 15, 20, 0.54), rgba(14, 15, 20, 0) 22%);
+    opacity: 1;
+    mix-blend-mode: normal;
 }
 
-/* Розмитий фон */
+/* ─── LOADER ───────────────────────────────────────────────────── */
+
+#loader {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    background: var(--bg-deep);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity var(--loader-fade-duration) ease;
+    pointer-events: all;
+}
+
+#loader.is-hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.loader__dots {
+    display: flex;
+    gap: var(--loader-dot-gap);
+}
+
+.loader__dots span {
+    width: var(--loader-dot-size);
+    height: var(--loader-dot-size);
+    border-radius: 50%;
+    background: var(--glass-color);
+    animation: loader-pulse 1.4s ease-in-out infinite;
+}
+
+.loader__dots span:nth-child(2) { animation-delay: 0.22s; }
+.loader__dots span:nth-child(3) { animation-delay: 0.44s; }
+
+@keyframes loader-pulse {
+    0%, 100% { opacity: 0.2;  transform: scale(0.7); }
+    50%       { opacity: 1;   transform: scale(1); }
+}
+
+/* ─── ФОН-КАРТИНКА (НИЖНІЙ ШАР) ───────────────────────────────── */
 body::after {
     content: '';
     position: fixed;
     inset: 0;
-    background-size: cover;
-    background-position: center;
+    pointer-events: none;
+    z-index: -2;
+
+    background-image: url("../images/backgrounds/background-main-mobile.jpg");
     background-repeat: no-repeat;
-    filter: blur(2px);
-    z-index: -3;
+    background-position: center center;
+    background-size: cover;
 }
 
-/* Неонова підсвітка для червоної команди */
-body.team-red::before {
-    background: var(--overlay-lg);
-    box-shadow: inset 0 0 150px var(--red-neon);
-    animation: neonPulseRed 3s ease-in-out infinite;
-}
-
-/* Неонова підсвітка для синьої команди */
-body.team-blue::before {
-    background: var(--overlay-lg);
-    box-shadow: inset 0 0 150px var(--blue-neon);
-    animation: neonPulseBlue 3s ease-in-out infinite;
-}
-
-@keyframes neonPulseRed {
-
-    0%,
-    100% {
-        box-shadow: inset 0 0 150px var(--red-neon);
-    }
-
-    50% {
-        box-shadow: inset 0 0 300px var(--red-neon-md);
+/* Tablet */
+@media (min-width: 768px) {
+    body::after {
+        background-image: url("../images/backgrounds/background-main-tablet.jpg");
+        background-position: center center;
     }
 }
 
-@keyframes neonPulseBlue {
-
-    0%,
-    100% {
-        box-shadow: inset 0 0 150px var(--blue-neon);
-    }
-
-    50% {
-        box-shadow: inset 0 0 300px var(--blue-neon-md);
+/* Desktop */
+@media (min-width: 1200px) {
+    body::after {
+        background-image: url("../images/backgrounds/background-main.jpg");
+        background-position: center center;
     }
 }
 
-/* ─── ЗАГЛУШКА ────────────────────────────────────────────────── */
-.waiting-screen {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100vw;
-    height: 100vh;
-    gap: var(--space-md);
-}
-
-.waiting-screen__title {
-    margin: 0;
-    font-size: clamp(3rem, 10vw, 8rem);
-    font-weight: 800;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    background: linear-gradient(180deg, var(--white), var(--gray-300));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-.waiting-screen__hint {
-    margin: 0;
-    font-size: var(--font-lg);
-    color: var(--gray-400);
-    letter-spacing: 0.1em;
-    animation: hintPulse 2s ease-in-out infinite;
-}
-
-@keyframes hintPulse {
-
-    0%,
-    100% {
-        opacity: 0.4;
+@supports (height: 100svh) {
+    body::after {
+        background-size: cover;
     }
+}
 
-    50% {
-        opacity: 1;
+@supports (height: 100dvh) {
+    body::after {
+        background-size: cover;
     }
 }

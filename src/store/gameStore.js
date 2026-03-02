@@ -1,26 +1,18 @@
+// src/store/gameStore.js
 import { supabase } from '../supabaseClient.js';
 import { createEmitter } from '../utils/emitter.js';
-import { createBoard } from '../domain/boardFactory.js';
-import { revealCell, endTurn, checkWinner } from '../domain/gameRules.js';
-import { WORDS } from '../data/ru_nouns.js';
-
-function generateUUID() {
-    if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') {
-        return crypto.randomUUID();
-    }
-    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
-        const r = Math.random() * 16 | 0;
-        return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
-    });
-}
+import { revealCell, endTurn, setGuideLimit, checkWinner } from '../domain/gameRules.js';
+import { DEFAULT_LANGUAGE } from '../utils/i18n.js';
 
 export function createGameStore(roomId) {
     const emitter = createEmitter();
-    let state = null;
+    let state    = null;
+    let language = DEFAULT_LANGUAGE;
 
-    function emit(next) {
-        state = next;
-        emitter.emit(state);
+    function emit(nextState, nextLang) {
+        if (nextState !== undefined) state    = nextState;
+        if (nextLang  !== undefined) language = nextLang ?? DEFAULT_LANGUAGE;
+        emitter.emit({ state, language });
     }
 
     function applyWinner(next) {
@@ -28,89 +20,60 @@ export function createGameStore(roomId) {
         return winner ? { ...next, gameOver: true, winner } : next;
     }
 
-    function createNewGame() {
-        const { cells, startsFirst } = createBoard({ size: 5, words: WORDS });
-        return {
-            gameId: generateUUID(),
-            size: 5,
-            cells,
-            activeTeam: startsFirst,
-            startingTeam: startsFirst,
-            gameOver: false,
-            winner: null
-        };
-    }
-
-    async function loadInitialState() {
-        const { data, error } = await supabase
-            .from('games')
-            .select('state')
-            .eq('id', roomId)
-            .maybeSingle(); // ← замість .single(), не кидає 404
-
-        if (error || !data) return null;
-
-        emit(data.state);
-        return data.state;
-    }
-
     async function updateState(next) {
         const updated = applyWinner(next);
-        await supabase
-            .from('games')
-            .update({ state: updated })
-            .eq('id', roomId);
-    }
-
-    function subscribeRealtime() {
-        const channel = supabase
-            .channel('room-' + roomId)
-            .on(
-                'postgres_changes',
-                {
-                    event: '*',
-                    schema: 'public',
-                    table: 'games',
-                    filter: `id=eq.${roomId}`
-                },
-                (payload) => {
-                    console.log('🔥 Realtime payload:', payload);
-                    emit(payload.new.state);
-                }
-            )
-            .subscribe((status) => {
-                console.log('📡 Realtime status:', status);
-            });
+        await supabase.from('rooms').update({ state: updated }).eq('id', roomId);
     }
 
     async function init() {
-        subscribeRealtime();
-        await loadInitialState();
+        supabase
+            .channel('room-' + roomId)
+            .on('postgres_changes',
+                { event: '*', schema: 'public', table: 'rooms', filter: `id=eq.${roomId}` },
+                payload => emit(payload.new.state, payload.new.language)
+            )
+            .subscribe();
+
+        const { data } = await supabase
+            .from('rooms')
+            .select('state, language')
+            .eq('id', roomId)
+            .maybeSingle();
+
+        if (data) emit(data.state, data.language);
     }
 
     return {
         init,
-        subscribe: emitter.subscribe,
-        getState: () => state,
+        subscribe:   emitter.subscribe,
+        getState:    () => state,
+        getLanguage: () => language,
 
-        createGame: async () => {
-            const newGame = createNewGame();
-            await supabase.from('games').upsert({
-                id: roomId,
-                state: newGame
-            });
+        // Переводить гру з lobby → active (викликається хостом коли всі підключились)
+        startGame: async () => {
+            if (!state || state.phase !== 'lobby') return;
+            const updated = { ...state, phase: 'active' };
+            await supabase.from('rooms').update({ state: updated }).eq('id', roomId);
+        },
+
+        // Скидає стан (викликається перед новою грою з index.html)
+        resetGame: async () => {
+            await supabase.from('rooms').update({ state: null }).eq('id', roomId);
+        },
+
+        setGuideLimit: async (limit) => {
+            if (!state || state.gameOver) return;
+            await updateState(setGuideLimit(state, limit));
         },
 
         reveal: async (index) => {
             if (!state || state.gameOver) return;
-            const next = revealCell(state, index);
-            await updateState(next);
+            await updateState(revealCell(state, index));
         },
 
         endTurn: async () => {
             if (!state || state.gameOver) return;
-            const next = endTurn(state);
-            await updateState(next);
-        }
+            await updateState(endTurn(state));
+        },
     };
 }
