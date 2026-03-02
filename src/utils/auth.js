@@ -1,12 +1,17 @@
 // src/utils/auth.js — Supabase auth helpers
-import { supabase } from '../supabaseClient.js';
+import { supabase, isSupabaseConfigured } from '../supabaseClient.js';
 
 export async function getUser() {
+    if (!isSupabaseConfigured) return null;
     const { data: { user } } = await supabase.auth.getUser();
     return user;
 }
 
 export async function signInWithGoogle() {
+    if (!isSupabaseConfigured) {
+        window.alert('Google auth is not configured for this deployment yet.');
+        return;
+    }
     const { error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: { redirectTo: window.location.origin + window.location.pathname }
@@ -15,12 +20,16 @@ export async function signInWithGoogle() {
 }
 
 export async function signOut() {
+    if (!isSupabaseConfigured) return;
     await supabase.auth.signOut();
 }
 
 // Знаходить або створює кімнату для хоста
 // Повертає { id, guest_token, hasActiveGame }
 export async function getOrCreateRoomForUser(userId) {
+    if (!isSupabaseConfigured) {
+        throw new Error('Supabase is not configured.');
+    }
     const { data: existing } = await supabase
         .from('rooms')
         .select('id, guest_token, state')
