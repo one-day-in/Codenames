@@ -208,7 +208,9 @@ export async function initGame(root) {
 
         // [PRESENCE DISABLED] — одразу активуємо, без очікування гравців
         if (state.phase === 'lobby') {
-            store.startGame();
+            store.startGame().catch((error) => {
+                console.error('Failed to start game:', error);
+            });
             return;
         }
 

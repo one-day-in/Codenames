@@ -52,8 +52,16 @@ export function createGameStore(roomId) {
         // Переводить гру з lobby → active (викликається хостом коли всі підключились)
         startGame: async () => {
             if (!state || state.phase !== 'lobby') return;
+            const previous = state;
             const updated = { ...state, phase: 'active' };
-            await supabase.from('rooms').update({ state: updated }).eq('id', roomId);
+            // Локально перемикаємо фазу одразу, щоб хост не "зависав" на loading.
+            emit(updated, language);
+            const { error } = await supabase.from('rooms').update({ state: updated }).eq('id', roomId);
+            if (error) {
+                // Повертаємо попередній стан, якщо апдейт не пройшов.
+                emit(previous, language);
+                throw error;
+            }
         },
 
         // Скидає стан (викликається перед новою грою з index.html)
