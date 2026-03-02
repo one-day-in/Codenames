@@ -42,6 +42,7 @@ export const TRANSLATIONS = {
         confirmNewGame: 'Скинути поточну гру?',
         confirmNewGameAction: 'Почати нову гру',
         cancel: 'Скасувати',
+        newGameFailed: 'Не вдалося створити нову гру. Спробуй ще раз.',
         continueGame: 'Продовжити гру',
         forceRejoin: 'Це я — перепідключитись',
     },
@@ -85,6 +86,7 @@ export const TRANSLATIONS = {
         confirmNewGame: 'Reset the current game?',
         confirmNewGameAction: 'Start new game',
         cancel: 'Cancel',
+        newGameFailed: 'Failed to start a new game. Please try again.',
         continueGame: 'Continue game',
         forceRejoin: 'That\'s me — reconnect',
     },
@@ -128,6 +130,7 @@ export const TRANSLATIONS = {
         confirmNewGame: 'Сбросить текущую игру?',
         confirmNewGameAction: 'Начать новую игру',
         cancel: 'Отмена',
+        newGameFailed: 'Не удалось начать новую игру. Попробуй ещё раз.',
         continueGame: 'Продолжить игру',
         forceRejoin: 'Это я — переподключиться',
     }
