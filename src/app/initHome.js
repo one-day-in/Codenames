@@ -260,21 +260,13 @@ export async function initHome(root) {
     }
 
     // ─── INIT LOAD ───────────────────────────────────────────────────
-
-    root.innerHTML = `
-        <div class="app">
-            <div class="lobby-screen">
-                <div class="lobby__title-wrap">
-                    <h1 class="lobby__title">${GAME_NAME}</h1>
-                </div>
-            </div>
-        </div>
-    `;
+    // Перший рендер робимо тим самим шаблоном, що й основний екран,
+    // щоб уникнути стрибка layout (верх -> центр).
+    await render();
 
     user = await getUser();
     if (user) {
         room = await getOrCreateRoomForUser(user.id);
+        await render();
     }
-
-    render();
 }
