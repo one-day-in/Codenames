@@ -5,7 +5,7 @@ import { fitTextAll } from '../utils/fitText.js';
 import { getGameCellClass } from '../utils/renderCell.js';
 import { createPresence, ROLES, ALL_ROLES } from '../utils/presence.js';
 import { keepAlive } from '../utils/keepAlive.js';
-import { t, DEFAULT_LANGUAGE, GAME_NAME } from '../utils/i18n.js';
+import { t } from '../utils/i18n.js';
 import { getBaseUrl, getParams } from '../utils/url.js';
 import { signOut } from '../utils/auth.js';
 import { ICONS } from '../utils/icons.js';
@@ -25,15 +25,6 @@ export async function initGame(root) {
         window.location.href = getBaseUrl() + '/index.html';
         return;
     }
-
-    // Лоадер поки ініціалізується
-    root.innerHTML = `
-        <div class="app">
-            <div class="lobby-screen">
-                <h1 class="lobby__title">${GAME_NAME}</h1>
-                <p>${t(DEFAULT_LANGUAGE).loading}</p>
-            </div>
-        </div>`;
 
     // [PRESENCE DISABLED] createPresence(roomId), presence.listen(), keepAlive
 

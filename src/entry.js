@@ -10,11 +10,14 @@ function hideLoader() {
     setTimeout(() => loader.remove(), 800); // fallback якщо transition не спрацює
 }
 
-// readyState === 'complete' — якщо load вже стався до запуску модуля
-if (document.readyState === 'complete') {
-    hideLoader();
-} else {
-    window.addEventListener('load', hideLoader);
+function waitForWindowLoad() {
+    if (document.readyState === 'complete') return Promise.resolve();
+    return new Promise(resolve => {
+        const onLoad = () => resolve();
+        window.addEventListener('load', onLoad, { once: true });
+        // Не тримаємо loader безкінечно, якщо браузер не віддасть load.
+        setTimeout(resolve, 6000);
+    });
 }
 // ───────────────────────────────────────────────────────────────────
 
@@ -28,9 +31,24 @@ const pages = {
 
 document.addEventListener('DOMContentLoaded', async () => {
     const root = document.querySelector('#app');
-    if (!root) return;
+    if (!root) {
+        hideLoader();
+        return;
+    }
+
     const getInit = pages[document.body.dataset.page];
-    if (!getInit) return;
-    const init = await getInit();
-    init(root);
+    if (!getInit) {
+        hideLoader();
+        return;
+    }
+
+    try {
+        const init = await getInit();
+        await init(root);
+    } catch (error) {
+        console.error('Page init failed:', error);
+    } finally {
+        await waitForWindowLoad();
+        hideLoader();
+    }
 });
