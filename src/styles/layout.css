@@ -306,7 +306,9 @@
     right: var(--ui-edge-right);
     z-index: 10;
 
-    padding: var(--action-btn-pad-y) var(--action-btn-pad-x);
+    min-width: clamp(132px, 30vw, 186px);
+    min-height: clamp(52px, 9.5vw, 66px);
+    padding: calc(var(--action-btn-pad-y) + 4px) calc(var(--action-btn-pad-x) + 8px);
     font-size: var(--action-btn-font-size);
     font-weight: 700;
     letter-spacing: var(--action-btn-letter-spacing);
@@ -326,6 +328,14 @@
 .team-dissonant .walker__end-turn:not(:disabled):hover {
     border-color: var(--dissonant-light);
     box-shadow: 0 0 20px rgba(155, 195, 255, 0.6);
+}
+
+@media (max-width: 720px) {
+    .walker__end-turn {
+        min-width: min(56vw, 240px);
+        min-height: 72px;
+        padding: 12px 22px;
+    }
 }
 
 /* ─── AWAKE SCREEN ───────────────────────────────────────────── */
