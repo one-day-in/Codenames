@@ -1,0 +1,270 @@
+/* base.css — глобальні стилі, спільні компоненти */
+
+/* ─── RESET / ГЛОБАЛЬНІ ───────────────────────────────────────── */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* ─── КНОПКИ — базовий reset ───────────────────────────────────── */
+button {
+    appearance: none;
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+    font-family: var(--font-ui);
+    color: inherit;
+    cursor: pointer;
+    line-height: 1;
+}
+
+button:not(.btn-icon) {
+    border: var(--game-btn-border);
+    border-radius: var(--game-btn-radius);
+    background:
+        linear-gradient(180deg, var(--white-20), var(--btn-highlight-clear) 44%),
+        var(--game-btn-bg);
+    color: var(--game-btn-color);
+    box-shadow:
+        var(--game-btn-shadow),
+        inset 0 1px 0 var(--btn-inset-top),
+        inset 0 -1px 0 var(--btn-inset-bottom);
+    backdrop-filter: blur(7px);
+    transform: translateY(0);
+    transition:
+        background var(--transition-fast),
+        border-color var(--transition-fast),
+        color var(--transition-fast),
+        transform var(--transition-fast),
+        box-shadow var(--transition-fast);
+}
+
+button:not(.btn-icon):not(:disabled):hover {
+    border: var(--game-btn-border-hover);
+    background:
+        linear-gradient(180deg, var(--btn-highlight-hover), var(--btn-highlight-clear) 48%),
+        var(--game-btn-bg-hover);
+    color: var(--game-btn-color-hover);
+    transform: translateY(-1px);
+    box-shadow:
+        var(--game-btn-shadow-hover),
+        var(--game-btn-glow),
+        inset 0 1px 0 var(--btn-inset-top-hover);
+}
+
+button:not(.btn-icon):not(:disabled):active {
+    border: var(--game-btn-border-active);
+    background:
+        linear-gradient(180deg, var(--btn-highlight-active), var(--btn-highlight-clear) 50%),
+        var(--game-btn-bg-active);
+    transform: translateY(0) scale(0.97);
+    box-shadow:
+        var(--game-btn-shadow-hover),
+        var(--game-btn-glow-active),
+        inset 0 1px 0 var(--btn-inset-top-active);
+}
+
+button:not(.btn-icon):focus-visible {
+    outline: none;
+    box-shadow: var(--game-btn-shadow), var(--game-btn-focus);
+}
+
+button:disabled {
+    cursor: not-allowed;
+    color: var(--text-disabled);
+    opacity: 0.55;
+}
+
+html,
+body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    overflow: hidden;
+}
+
+#app {
+    width: 100%;
+    height: 100%;
+    min-height: 100dvh;
+    position: relative;
+    z-index: 1;
+    isolation: isolate;
+}
+
+/* Фолбек-підкладка (чорний) */
+html {
+    background: var(--black);
+}
+
+body {
+    font-family: var(--font-ui);
+    color: var(--text-main);
+    position: relative;
+    background-color: var(--black);
+    z-index: 0;
+}
+
+/* База фону для всієї гри: центрування + обрізання від центру */
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -3;
+    background-image: var(--global-bg-image);
+    background-repeat: no-repeat;
+    background-position: var(--global-bg-position);
+    background-size: var(--global-bg-size);
+    opacity: var(--global-bg-opacity);
+    mix-blend-mode: normal;
+}
+
+/* Текстурний шар: легке зерно + віньєтка для кінематографічної глибини */
+body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -2;
+    background:
+        radial-gradient(120% 105% at 50% 46%,
+            var(--vignette-clear) 44%,
+            var(--vignette-mid) 68%,
+            var(--vignette-strong) 86%,
+            var(--vignette-end) 100%),
+        linear-gradient(to top, var(--vignette-bottom), var(--vignette-clear) 28%),
+        linear-gradient(to bottom, var(--vignette-top), var(--vignette-clear) 22%);
+    opacity: 1;
+    mix-blend-mode: normal;
+}
+
+/* Рухливий туман поверх фону (але під UI) */
+#global-fog {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.global-fog__layer,
+.global-fog__grain {
+    position: absolute;
+    inset: -12%;
+    pointer-events: none;
+}
+
+.global-fog__layer {
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    mix-blend-mode: screen;
+    will-change: transform, opacity;
+}
+
+.global-fog__layer--1 {
+    background-image: var(--fog-layer-1-image);
+    opacity: var(--fog-layer-1-opacity);
+    filter: blur(var(--fog-layer-1-blur));
+    transform: scale(var(--fog-layer-1-scale));
+    animation: fog-drift-1 var(--fog-layer-1-duration) ease-in-out infinite alternate;
+}
+
+.global-fog__layer--2 {
+    background-image: var(--fog-layer-2-image);
+    opacity: var(--fog-layer-2-opacity);
+    filter: blur(var(--fog-layer-2-blur));
+    transform: scale(var(--fog-layer-2-scale));
+    animation: fog-drift-2 var(--fog-layer-2-duration) ease-in-out infinite alternate;
+}
+
+.global-fog__layer--3 {
+    background-image: var(--fog-layer-3-image);
+    opacity: var(--fog-layer-3-opacity);
+    filter: blur(var(--fog-layer-3-blur));
+    transform: scale(var(--fog-layer-3-scale));
+    animation: fog-drift-3 var(--fog-layer-3-duration) ease-in-out infinite alternate;
+}
+
+.global-fog__layer--4 {
+    background-image: var(--fog-layer-4-image);
+    opacity: var(--fog-layer-4-opacity);
+    filter: blur(var(--fog-layer-4-blur));
+    transform: scale(var(--fog-layer-4-scale));
+    animation: fog-drift-4 var(--fog-layer-4-duration) ease-in-out infinite alternate;
+}
+
+/* Легкий анімований серпанок, щоб дим виглядав "живішим" */
+.global-fog__grain {
+    background:
+        radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.06) 0 1px, transparent 1px),
+        radial-gradient(circle at 72% 58%, rgba(255, 255, 255, 0.04) 0 1px, transparent 1px),
+        radial-gradient(circle at 48% 78%, rgba(255, 255, 255, 0.05) 0 1px, transparent 1px);
+    background-size: 150px 150px, 190px 190px, 210px 210px;
+    opacity: var(--fog-grain-opacity);
+    mix-blend-mode: soft-light;
+    animation: fog-grain-shift 22s linear infinite;
+}
+
+@keyframes fog-drift-1 {
+    0% {
+        transform: translate3d(-2.5%, -1.2%, 0) scale(var(--fog-layer-1-scale));
+        opacity: calc(var(--fog-layer-1-opacity) * 0.82);
+    }
+    100% {
+        transform: translate3d(2.2%, 1.6%, 0) scale(calc(var(--fog-layer-1-scale) + 0.03));
+        opacity: var(--fog-layer-1-opacity);
+    }
+}
+
+@keyframes fog-drift-2 {
+    0% {
+        transform: translate3d(2.8%, -1.6%, 0) scale(var(--fog-layer-2-scale));
+        opacity: calc(var(--fog-layer-2-opacity) * 0.8);
+    }
+    100% {
+        transform: translate3d(-2.4%, 2%, 0) scale(calc(var(--fog-layer-2-scale) + 0.02));
+        opacity: var(--fog-layer-2-opacity);
+    }
+}
+
+@keyframes fog-drift-3 {
+    0% {
+        transform: translate3d(-1.6%, 2.2%, 0) scale(var(--fog-layer-3-scale));
+        opacity: calc(var(--fog-layer-3-opacity) * 0.78);
+    }
+    100% {
+        transform: translate3d(2.8%, -2%, 0) scale(calc(var(--fog-layer-3-scale) + 0.02));
+        opacity: var(--fog-layer-3-opacity);
+    }
+}
+
+@keyframes fog-drift-4 {
+    0% {
+        transform: translate3d(2%, 1.4%, 0) scale(var(--fog-layer-4-scale));
+        opacity: calc(var(--fog-layer-4-opacity) * 0.72);
+    }
+    100% {
+        transform: translate3d(-2.6%, -1.8%, 0) scale(calc(var(--fog-layer-4-scale) + 0.03));
+        opacity: var(--fog-layer-4-opacity);
+    }
+}
+
+@keyframes fog-grain-shift {
+    0% {
+        transform: translate3d(0, 0, 0);
+    }
+    100% {
+        transform: translate3d(-6%, 4%, 0);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .global-fog__layer,
+    .global-fog__grain {
+        animation: none;
+    }
+}

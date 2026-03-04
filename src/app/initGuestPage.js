@@ -12,7 +12,7 @@ import { createPresence, ROLES } from '../utils/presence.js';
 import { createGameStore } from '../store/gameStore.js';
 import { keepAlive } from '../utils/keepAlive.js';
 import { getParams } from '../utils/url.js';
-import { t, DEFAULT_LANGUAGE } from '../utils/i18n.js';
+import { t, DEFAULT_LANGUAGE, getTeamName } from '../utils/i18n.js';
 
 function getPresenceRole(roleType, team) {
     if (roleType === 'guide') {
@@ -21,9 +21,9 @@ function getPresenceRole(roleType, team) {
     return team === 'resonant' ? ROLES.WALKER_RESONANT : ROLES.WALKER_DISSONANT;
 }
 
-function getTakenText(roleType, team, tr) {
+function getTakenText(roleType, team, tr, lang) {
     if (roleType === 'walker') {
-        return `${team} ${tr.dreamwalker}<br>${tr.controllerTaken.replace('\n', '<br>')}`;
+        return `${getTeamName(team, lang)} ${tr.dreamwalker}<br>${tr.controllerTaken.replace('\n', '<br>')}`;
     }
     const key = team === 'resonant' ? 'miniTakenResonant' : 'miniTakenDissonant';
     return tr[key].replace('\n', '<br>');
@@ -38,11 +38,13 @@ export async function initGuestPage(root, { roleType, invalidParamsHtml }) {
     }
 
     const { data: room, error } = await supabase
-        .from('rooms').select('id, guest_token')
+        .from('rooms').select('id, guest_token, language')
         .eq('id', roomId).eq('guest_token', token).maybeSingle();
 
+    const lang = room?.language || DEFAULT_LANGUAGE;
+    const tr = t(lang);
+
     if (!room || error) {
-        const tr = t(DEFAULT_LANGUAGE);
         root.innerHTML = `<div class="waiting-screen">
             <p>${tr.wrongLink.replace('\n', '<br>')}</p>
         </div>`;
@@ -54,12 +56,11 @@ export async function initGuestPage(root, { roleType, invalidParamsHtml }) {
     const taken        = await presence.isRoleTaken(presenceRole);
 
     if (taken) {
-        const tr = t(DEFAULT_LANGUAGE);
         root.innerHTML = `
             <div class="waiting-screen">
                 <div class="taken-screen">
                     <p class="taken-screen__icon">🔒</p>
-                    <p class="taken-screen__text">${getTakenText(roleType, team, tr)}</p>
+                    <p class="taken-screen__text">${getTakenText(roleType, team, tr, lang)}</p>
                     <button class="lobby__btn" id="forceJoinBtn">${tr.forceRejoin}</button>
                 </div>
             </div>`;

@@ -124,6 +124,44 @@
   --loader-dot-size: 7px;
   --loader-dot-gap: 10px;
   --loader-fade-duration: 0.7s;
+  --loader-bg: #0b0d12;
+  --loader-top-offset: 0px;
+  --loader-shell-gap: 0.8rem;
+  --loader-title-font: Georgia, "Times New Roman", serif;
+  --loader-title-size: 1.5rem;
+  --loader-title-line-height: 0.92;
+  --loader-title-letter-spacing: 0.22em;
+  --loader-title-opacity: 0.9;
+  --loader-dot-color: #f2efe7;
+  --loader-dot-opacity: 0.35;
+
+  /* ─── GLOBAL BACKGROUND / FOG ─────────────────────────────── */
+  --global-bg-image: url("../images/backgrounds/background.jpg");
+  --global-bg-position: center center;
+  --global-bg-size: cover;
+  --global-bg-opacity: 0.94;
+
+  --fog-layer-1-image: url("../images/fog/fog-layer-1.png");
+  --fog-layer-2-image: url("../images/fog/fog-layer-2.png");
+  --fog-layer-3-image: url("../images/fog/fog-layer-3.png");
+  --fog-layer-4-image: url("../images/fog/fog-layer-4.png");
+  --fog-layer-1-opacity: 0.22;
+  --fog-layer-2-opacity: 0.18;
+  --fog-layer-3-opacity: 0.14;
+  --fog-layer-4-opacity: 0.12;
+  --fog-layer-1-blur: 3px;
+  --fog-layer-2-blur: 5px;
+  --fog-layer-3-blur: 6px;
+  --fog-layer-4-blur: 8px;
+  --fog-layer-1-scale: 1.14;
+  --fog-layer-2-scale: 1.2;
+  --fog-layer-3-scale: 1.22;
+  --fog-layer-4-scale: 1.26;
+  --fog-layer-1-duration: 42s;
+  --fog-layer-2-duration: 56s;
+  --fog-layer-3-duration: 68s;
+  --fog-layer-4-duration: 84s;
+  --fog-grain-opacity: 0.05;
 
   /* ─── SAFE AREA + UI OFFSETS (mobile app/webview tuning) ───── */
   --safe-area-top: env(safe-area-inset-top, 0px);
@@ -154,6 +192,188 @@
 
   --game-footer-h: 56px;
 
+  /* ─── SCREEN LAYOUT TOKENS (header/body/footer) ───────────── */
+  --screen-header-pad-top: 6px;
+  --screen-header-pad-x: 8px;
+  --screen-footer-gap: clamp(10px, 1.8vw, 16px);
+  --screen-footer-pad-y: clamp(6px, 0.9vh, 10px);
+  --screen-footer-pad-x: 8px;
+  --screen-control-gap: clamp(8px, 1.5vw, 12px);
+  --screen-control-pad: clamp(6px, 0.9vh, 10px);
+  --screen-view-pad-y: clamp(12px, 2vh, 20px);
+  --screen-view-pad-x: var(--space-sm);
+  --grid-page-pad-x: clamp(50px, 10vw, 250px);
+  --grid-page-pad-y: clamp(50px, 8vh, 180px);
+
+  /* ─── GAME SCREEN TOKENS ───────────────────────────────────── */
+  --game-grid-reserve-side: clamp(54px, 6.5vw, 86px);
+  --game-score-min-h: clamp(54px, 6.4dvh, 74px);
+  --game-score-gap: clamp(10px, 1.8vw, 16px);
+  --game-score-pad: clamp(8px, 1.2vh, 12px);
+  --game-score-font-size: clamp(1.18rem, 2.8vw, 1.62rem);
+  --game-score-letter-spacing: clamp(1px, 0.2vw, 2px);
+  --game-score-max-width: min(90vw, 680px);
+  --game-score-item-pad-y: clamp(0.62rem, 1.1vh, 0.82rem);
+  --game-score-item-pad-x: clamp(0.95rem, 2vw, 1.25rem);
+
+  --game-qr-dock-gap: clamp(12px, 2.2vh, 20px);
+  --game-qr-side-offset: clamp(10px, 1.8vw, 24px);
+  --game-qr-dot-size: clamp(42px, 4.3vw, 56px);
+  --game-qr-dot-font-size: clamp(0.9rem, 1.4vw, 1.1rem);
+  --game-qr-popover-width: clamp(190px, 18vw, 250px);
+  --game-qr-popover-offset: 12px;
+  --game-qr-mobile-gap: 10px;
+  --game-qr-mobile-side-offset: 8px;
+  --game-qr-mobile-dot-size: 42px;
+  --game-qr-mobile-popover-width: min(70vw, 220px);
+  --game-qr-mobile-popover-offset: 8px;
+
+  --gameover-banner-top: calc(var(--safe-area-top) + 64px + var(--space-sm));
+
+  /* ─── SHARED PANEL COLORS ─────────────────────────────────── */
+  --panel-border-soft: rgba(128, 140, 166, 0.42);
+  --panel-grad-top: rgba(70, 82, 118, 0.3);
+  --panel-grad-bottom: rgba(15, 18, 27, 0.84);
+  --panel-shadow-outer: rgba(8, 9, 13, 0.52);
+  --panel-shadow-inner: rgba(232, 230, 227, 0.14);
+
+  /* ─── GAME QR COLORS ──────────────────────────────────────── */
+  --game-qr-resonant-glow: rgba(245, 200, 138, 0.24);
+  --game-qr-dissonant-glow: rgba(155, 195, 255, 0.24);
+  --game-qr-popover-bg: rgba(16, 20, 30, 0.96);
+  --game-qr-popover-shadow: rgba(6, 8, 12, 0.68);
+
+  /* ─── TEAM STATUS COLORS ──────────────────────────────────── */
+  --team-resonant-status-bg: rgba(58, 44, 30, 0.78);
+  --team-dissonant-status-bg: rgba(31, 42, 58, 0.78);
+
+  /* ─── GUIDE/WALKER ACTION COLORS ──────────────────────────── */
+  --guide-btn-selected-bg: #2C3248;
+  --guide-btn-selected-glow: rgba(255, 223, 174, 0.4);
+  --guide-btn-hover-glow: rgba(255, 223, 174, 0.6);
+  --guide-btn-hover-glow-dissonant: rgba(155, 195, 255, 0.6);
+  --guide-btn-selected-glow-dissonant: rgba(155, 195, 255, 0.4);
+
+  /* ─── HOMEPAGE TOKENS ─────────────────────────────────────── */
+  --home-lang-active-border: #FFF2C8;
+  --home-lang-active-bg-top: rgba(255, 242, 206, 0.415);
+  --home-lang-active-bg-bottom: rgba(5, 32, 79, 0.4);
+  --home-lang-active-bg-base: rgba(90, 104, 138, 0.96);
+  --home-lang-active-text: #FFFFFF;
+  --home-lang-active-ring: rgba(255, 242, 200, 0.42);
+  --home-lang-active-glow: rgba(255, 239, 195, 0.5);
+  --home-lang-active-shadow: rgba(6, 8, 12, 0.5);
+  --home-lang-hover-bg: rgba(255, 242, 200, 0.15);
+  --home-lang-hover-shadow: rgba(255, 242, 200, 0.35);
+
+  --home-title-wrap-border: rgba(205, 184, 145, 0.34);
+  --home-title-wrap-grad-top: rgba(28, 31, 42, 0.9);
+  --home-title-wrap-grad-bottom: rgba(11, 14, 20, 0.8);
+  --home-title-wrap-shine: rgba(255, 239, 200, 0.08);
+  --home-title-wrap-base: rgba(14, 17, 24, 0.76);
+  --home-title-wrap-shadow: rgba(6, 8, 12, 0.68);
+  --home-title-wrap-outline: rgba(255, 233, 186, 0.1);
+  --home-title-wrap-inset: rgba(255, 244, 221, 0.2);
+  --home-title-wrap-inset-dark: rgba(6, 8, 12, 0.5);
+  --home-title-wrap-highlight: rgba(255, 245, 220, 0.12);
+
+  --home-title-shadow-resonant: rgba(255, 223, 174, 0.4);
+  --home-title-shadow-dissonant: rgba(155, 195, 255, 0.36);
+  --home-title-shadow-deep: rgba(6, 9, 14, 0.68);
+
+  --nightmare-accent: #FF3A4F;
+
+  --home-actions-border: rgba(128, 140, 166, 0.45);
+  --home-actions-grad-top: rgba(70, 82, 118, 0.32);
+  --home-actions-grad-bottom: rgba(15, 18, 27, 0.84);
+  --home-actions-shadow: rgba(10, 12, 18, 0.58);
+  --home-actions-inset: rgba(232, 230, 227, 0.16);
+  --home-title-wrap-shine-clear: rgba(255, 239, 200, 0);
+  --home-title-wrap-highlight-clear: rgba(255, 245, 220, 0);
+
+  /* ─── HOMEPAGE SIZE TOKENS ────────────────────────────────── */
+  --home-lang-gap: 0.5rem;
+  --home-lang-margin-top: clamp(14px, 2.2vw, 26px);
+  --home-lang-btn-min-h: 58px;
+  --home-lang-btn-min-w: 82px;
+  --home-lang-btn-pad-y: 0.8rem;
+  --home-lang-btn-pad-x: 1.35rem;
+  --home-lang-btn-font-size: clamp(0.95rem, 1.6vw, 1.12rem);
+  --home-lang-btn-radius: 14px;
+  --home-layout-top-offset: 20vh;
+  --home-layout-gap: clamp(18px, 3vh, 32px);
+  --home-title-wrap-pad-y: clamp(0.75rem, 1.8vw, 1.2rem);
+  --home-title-wrap-pad-x: clamp(1.4rem, 3.6vw, 2.6rem);
+  --home-title-wrap-radius: clamp(16px, 2.8vw, 26px);
+  --home-title-font-size: clamp(3rem, 9vw, 6.8rem);
+  --home-actions-gap: clamp(1.1rem, 2.1vw, 1.6rem);
+  --home-actions-pad: clamp(1.25rem, 2.8vw, 2rem);
+  --home-actions-width: min(92vw, 560px);
+  --home-btn-min-h: 58px;
+  --home-btn-pad-y: clamp(1rem, 2.3vw, 1.35rem);
+  --home-btn-pad-x: clamp(1.7rem, 4vw, 2.6rem);
+  --home-btn-font-size: clamp(1.08rem, 2.2vw, 1.42rem);
+  --home-google-width: min(92vw, 500px);
+  --home-actions-margin-top: 5vh;
+
+  /* ─── HOME MOBILE SIZE TOKENS ─────────────────────────────── */
+  --home-mobile-layout-top-offset: 18vh;
+  --home-mobile-layout-gap: clamp(14px, 2.4vh, 24px);
+  --home-mobile-lang-margin-top: clamp(10px, 3vw, 14px);
+  --home-mobile-lang-gap: 0.35rem;
+  --home-mobile-lang-pad: 0.25rem;
+  --home-mobile-lang-btn-min-h: 52px;
+  --home-mobile-lang-btn-min-w: 70px;
+  --home-mobile-lang-btn-pad-y: 0.65rem;
+  --home-mobile-lang-btn-pad-x: 1rem;
+  --home-mobile-lang-btn-font-size: clamp(0.86rem, 3.2vw, 1rem);
+  --home-mobile-title-size: clamp(2.35rem, 10.8vw, 4rem);
+  --home-mobile-title-wrap-pad-y: clamp(0.45rem, 2.4vw, 0.75rem);
+  --home-mobile-title-wrap-pad-x: clamp(0.75rem, 3.8vw, 1.1rem);
+  --home-mobile-btn-font-size: clamp(1rem, 4.4vw, 1.24rem);
+  --home-mobile-btn-pad-y: 0.95rem;
+  --home-mobile-btn-pad-x: 1.2rem;
+  --home-mobile-actions-width: min(96vw, 460px);
+  --home-mobile-actions-pad: clamp(0.85rem, 3.2vw, 1rem);
+  --home-mobile-actions-gap: clamp(0.75rem, 3vw, 1rem);
+  --home-mobile-actions-margin-top: clamp(16px, 4vh, 24px);
+  --home-small-inline-pad: clamp(10px, 3vw, 14px);
+  --home-small-actions-radius: 14px;
+  --home-small-actions-pad: 0.75rem;
+  --home-small-actions-gap: 0.7rem;
+  --home-small-btn-min-h: 50px;
+  --home-small-btn-font-size: clamp(0.9rem, 4.1vw, 1rem);
+
+  /* ─── CELL TOKENS ──────────────────────────────────────────── */
+  --cell-border-nightmare: rgba(255, 58, 79, 0.35);
+  --cell-border-anomaly: rgba(224, 86, 255, 0.35);
+  --cell-border-resonant: rgba(191, 123, 22, 0.818);
+  --cell-border-dissonant: rgba(155, 195, 255, 0.36);
+
+  /* ─── MODAL TOKENS ─────────────────────────────────────────── */
+  --modal-backdrop: rgba(8, 10, 15, 0.62);
+  --modal-loading-backdrop: rgba(8, 10, 15, 0.66);
+  --modal-border: rgba(155, 195, 255, 0.3);
+  --modal-border-strong: rgba(155, 195, 255, 0.34);
+  --modal-grad-top: rgba(33, 41, 61, 0.9);
+  --modal-grad-bottom: rgba(14, 18, 27, 0.92);
+  --modal-grad-top-strong: rgba(33, 41, 61, 0.92);
+  --modal-grad-bottom-strong: rgba(14, 18, 27, 0.95);
+  --modal-shadow: rgba(5, 8, 12, 0.7);
+  --modal-shadow-strong: rgba(5, 8, 12, 0.74);
+  --modal-confirm-width: min(94vw, 40vw);
+  --modal-confirm-gap: clamp(14px, 1.8vw, 22px);
+  --modal-confirm-pad: clamp(1.2rem, 2.6vw, 1.8rem);
+  --modal-confirm-title-size: clamp(1.1rem, 1.6vw, 1.4rem);
+  --modal-confirm-text-size: clamp(0.95rem, 1.25vw, 1.08rem);
+  --modal-confirm-btn-min-h: 54px;
+  --modal-confirm-btn-pad-x: clamp(0.9rem, 1.2vw, 1.25rem);
+  --modal-confirm-btn-font-size: clamp(0.92rem, 1.2vw, 1.04rem);
+  --modal-loading-width: min(90vw, 420px);
+  --modal-loading-pad: clamp(1rem, 2.8vw, 1.5rem);
+  --modal-loading-title-size: clamp(1rem, 2.2vw, 1.25rem);
+  --modal-loading-text-size: clamp(0.85rem, 1.8vw, 0.98rem);
+
   /* ─── GRID ────────────────────────────────────────────────── */
   --grid-gap: clamp(3px, 1vw, 8px);
   --grid-gap-sm: clamp(2px, 0.8vw, 4px);
@@ -179,11 +399,19 @@
   --score-item-border: 1px solid var(--white-20);
 
   --guide-btn-gap: clamp(4px, 1.5vw, 10px);
+  --guide-btn-panel-width: min(90vw, 560px);
+  --guide-footer-gap: clamp(10px, 2vw, 16px);
+  --walker-footer-gap: clamp(12px, 2.2vw, 18px);
+  --guide-footer-max-width: min(96vw, 760px);
+  --walker-footer-max-width: min(96vw, 560px);
+  --guide-mobile-btns-max-width: min(96vw, 520px);
   --guide-btn-min-size: clamp(36px, 9vw, 52px);
   --guide-btn-font-size: clamp(0.8rem, 3vw, 1rem);
   --guide-btn-panel-width-landscape: clamp(90px, 20vw, 140px);
   --guide-btn-min-height-landscape: clamp(28px, 6vw, 42px);
   --guide-btn-font-size-landscape: clamp(0.7rem, 2.5vw, 0.9rem);
+  --guide-hint-size: clamp(0.78rem, 1.2vw, 0.92rem);
+  --guide-hint-mobile-size: clamp(0.72rem, 2.8vw, 0.84rem);
   --guide-btn-bg: #1B1E2A;
   --guide-btn-bg-active: #232738;
   --guide-btn-bg-selected: #2C3248;
@@ -191,6 +419,25 @@
   --guide-btn-border-active: 1px solid #4A5270;
 
   --action-btn-font-size: clamp(0.8rem, 2.5vw, 1rem);
+  --walker-header-max-width: min(96vw, 760px);
+  --walker-header-gap: clamp(8px, 1.2vh, 12px);
+  --walker-header-pad-y: clamp(8px, 1.2vh, 12px);
+  --walker-header-pad-x: clamp(12px, 1.8vw, 18px);
+  --walker-header-title-size: clamp(0.9rem, 1.6vw, 1.15rem);
+  --walker-header-title-size-lg: clamp(1.05rem, 2vw, 1.38rem);
+  --walker-header-title-spacing: 0.1em;
+  --walker-header-info-size: clamp(0.84rem, 1.3vw, 1rem);
+  --walker-header-actions-gap: clamp(10px, 1.8vw, 14px);
+  --walker-header-end-size: clamp(0.82rem, 1.25vw, 0.96rem);
+  --walker-header-refresh-size: clamp(20px, 2.1vw, 24px);
+  --walker-header-mobile-gap: 6px;
+  --walker-header-mobile-pad-y: 8px;
+  --walker-header-mobile-pad-x: 10px;
+  --walker-header-mobile-title-size: clamp(0.82rem, 3.2vw, 1rem);
+  --walker-header-mobile-title-size-lg: clamp(0.96rem, 4vw, 1.2rem);
+  --walker-header-mobile-info-size: clamp(0.78rem, 2.9vw, 0.92rem);
+  --walker-header-mobile-end-size: clamp(0.75rem, 2.8vw, 0.9rem);
+  --walker-header-mobile-refresh-size: clamp(18px, 5vw, 22px);
   --action-btn-letter-spacing: 2px;
   --action-btn-pad-y: var(--space-xs);
   --action-btn-pad-x: var(--space-md);
@@ -212,6 +459,20 @@
   --game-btn-glow: 0 0 18px rgba(155, 195, 255, 0.22);
   --game-btn-glow-active: 0 0 24px rgba(255, 223, 174, 0.24);
   --game-btn-radius: var(--radius-md);
+  --btn-highlight-base: var(--white-20);
+  --btn-highlight-clear: rgba(232, 230, 227, 0);
+  --btn-highlight-hover: rgba(232, 230, 227, 0.2);
+  --btn-highlight-active: rgba(232, 230, 227, 0.24);
+  --btn-inset-top: rgba(244, 241, 236, 0.17);
+  --btn-inset-top-hover: rgba(244, 241, 236, 0.23);
+  --btn-inset-top-active: rgba(244, 241, 236, 0.25);
+  --btn-inset-bottom: rgba(7, 9, 14, 0.5);
+  --vignette-clear: rgba(14, 15, 20, 0);
+  --vignette-mid: rgba(14, 15, 20, 0.26);
+  --vignette-strong: rgba(14, 15, 20, 0.6);
+  --vignette-end: rgba(14, 15, 20, 0.9);
+  --vignette-bottom: rgba(14, 15, 20, 0.72);
+  --vignette-top: rgba(14, 15, 20, 0.54);
 
   /* ─── GLASS UI (іконні кнопки) ────────────────────────────── */
   --glass-bg: rgba(36, 42, 59, 0.8);

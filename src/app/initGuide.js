@@ -2,7 +2,7 @@
 import { fitTextToCell } from '../utils/fitText.js';
 import { onOrientationChange } from '../utils/resize.js';
 import { getGuideCellClass } from '../utils/renderCell.js';
-import { t, DEFAULT_LANGUAGE } from '../utils/i18n.js';
+import { t, DEFAULT_LANGUAGE, getTeamName } from '../utils/i18n.js';
 import { escapeHtml } from '../utils/sanitize.js';
 import { initGuestPage } from './initGuestPage.js';
 
@@ -30,39 +30,48 @@ export async function initGuide(root) {
         const turn = state.turn;
         const isMyTurn = turn.team === team;
         const guideLocked = turn.guideLimit !== null;
+        const canAct = isMyTurn && !guideLocked && !state.gameOver;
 
-        const teamLabel = team.charAt(0).toUpperCase() + team.slice(1);
-        const statusText = (isMyTurn && !guideLocked)
-            ? `${teamLabel} ${tr.guide} : ${tr.yourTurn}`
-            : `${teamLabel} ${tr.guide}`;
+        const playerTitle = `${getTeamName(team, lang)} ${tr.guide}`;
+        const hintText = tr.chooseLimit;
 
         const btnHTML = Array.from({ length: MAX_HINT_BTNS }, (_, i) => {
             const n = i + 1;
-            const active = isMyTurn && !guideLocked && !state.gameOver;
             const chosen = turn.guideLimit === n;
 
             return `
             <button
                 class="guide__num-btn ${chosen ? 'guide__num-btn--chosen' : ''}"
                 data-limit="${n}"
-                ${!active ? 'disabled' : ''}
+                ${!canAct ? 'disabled' : ''}
             >${n}</button>
         `;
         }).join('');
 
         root.innerHTML = `
-        <div class="guide guide--${team}">
-            <div class="grid grid--5">
-                ${state.cells.map(cell => `
-                    <div class="${getGuideCellClass(cell)}">
-                        <span class="cell__content">${escapeHtml(cell.word)}</span>
-                    </div>
-                `).join('')}
-            </div>
-        </div>
+        <div class="screen-layout guide-layout">
+            <header class="screen-header">
+                <div class="guide__header">
+                    <div class="guide__title ${canAct ? 'guide__title--active' : 'guide__title--muted'}">${playerTitle}</div>
+                    <div class="guide__hint">${hintText}</div>
+                    <div class="guide__btns ${canAct ? 'guide__btns--active' : 'guide__btns--muted'}">${btnHTML}</div>
+                </div>
+            </header>
 
-        <div class="guide__status">${statusText}</div>
-        <div class="guide__btns">${btnHTML}</div>
+            <main class="screen-body">
+                <div class="guide guide--${team}">
+                    <div class="grid grid--5">
+                        ${state.cells.map(cell => `
+                            <div class="${getGuideCellClass(cell)}">
+                                <span class="cell__content">${escapeHtml(cell.word)}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            </main>
+
+            <footer class="screen-footer guide__footer"></footer>
+        </div>
     `;
 
         requestAnimationFrame(() => {

@@ -5,33 +5,48 @@
 /* ─── LANDSCAPE ─────────────────────────────── */
 
 @media (orientation: landscape) {
-
-    .guide {
-        --grid-reserve-top: calc(var(--ui-edge-top) + 42px);
-        --grid-reserve-right: calc(var(--guide-btn-panel-width-landscape) + var(--safe-area-right) + var(--space-sm));
-        --grid-reserve-bottom: 0px;
-        --grid-reserve-left: 0px;
-    }
-
-    /* ── Guide: кнопки ліворуч ───────────────── */
-
     .guide__btns {
-        top: var(--safe-area-top);
-        bottom: var(--safe-area-bottom);
-        left: auto;
-        right: calc(var(--safe-area-right) + var(--guide-panel-offset-right));
-        width:  var(--guide-btn-panel-width-landscape);
-
-        grid-template-columns: repeat(2, 1fr);
-        align-content: center;
+        grid-template-columns: repeat(8, minmax(0, 1fr));
+        width: min(84vw, 760px);
     }
 
     .guide__num-btn {
-        min-width:  0;
+        min-width: 0;
         min-height: var(--guide-btn-min-height-landscape);
-        font-size:  var(--guide-btn-font-size-landscape);
+        font-size: var(--guide-btn-font-size-landscape);
+    }
+}
+
+/* ─── PORTRAIT ─────────────────────────────── */
+
+@media (orientation: portrait) {
+    .screen-body > .game,
+    .screen-body > .guide,
+    .screen-body > .walker {
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
+    .screen-body > .game .grid,
+    .screen-body > .guide .grid,
+    .screen-body > .walker .grid {
+        --_grid-square-size: min(var(--_avail-w), var(--_avail-h));
+        width: var(--_grid-square-size);
+        height: auto;
+    }
+
+    .screen-body > .game .grid--5,
+    .screen-body > .guide .grid--5,
+    .screen-body > .walker .grid--5 {
+        grid-template-rows: repeat(5, auto);
+    }
+
+    .screen-body > .game .cell,
+    .screen-body > .guide .cell,
+    .screen-body > .walker .cell {
+        --cell-aspect-ratio: 1 / 1;
+    }
 }
 
 /* ─── ДРІБНІ ЕКРАНИ (< 400px) ───────────────── */
@@ -39,5 +54,13 @@
 @media (max-width: 400px) {
     .grid--5 {
         gap: var(--grid-gap-sm);
+    }
+}
+
+/* ─── MOBILE GRID PADDING ─────────────────────── */
+@media (max-width: 720px) {
+    :root {
+        --grid-page-pad-x: clamp(18px, 4vw, 32px);
+        --grid-page-pad-y: clamp(18px, 3.4vh, 30px);
     }
 }

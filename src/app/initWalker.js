@@ -2,9 +2,10 @@
 import { onOrientationChange } from '../utils/resize.js';
 import { fitTextAll } from '../utils/fitText.js';
 import { getGameCellClass } from '../utils/renderCell.js';
-import { t, DEFAULT_LANGUAGE, getAwakeningName } from '../utils/i18n.js';
+import { t, DEFAULT_LANGUAGE, getAwakeningName, getTeamName } from '../utils/i18n.js';
 import { getBaseUrl } from '../utils/url.js';
 import { escapeHtml } from '../utils/sanitize.js';
+import { ICONS } from '../utils/icons.js';
 import { initGuestPage } from './initGuestPage.js';
 
 export async function initWalker(root) {
@@ -32,7 +33,7 @@ export async function initWalker(root) {
                 <div class="awake-screen__content">
                     <div class="awake-screen__title">${tr.awake}</div>
                     <div class="awake-screen__awakening">${getAwakeningName(state.winner, lang)}</div>
-                    <div class="awake-screen__role">${isWinner ? '🏆' : '💀'} ${team} ${tr.dreamwalker}</div>
+                    <div class="awake-screen__role">${isWinner ? '🏆' : '💀'} ${getTeamName(team, lang)} ${tr.dreamwalker}</div>
                     <button class="awake-screen__new-game-btn" id="newGameBtn">${tr.newGame}</button>
                 </div>
             </div>`;
@@ -50,35 +51,47 @@ export async function initWalker(root) {
         const hasLimit = turn.guideLimit !== null;
         const canPlay = isMyTurn && hasLimit && !state.gameOver;
 
-        const teamLabel = team.charAt(0).toUpperCase() + team.slice(1);
-        const statusText = (isMyTurn && hasLimit)
-            ? `${teamLabel} ${tr.dreamwalker} : ${turn.guideLimit} ${tr.steps}`
-            : `${teamLabel} ${tr.dreamwalker}`;
+        const playerTitle = `${getTeamName(team, lang)} ${tr.dreamwalker}`;
+        const turnInfoText = canPlay ? `${turn.guideLimit} ${tr.steps}` : '';
+        const turnInfoClass = canPlay
+            ? 'walker__turn-info walker__turn-info--active'
+            : 'walker__turn-info walker__turn-info--muted';
 
         document.body.classList.remove('team-resonant', 'team-dissonant');
         document.body.classList.add(`team-${turn.team}`);
 
         root.innerHTML = `
-        <div class="walker walker--${team}">
-            <div class="grid grid--5">
-                ${state.cells.map((cell, i) => `
-                    <div
-                        class="${getGameCellClass(cell)} ${canPlay && !cell.revealed ? 'cell--clickable' : ''}"
-                        data-index="${i}"
-                    >
-                        <span class="cell__content">${escapeHtml(cell.word)}</span>
+        <div class="screen-layout walker-layout">
+            <header class="screen-header">
+                <div class="walker__header">
+                    <div class="walker__title ${canPlay ? 'walker__title--active' : 'walker__title--muted'}">${playerTitle}</div>
+                    <div class="walker__meta">
+                        <div class="${turnInfoClass}">${turnInfoText}</div>
+                        <div class="walker__actions">
+                            <span class="walker__end-hint">${tr.end}</span>
+                            <button class="walker__action-btn walker__refresh-btn ${canPlay ? 'walker__refresh-btn--active' : 'walker__refresh-btn--muted'}" id="refreshBtn" aria-label="${tr.endTurn}" ${!canPlay ? 'disabled' : ''}>${ICONS.refreshCw}</button>
+                        </div>
                     </div>
-                `).join('')}
-            </div>
+                </div>
+            </header>
+
+            <main class="screen-body">
+                <div class="walker walker--${team}">
+                    <div class="grid grid--5">
+                        ${state.cells.map((cell, i) => `
+                            <div
+                                class="${getGameCellClass(cell)} ${canPlay && !cell.revealed ? 'cell--clickable' : ''}"
+                                data-index="${i}"
+                            >
+                                <span class="cell__content">${escapeHtml(cell.word)}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            </main>
+
+            <footer class="screen-footer walker__footer"></footer>
         </div>
-
-        <div class="walker__status">${statusText}</div>
-
-        <button
-            class="walker__end-turn"
-            id="endTurnBtn"
-            ${!canPlay ? 'disabled' : ''}
-        >${tr.endTurn}</button>
     `;
 
         requestAnimationFrame(() => fitTextAll(root));
@@ -90,7 +103,7 @@ export async function initWalker(root) {
                 );
             });
 
-        document.getElementById('endTurnBtn')
+        document.getElementById('refreshBtn')
             ?.addEventListener('click', () => {
                 if (canPlay) store.endTurn();
             });

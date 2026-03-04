@@ -20,49 +20,52 @@
 /* ─── GLASS ICON BUTTON ───────────────────────────────────────── */
 
 .btn-icon {
-    background:      var(--glass-bg);
+    background: var(--glass-bg);
     backdrop-filter: blur(var(--glass-blur));
-    border:          1px solid var(--glass-border);
-    border-radius:   var(--radius-sm);
-    color:           var(--glass-color);
-    cursor:          pointer;
-    transition:      background var(--transition-fast),
-                     border-color var(--transition-fast),
-                     color var(--transition-fast),
-                     box-shadow var(--transition-fast);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-sm);
+    color: var(--glass-color);
+    cursor: pointer;
+    transition: background var(--transition-fast),
+        border-color var(--transition-fast),
+        color var(--transition-fast),
+        box-shadow var(--transition-fast);
 }
+
 .btn-icon:hover {
-    background:   var(--glass-bg-hover);
+    background: var(--glass-bg-hover);
     border-color: var(--glass-border-hover);
-    color:        var(--glass-color-hover);
-    box-shadow:   0 0 20px rgba(155, 195, 255, 0.3);
+    color: var(--glass-color-hover);
+    box-shadow: 0 0 20px var(--modal-border);
 }
+
 .btn-icon:active {
     transform: scale(0.92);
 }
+
 .btn-icon svg {
-    display:        block;
-    width:          var(--icon-size);
-    height:         var(--icon-size);
+    display: block;
+    width: var(--icon-size);
+    height: var(--icon-size);
     pointer-events: none;
 }
 
 /* Кнопка повноекранного режиму — правий нижній кут */
 .fullscreen-btn {
-    position: absolute;
+    position: fixed;
     bottom: var(--ui-edge-bottom);
     right: var(--ui-edge-right);
-    z-index: 10;
+    z-index: 90;
 
     display: flex;
     align-items: center;
     justify-content: center;
-    width:  var(--icon-btn-size);
+    width: var(--icon-btn-size);
     height: var(--icon-btn-size);
 }
 
 body[data-page="home"] .fullscreen-btn {
-    opacity: 0.28;
+    opacity: var(--home-fullscreen-idle-opacity);
     transition: opacity var(--transition-fast);
 }
 
@@ -81,18 +84,18 @@ body[data-page="home"] .fullscreen-btn:focus-visible {
     display: flex;
     align-items: center;
     justify-content: center;
-    width:  var(--icon-btn-size);
+    width: var(--icon-btn-size);
     height: var(--icon-btn-size);
 }
 
 body[data-page="home"] .btn-profile {
-    width: 60px;
-    height: 60px;
+    width: var(--home-profile-btn-size);
+    height: var(--home-profile-btn-size);
 }
 
 body[data-page="home"] .btn-profile svg {
-    width: 30px;
-    height: 30px;
+    width: var(--home-profile-icon-size);
+    height: var(--home-profile-icon-size);
 }
 
 /* Кнопка «назад / logout» (у footer і на home) */
@@ -119,8 +122,8 @@ body[data-page="home"] .btn-profile svg {
 }
 
 .qr-panel__group-title {
-    font-size:      clamp(0.75rem, 2vw, 0.95rem);
-    font-weight:    700;
+    font-size: clamp(0.75rem, 2vw, 0.95rem);
+    font-weight: 700;
     letter-spacing: 3px;
     text-transform: uppercase;
     margin: 0;
@@ -150,7 +153,7 @@ body[data-page="home"] .btn-profile svg {
 }
 
 .qr-panel__label {
-    font-size:      clamp(0.65rem, 1.5vw, 0.8rem);
+    font-size: clamp(0.65rem, 1.5vw, 0.8rem);
     letter-spacing: 1px;
     text-transform: uppercase;
     margin: 0;
@@ -194,9 +197,9 @@ body[data-page="home"] .btn-profile svg {
 
 .qr-modal__close {
     position: absolute;
-    top:   var(--space-sm);
+    top: var(--space-sm);
     right: var(--space-sm);
-    width:  var(--modal-close-size);
+    width: var(--modal-close-size);
     height: var(--modal-close-size);
     display: flex;
     align-items: center;
@@ -220,29 +223,29 @@ body[data-page="home"] .btn-profile svg {
 .confirm-modal__backdrop {
     position: absolute;
     inset: 0;
-    background: rgba(8, 10, 15, 0.62);
+    background: var(--modal-backdrop);
     backdrop-filter: blur(2px);
 }
 
 .confirm-modal__content {
     position: relative;
     z-index: 1;
-    width: min(94vw, 620px);
+    width: var(--modal-confirm-width);
     display: flex;
     flex-direction: column;
-    gap: clamp(14px, 1.8vw, 22px);
-    padding: clamp(1.2rem, 2.6vw, 1.8rem);
+    gap: var(--modal-confirm-gap);
+    padding: var(--modal-confirm-pad);
     border-radius: var(--radius-md);
-    border: 1px solid rgba(155, 195, 255, 0.3);
+    border: 1px solid var(--modal-border);
     background:
-        linear-gradient(180deg, rgba(33, 41, 61, 0.9), rgba(14, 18, 27, 0.92)),
+        linear-gradient(180deg, var(--modal-grad-top), var(--modal-grad-bottom)),
         var(--panel-float);
-    box-shadow: 0 20px 50px rgba(5, 8, 12, 0.7);
+    box-shadow: 0 20px 50px var(--modal-shadow);
 }
 
 .confirm-modal__title {
     margin: 0;
-    font-size: clamp(1.1rem, 1.6vw, 1.4rem);
+    font-size: var(--modal-confirm-title-size);
     font-weight: 700;
     letter-spacing: 0.08em;
     text-transform: uppercase;
@@ -251,7 +254,7 @@ body[data-page="home"] .btn-profile svg {
 .confirm-modal__text {
     margin: 0;
     color: var(--text-secondary);
-    font-size: clamp(0.95rem, 1.25vw, 1.08rem);
+    font-size: var(--modal-confirm-text-size);
     line-height: 1.45;
 }
 
@@ -262,9 +265,9 @@ body[data-page="home"] .btn-profile svg {
 }
 
 .confirm-modal__btn {
-    min-height: 54px;
-    padding-inline: clamp(0.9rem, 1.2vw, 1.25rem);
-    font-size: clamp(0.92rem, 1.2vw, 1.04rem);
+    min-height: var(--modal-confirm-btn-min-h);
+    padding-inline: var(--modal-confirm-btn-pad-x);
+    font-size: var(--modal-confirm-btn-font-size);
     font-weight: 700;
     letter-spacing: 0.08em;
     text-transform: uppercase;
@@ -306,30 +309,30 @@ body[data-page="home"] .btn-profile svg {
 .newgame-loading-modal__backdrop {
     position: absolute;
     inset: 0;
-    background: rgba(8, 10, 15, 0.66);
+    background: var(--modal-loading-backdrop);
     backdrop-filter: blur(3px);
 }
 
 .newgame-loading-modal__content {
     position: relative;
     z-index: 1;
-    width: min(90vw, 420px);
+    width: var(--modal-loading-width);
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: var(--space-sm);
-    padding: clamp(1rem, 2.8vw, 1.5rem);
+    padding: var(--modal-loading-pad);
     border-radius: var(--radius-md);
-    border: 1px solid rgba(155, 195, 255, 0.34);
+    border: 1px solid var(--modal-border-strong);
     background:
-        linear-gradient(180deg, rgba(33, 41, 61, 0.92), rgba(14, 18, 27, 0.95)),
+        linear-gradient(180deg, var(--modal-grad-top-strong), var(--modal-grad-bottom-strong)),
         var(--panel-float);
-    box-shadow: 0 20px 50px rgba(5, 8, 12, 0.74);
+    box-shadow: 0 20px 50px var(--modal-shadow-strong);
 }
 
 .newgame-loading-modal__title {
     margin: 0;
-    font-size: clamp(1rem, 2.2vw, 1.25rem);
+    font-size: var(--modal-loading-title-size);
     font-weight: 700;
     letter-spacing: 0.08em;
     text-transform: uppercase;
@@ -338,6 +341,6 @@ body[data-page="home"] .btn-profile svg {
 .newgame-loading-modal__text {
     margin: 0;
     color: var(--text-secondary);
-    font-size: clamp(0.85rem, 1.8vw, 0.98rem);
+    font-size: var(--modal-loading-text-size);
     text-align: center;
 }

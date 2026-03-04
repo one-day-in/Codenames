@@ -7,14 +7,13 @@ import { createPresence, ROLES, ALL_ROLES } from '../utils/presence.js';
 import { keepAlive } from '../utils/keepAlive.js';
 import { t } from '../utils/i18n.js';
 import { getBaseUrl, getParams } from '../utils/url.js';
-import { signOut } from '../utils/auth.js';
 import { ICONS } from '../utils/icons.js';
 import { onOrientationChange } from '../utils/resize.js';
 import { escapeHtml } from '../utils/sanitize.js';
 
 function makeQrImg(url, size = 130) {
     return `<img class="qr-image"
-        src="https://api.qrserver.com/v1/create-qr-code/?size=${size}x${size}&color=8B7355&bgcolor=2a1f1a&data=${encodeURIComponent(url)}"
+        src="https://api.qrserver.com/v1/create-qr-code/?size=${size}x${size}&color=1D2433&bgcolor=FAF8F2&data=${encodeURIComponent(url)}"
         width="${size}" height="${size}" />`;
 }
 
@@ -101,79 +100,73 @@ export async function initGame(root) {
         const rDone  = cells.filter(c => c.role === 'resonant'  && c.revealed).length;
         const dDone  = cells.filter(c => c.role === 'dissonant' && c.revealed).length;
         const qrItems = [
-            { team: 'dissonant', role: 'guide', label: tr.guide, marker: 'G', side: 'left' },
-            { team: 'dissonant', role: 'walker', label: tr.dreamwalker, marker: 'W', side: 'left' },
-            { team: 'resonant', role: 'guide', label: tr.guide, marker: 'G', side: 'right' },
-            { team: 'resonant', role: 'walker', label: tr.dreamwalker, marker: 'W', side: 'right' },
+            { team: 'dissonant', role: 'guide', label: tr.guide },
+            { team: 'dissonant', role: 'walker', label: tr.dreamwalker },
+            { team: 'resonant', role: 'guide', label: tr.guide },
+            { team: 'resonant', role: 'walker', label: tr.dreamwalker },
         ];
 
         document.body.className = `team-${state.turn.team}`;
 
         root.innerHTML = `
-        <div class="game">
-            <div class="grid grid--5">
-                ${cells.map(cell => `
-                    <div class="${getGameCellClass(cell)}">
-                        <span class="cell__content">${escapeHtml(cell.word)}</span>
-                    </div>
-                `).join('')}
-            </div>
-        </div>
-
-        <div class="game-qr-dock game-qr-dock--left">
-            ${qrItems.filter(item => item.side === 'left').map(item => `
-                <div class="game-qr-dock__item game-qr-dock__item--${item.team}">
-                    <button
-                        class="game-qr-dot"
-                        type="button"
-                        aria-label="${item.team} ${item.label}"
-                        title="${item.team} ${item.label}"
-                    >${item.marker}</button>
-                    <div class="game-qr-popover">
-                        <p class="game-qr-popover__title">${item.team} ${item.label}</p>
-                        <div class="game-qr-popover__image">
-                            ${makeQrImg(guestUrl(item.role, item.team), 190)}
+        <div class="screen-layout game-layout">
+            <header class="screen-header game__header">
+                <div class="game__header-bar">
+                    <button class="btn-back btn-icon" id="backBtn">${ICONS.arrowLeft}</button>
+                    <div class="game__qr-hub" aria-label="${tr.qrHubLabel}">
+                        <span class="game__eye-indicator" aria-hidden="true">
+                            <span class="game__eye game__eye--closed">${ICONS.eyeClosed}</span>
+                            <span class="game__eye game__eye--open">${ICONS.eye}</span>
+                        </span>
+                        <button class="game__qr-trigger btn-icon" type="button" aria-label="${tr.showQr}">${ICONS.qrCode}</button>
+                        <div class="game__qr-modal">
+                            <div class="game__qr-modal-content">
+                                <p class="game__qr-hint">${tr.scanToControl}</p>
+                                <div class="qr-panel">
+                                    ${['dissonant', 'resonant'].map(team => `
+                                        <div class="qr-panel__group qr-panel__group--${team}">
+                                            <p class="qr-panel__group-title">${team === 'dissonant' ? tr.dissonant : tr.resonant}</p>
+                                            <div class="qr-panel__group-cards">
+                                                ${qrItems.filter(item => item.team === team).map(item => `
+                                                    <div class="qr-panel__block">
+                                                        <div class="qr-wrapper">${makeQrImg(guestUrl(item.role, item.team), 130)}</div>
+                                                        <p class="qr-panel__label">${item.label}</p>
+                                                    </div>
+                                                `).join('')}
+                                            </div>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            `).join('')}
-        </div>
+            </header>
 
-        <div class="game-qr-dock game-qr-dock--right">
-            ${qrItems.filter(item => item.side === 'right').map(item => `
-                <div class="game-qr-dock__item game-qr-dock__item--${item.team}">
-                    <button
-                        class="game-qr-dot"
-                        type="button"
-                        aria-label="${item.team} ${item.label}"
-                        title="${item.team} ${item.label}"
-                    >${item.marker}</button>
-                    <div class="game-qr-popover">
-                        <p class="game-qr-popover__title">${item.team} ${item.label}</p>
-                        <div class="game-qr-popover__image">
-                            ${makeQrImg(guestUrl(item.role, item.team), 190)}
-                        </div>
+            <main class="screen-body">
+                <div class="game">
+                    <div class="grid grid--5">
+                        ${cells.map(cell => `
+                            <div class="${getGameCellClass(cell)}">
+                                <span class="cell__content">${escapeHtml(cell.word)}</span>
+                            </div>
+                        `).join('')}
                     </div>
                 </div>
-            `).join('')}
-        </div>
 
-        <div class="game__score">
-            <span class="game__score-item game__score-item--resonant">${rDone} / ${rTotal}</span>
-            <span class="game__score-item game__score-item--dissonant">${dDone} / ${dTotal}</span>
-        </div>
+            </main>
 
-        <button class="btn-back btn-icon" id="backBtn">${ICONS.arrowLeft}</button>
-        <button class="btn-profile btn-icon" id="profileBtn">${ICONS.user}</button>
-        <button class="fullscreen-btn btn-icon" id="fullscreenBtn">${ICONS.maximize}</button>
+            <footer class="screen-footer game__footer">
+                <div class="game__score">
+                    <span class="game__score-item game__score-item--resonant ${state.turn.team === 'resonant' ? 'game__score-item--active' : ''}">${rDone} / ${rTotal}</span>
+                    <span class="game__score-item game__score-item--dissonant ${state.turn.team === 'dissonant' ? 'game__score-item--active' : ''}">${dDone} / ${dTotal}</span>
+                </div>
+                <button class="fullscreen-btn btn-icon" id="fullscreenBtn">${ICONS.maximize}</button>
+            </footer>
+        </div>
         `;
 
         document.getElementById('backBtn').addEventListener('click', () => {
-            window.location.href = getBaseUrl() + '/index.html';
-        });
-
-        document.getElementById('profileBtn').addEventListener('click', async () => {
-            await signOut();
             window.location.href = getBaseUrl() + '/index.html';
         });
 

@@ -18,6 +18,7 @@ import { createBoard } from '../domain/boardFactory.js';
 import { loadWords } from '../utils/words.js';
 import { getBaseUrl } from '../utils/url.js';
 import { ICONS } from '../utils/icons.js';
+import { fitTextBySelector } from '../utils/fitText.js';
 
 // ─── LANG STORAGE ───────────────────────────────────────────────
 
@@ -42,7 +43,7 @@ export async function initHome(root) {
     let user = null;
     let room = null;
     let warmedLanguage = null;
-    let introPlayed = false;
+    let introPlayed = true;
 
     function confirmNewGameModal(tr) {
         return new Promise(resolve => {
@@ -64,8 +65,18 @@ export async function initHome(root) {
                 </div>
             `;
 
+            const fitModalButtons = () => {
+                fitTextBySelector(modal, '.confirm-modal__btn', {
+                    widthRatio: 0.9,
+                    heightRatio: 0.42,
+                    minSize: 11,
+                    step: 0.25,
+                });
+            };
+
             const cleanup = (result) => {
                 document.removeEventListener('keydown', onKeyDown);
+                window.removeEventListener('resize', fitModalButtons);
                 modal.remove();
                 resolve(result);
             };
@@ -81,7 +92,9 @@ export async function initHome(root) {
             });
 
             document.addEventListener('keydown', onKeyDown);
+            window.addEventListener('resize', fitModalButtons);
             document.body.appendChild(modal);
+            requestAnimationFrame(fitModalButtons);
             modal.querySelector('.confirm-modal__btn--confirm')?.focus();
         });
     }

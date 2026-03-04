@@ -1,9 +1,14 @@
 /* main.css */
 @import url('./variables.css');
-@import url('./base.css');
+@import url('./foundation.css');
+@import url('./loader.css');
 @import url('./grid.css');
 @import url('./cell.css');
-@import url('./layout.css');
+@import url('./screen-layout.css');
+@import url('./game-layout.css');
+@import url('./status-screens.css');
+@import url('./guide.css');
+@import url('./walker.css');
 @import url('./ui.css');
 @import url('./responsive.css');
 @import url('./homepage.css');

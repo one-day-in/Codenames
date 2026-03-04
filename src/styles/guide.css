@@ -1,0 +1,138 @@
+/* ─── GUIDE ─────────────────────────────────────────────────── */
+
+.guide__header {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-xs);
+    padding: var(--walker-header-pad-y) var(--walker-header-pad-x);
+    border: none;
+    background: none;
+    box-shadow: none;
+    backdrop-filter: none;
+}
+
+.guide__title {
+    margin: 0;
+    text-align: center;
+    font-size: var(--walker-header-title-size-lg);
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: color var(--transition-fast), opacity var(--transition-fast), text-shadow var(--transition-fast);
+}
+
+.guide__title--active {
+    color: var(--text-main);
+    text-shadow:
+        0 0 10px var(--resonant-neon),
+        0 0 14px var(--dissonant-neon);
+}
+
+.guide__title--muted {
+    color: var(--text-secondary);
+    opacity: 0.76;
+}
+
+.guide__hint {
+    font-size: var(--guide-hint-size);
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--resonant-light);
+    text-align: center;
+}
+
+.guide__btns {
+    position: static;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--guide-btn-gap);
+    padding: 0;
+    box-sizing: border-box;
+    width: var(--guide-btn-panel-width);
+    transition: opacity var(--transition-fast), filter var(--transition-fast);
+}
+
+.guide__btns--active {
+    opacity: 1;
+    filter: none;
+}
+
+.guide__btns--muted {
+    opacity: 0.62;
+    filter: saturate(0.7);
+}
+
+.guide__num-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: var(--guide-btn-min-size);
+    min-height: var(--guide-btn-min-size);
+    padding: 0;
+    font-size: var(--guide-btn-font-size);
+    font-weight: 700;
+}
+
+.guide__num-btn:not([disabled]):hover {
+    border-color: var(--resonant-light);
+    background: var(--guide-btn-selected-bg);
+    box-shadow: 0 0 20px var(--guide-btn-hover-glow);
+}
+
+.guide__num-btn--chosen {
+    border: 1px solid var(--resonant-light);
+    background: var(--guide-btn-selected-bg);
+    color: var(--text-main);
+    box-shadow: 0 0 20px var(--guide-btn-selected-glow);
+}
+
+.team-dissonant .guide__num-btn:not([disabled]):hover {
+    border-color: var(--dissonant-light);
+    box-shadow: 0 0 20px var(--guide-btn-hover-glow-dissonant);
+}
+
+.team-dissonant .guide__num-btn--chosen {
+    border-color: var(--dissonant-light);
+    box-shadow: 0 0 20px var(--guide-btn-selected-glow-dissonant);
+}
+
+.guide__footer {
+    width: 100%;
+    justify-content: center;
+    gap: var(--guide-footer-gap);
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    max-width: var(--guide-footer-max-width);
+    margin-inline: auto;
+}
+
+.guide__footer:empty {
+    display: none;
+}
+
+@media (max-width: 720px) {
+    .guide__footer {
+        max-width: 100%;
+        grid-template-columns: 1fr;
+        justify-items: center;
+        gap: var(--game-qr-mobile-gap);
+    }
+
+    .guide__btns {
+        width: 100%;
+        max-width: var(--guide-mobile-btns-max-width);
+    }
+
+    .guide__title {
+        font-size: var(--walker-header-mobile-title-size-lg);
+    }
+
+    .guide__hint {
+        font-size: var(--guide-hint-mobile-size);
+    }
+}

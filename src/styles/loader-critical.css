@@ -1,0 +1,72 @@
+/* loader-critical.css
+   Early styles for initial paint before main bundle CSS is loaded. */
+:root {
+    --loader-page-bg: #000;
+    --loader-page-color: #f2efe7;
+    --loader-bg: #0b0d12;
+    --loader-top-offset: 0px;
+    --loader-shell-gap: 0.8rem;
+    --loader-title-font: Georgia, "Times New Roman", serif;
+    --loader-title-size: 1.5rem;
+    --loader-title-line-height: 0.92;
+    --loader-title-letter-spacing: 0.22em;
+    --loader-title-opacity: 0.9;
+    --loader-dot-size: 7px;
+    --loader-dot-gap: 10px;
+    --loader-dot-color: #f2efe7;
+    --loader-dot-opacity: 0.35;
+}
+
+html,
+body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--loader-page-bg);
+    color: var(--loader-page-color);
+}
+
+body {
+    overflow: hidden;
+}
+
+#loader {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: var(--loader-top-offset);
+    background: var(--loader-bg);
+}
+
+.loader__shell {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--loader-shell-gap);
+}
+
+.loader__title {
+    font-family: var(--loader-title-font);
+    font-size: var(--loader-title-size);
+    line-height: var(--loader-title-line-height);
+    text-align: center;
+    letter-spacing: var(--loader-title-letter-spacing);
+    text-transform: uppercase;
+    opacity: var(--loader-title-opacity);
+}
+
+.loader__dots {
+    display: flex;
+    gap: var(--loader-dot-gap);
+}
+
+.loader__dots span {
+    width: var(--loader-dot-size);
+    height: var(--loader-dot-size);
+    border-radius: 50%;
+    background: var(--loader-dot-color);
+    opacity: var(--loader-dot-opacity);
+}

@@ -1,4 +1,4 @@
-/* ─── GRID — квадратна 5×5 для всіх екранів ─────────────────── */
+/* ─── GRID — 5×5 для всіх екранів ───────────────────────────── */
 
 /* ─── BASE ────────────────────────────────── */
 
@@ -12,13 +12,12 @@
     grid-template-columns: repeat(5, 1fr);
     grid-template-rows: repeat(5, 1fr);
     gap: var(--grid-gap);
-    padding: var(--grid-pad);
+    padding: var(--grid-inner-pad, var(--grid-pad));
 }
 
 /* ─── РОЗМІР СІТКИ ────────────────────────────
-   Єдина формула для всіх сторінок і орієнтацій:
-   квадрат = мінімум з ширини і висоти вікна
-   Панелі абсолютні → не впливають на розрахунок
+   Сітка заповнює доступний простір screen-body
+   з урахуванням резервів (header/footer/side UI)
 ─────────────────────────────────────────── */
 
 .game .grid,
@@ -28,11 +27,17 @@
     --grid-reserve-right: 0px;
     --grid-reserve-bottom: 0px;
     --grid-reserve-left: 0px;
-    --_size: min(
-        100dvw - var(--grid-pad) * 2 - var(--grid-reserve-left) - var(--grid-reserve-right),
-        100dvh - var(--grid-pad) * 2 - var(--grid-reserve-top) - var(--grid-reserve-bottom)
-    );
-    width: var(--_size);
-    height: var(--_size);
+    --grid-inner-pad: 0px;
+    --_avail-w: calc(100% - var(--grid-reserve-left) - var(--grid-reserve-right));
+    --_avail-h: calc(100% - var(--grid-reserve-top) - var(--grid-reserve-bottom));
+    width: var(--_avail-w);
+    height: var(--_avail-h);
     flex-shrink: 0;
+}
+
+.game .cell,
+.guide .cell,
+.walker .cell {
+    --cell-aspect-ratio: auto;
+    --cell-bg-size: 100% 100%;
 }
