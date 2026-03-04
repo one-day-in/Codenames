@@ -42,6 +42,7 @@ export async function initHome(root) {
     let user = null;
     let room = null;
     let warmedLanguage = null;
+    let introPlayed = false;
 
     function confirmNewGameModal(tr) {
         return new Promise(resolve => {
@@ -116,7 +117,7 @@ export async function initHome(root) {
         document.body.className = '';
 
         root.innerHTML = `
-            <div class="app">
+            <div class="app ${introPlayed ? '' : 'app--intro'}">
 
                 <div class="lang-toggle">
                     ${LANGUAGES.map(l => `
@@ -165,6 +166,7 @@ export async function initHome(root) {
 
         bindEvents(tr);
         warmWordsCache(lang);
+        introPlayed = true;
     }
 
     function bindEvents(tr) {

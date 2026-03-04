@@ -170,7 +170,7 @@ body::after {
     pointer-events: none;
     z-index: -2;
 
-    background-image: url("../images/backgrounds/background-main-mobile.jpg");
+    background-image: url("../images/backgrounds/background-mobile.jpg");
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
@@ -179,7 +179,7 @@ body::after {
 /* Tablet */
 @media (min-width: 768px) {
     body::after {
-        background-image: url("../images/backgrounds/background-main-tablet.jpg");
+        background-image: url("../images/backgrounds/background-tablet.jpg");
         background-position: center center;
     }
 }
@@ -187,7 +187,7 @@ body::after {
 /* Desktop */
 @media (min-width: 1200px) {
     body::after {
-        background-image: url("../images/backgrounds/background-main.jpg");
+        background-image: url("../images/backgrounds/background.jpg");
         background-position: center center;
     }
 }

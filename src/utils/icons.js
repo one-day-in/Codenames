@@ -11,9 +11,12 @@ export const ICONS = {
         <path d="M19 12H5"/>
     </svg>`,
 
-    user: `<svg ${SVG_ATTRS}>
-        <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/>
-        <circle cx="12" cy="7" r="4"/>
+    user: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+        fill="none" stroke="currentColor"
+        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M10 12h.01"/>
+        <path d="M18 20V6a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v14"/>
+        <path d="M2 20h20"/>
     </svg>`,
 
     maximize: `<svg ${SVG_ATTRS}>

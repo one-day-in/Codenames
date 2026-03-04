@@ -86,8 +86,13 @@ body[data-page="home"] .fullscreen-btn:focus-visible {
 }
 
 body[data-page="home"] .btn-profile {
-    width: 56px;
-    height: 56px;
+    width: 60px;
+    height: 60px;
+}
+
+body[data-page="home"] .btn-profile svg {
+    width: 30px;
+    height: 30px;
 }
 
 /* Кнопка «назад / logout» (у footer і на home) */
