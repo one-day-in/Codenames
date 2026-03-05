@@ -1,4 +1,4 @@
-import{o as T,e as A}from"./sanitize-hr0MzWWz.js";import{t as d,D as _,c as B,g as v,a as E}from"./fitText-Bd138XTN.js";import{g as G}from"./renderCell-C7h02id-.js";import{g as C}from"./url-XkLgVFj3.js";import{I}from"./icons-Bcd_E9sO.js";import{i as x}from"./initGuestPage-CnyjP-Al.js";async function U(s){const m=await x(s,{roleType:"walker",invalidParamsHtml:`<div class="error-screen">
+import{o as T,e as A}from"./sanitize-D_lm_NtF.js";import{g as B,f as E}from"./renderCell-BOP4kpTI.js";import{t as d,D as _,a as G,g as v}from"./i18n-DXZvh-jR.js";import{g as C}from"./url-XkLgVFj3.js";import{I}from"./icons-Bcd_E9sO.js";import{i as x}from"./initGuestPage-DXA1m72i.js";async function U(s){const m=await x(s,{roleType:"walker",invalidParamsHtml:`<div class="error-screen">
             <p>${d(_).wrongLink.replace(`
 `,"<br>")}</p>
         </div>`});if(!m)return;const{presence:u,store:i,team:c}=m;function k(a=_){s.innerHTML=`<div class="waiting-screen">
@@ -7,7 +7,7 @@ import{o as T,e as A}from"./sanitize-hr0MzWWz.js";import{t as d,D as _,c as B,g 
             <div class="awake-screen awake-screen--${a.winner}">
                 <div class="awake-screen__content">
                     <div class="awake-screen__title">${e.awake}</div>
-                    <div class="awake-screen__awakening">${B(a.winner,r)}</div>
+                    <div class="awake-screen__awakening">${G(a.winner,r)}</div>
                     <div class="awake-screen__role">${n?"🏆":"💀"} ${v(c,r)} ${e.dreamwalker}</div>
                     <button class="awake-screen__new-game-btn" id="newGameBtn">${e.newGame}</button>
                 </div>
@@ -31,7 +31,7 @@ import{o as T,e as A}from"./sanitize-hr0MzWWz.js";import{t as d,D as _,c as B,g 
                     <div class="grid grid--5">
                         ${a.cells.map((l,L)=>`
                             <div
-                                class="${G(l)} ${t&&!l.revealed?"cell--clickable":""}"
+                                class="${B(l)} ${t&&!l.revealed?"cell--clickable":""}"
                                 data-index="${L}"
                             >
                                 <span class="cell__content">${A(l.word)}</span>
