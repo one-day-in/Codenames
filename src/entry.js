@@ -4,12 +4,17 @@ import { preloadVisualImages } from './utils/preloadImages.js';
 
 // ─── LOADER ────────────────────────────────────────────────────────
 let loaderPending = 1; // initial page bootstrap
+const LOADER_EXIT_GLITCH_MS = 380;
 
 function hideLoader() {
     const loader = document.getElementById('loader');
     if (!loader) return;
-    if (loader.classList.contains('is-hidden')) return;
-    loader.classList.add('is-hidden');
+    if (loader.classList.contains('is-hidden') || loader.classList.contains('is-exiting')) return;
+    loader.classList.add('is-exiting');
+    setTimeout(() => {
+        loader.classList.remove('is-exiting');
+        loader.classList.add('is-hidden');
+    }, LOADER_EXIT_GLITCH_MS);
 }
 
 function showLoader() {
@@ -93,6 +98,7 @@ const pages = {
     game:    () => import('./app/initGame.js').then(m => m.initGame),
     guide:   () => import('./app/initGuide.js').then(m => m.initGuide),
     walker:  () => import('./app/initWalker.js').then(m => m.initWalker),
+    sandbox: () => import('./app/initSandbox.js').then(m => m.initSandbox),
     preview: () => import('./app/initPreview.js').then(m => m.initPreview),
 };
 

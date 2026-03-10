@@ -173,12 +173,12 @@
   /* ─── MODAL TOKENS (single standard) ───────────────────────── */
   --modal-overlay-blur: 0px;
   --modal-surface-bg:
-    linear-gradient(180deg, transparent, transparent),
-    transparent;
-  --modal-surface-border: 0 solid transparent;
-  --modal-surface-shadow: none;
+    linear-gradient(180deg, var(--pal-panel-grad-top), var(--pal-panel-grad-bottom)),
+    rgba(10, 12, 18, 0.64);
+  --modal-surface-border: 1px solid rgba(255, 255, 255, 0.22);
+  --modal-surface-shadow: 0 18px 42px rgba(0, 0, 0, 0.48);
   --modal-surface-radius: var(--radius-panel);
-  --modal-surface-blur: 0px;
+  --modal-surface-blur: 10px;
 
   --modal-qr-max-width: 90dvw;
   --modal-qr-close-font-size: 1rem;
@@ -210,17 +210,26 @@
   --modal-game-qr-width: 80vw;
   --modal-game-qr-height: 80vh;
   --modal-game-qr-pad: clamp(8px, 2vh, 22px);
-  --modal-game-qr-border: 0 solid transparent;
-  --modal-game-qr-bg: transparent;
-  --modal-game-qr-shadow: none;
+  --modal-game-qr-border: var(--modal-surface-border);
+  --modal-game-qr-bg: var(--modal-surface-bg);
+  --modal-game-qr-shadow: var(--modal-surface-shadow);
   --modal-game-qr-width-mobile: 92vw;
   --modal-game-qr-height-mobile: 76vh;
   --modal-game-qr-pad-mobile: 8px;
 
+  /* ─── TURN TRANSITION OVERLAY ─────────────────────────────── */
+  --turn-transition-z: 130;
+  --turn-transition-pad: clamp(14px, 3vw, 22px);
+  --turn-transition-panel-width: min(92vw, 760px);
+  --turn-transition-panel-gap: clamp(8px, 1.6vh, 14px);
+  --turn-transition-label-size: clamp(0.85rem, 1.2vw, 1rem);
+  --turn-transition-message-size: clamp(1rem, 1.8vw, 1.45rem);
+
   /* ─── GRID ────────────────────────────────────────────────── */
-  --grid-gap: clamp(3px, 1vw, 8px);
-  --grid-gap-sm: clamp(2px, 0.8vw, 4px);
+  --grid-gap: clamp(13px, 1vw, 28px);
+  --grid-gap-sm: clamp(12px, 0.8vw, 24px);
   --grid-pad: clamp(1%, 3.5vw, 3%);
+  --game-grid-max-width: 1500px;
 
   /* ─── ІНДИКАТОРИ / SCOREBOARD ────────────────────────────── */
   --indicator-border: 0 solid transparent;
@@ -417,7 +426,7 @@
   --safe-area-top: env(safe-area-inset-top, 0px);
   --screen-footer-pad-y: clamp(6px, 0.9vh, 10px);
   --cell-aspect-ratio: 1 / 1;
-  --cell-bg-size: cover;
+  --cell-bg-size: 100% 100%;
   --cell-transition-duration: 120ms;
   --grid-page-pad-y: clamp(50px, 8vh, 180px);
   --grid-inner-pad: var(--grid-pad);
@@ -437,8 +446,8 @@
   --home-mobile-btn-pad-y: 0.95rem;
   --home-mobile-lang-btn-pad-y: 0.65rem;
   --home-fullscreen-idle-opacity: 0.42;
-  --ui-hint-size: clamp(0.74rem, 1.02vw, 0.86rem);
-  --ui-hint-size-mobile: clamp(0.68rem, 2.6vw, 0.8rem);
+  --ui-hint-size: clamp(0.86rem, 1.2vw, 2rem);
+  --ui-hint-size-mobile: clamp(0.8rem, 3.1vw, 0.92rem);
   --ui-hint-letter-spacing: 0.03em;
   --ui-hint-line-height: 1.3;
   --ui-hint-weight: 500;

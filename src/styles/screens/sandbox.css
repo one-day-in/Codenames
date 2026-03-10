@@ -1,0 +1,129 @@
+/* ─── SANDBOX (game + two walkers in one window) ───────────── */
+
+.sandbox-layout .fullscreen-btn {
+    position: static;
+}
+
+.sandbox__header {
+    width: 100%;
+}
+
+.sandbox__header-bar {
+    width: 100%;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.sandbox__title {
+    text-align: center;
+    font-size: clamp(0.95rem, 1.8vw, 1.2rem);
+    letter-spacing: 0.08em;
+    color: var(--pal-text-main);
+}
+
+.sandbox {
+    width: 100%;
+    height: 100%;
+    padding: var(--grid-page-pad-y) var(--grid-page-pad-x);
+    box-sizing: border-box;
+}
+
+.sandbox .grid .cell.cell--hidden {
+    cursor: pointer;
+}
+
+.sandbox .grid .cell.cell--hidden:hover {
+    transform: var(--btn-hover-shift);
+}
+
+.sandbox__footer {
+    width: 100%;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    align-items: stretch;
+    gap: var(--space-sm);
+}
+
+.sandbox__team {
+    border-radius: var(--modal-surface-radius);
+    border: var(--modal-surface-border);
+    background: var(--modal-surface-bg);
+    box-shadow: var(--modal-surface-shadow);
+    backdrop-filter: blur(var(--modal-surface-blur));
+    padding: var(--space-sm);
+    display: grid;
+    gap: var(--space-sm);
+    min-width: 0;
+}
+
+.sandbox__team.is-muted {
+    opacity: 0.72;
+}
+
+.sandbox__team-title {
+    margin: 0;
+    text-align: center;
+    font-size: clamp(0.9rem, 1.2vw, 1.06rem);
+    letter-spacing: 0.08em;
+}
+
+.sandbox__team-status {
+    margin: 0;
+    min-height: 1.2em;
+    text-align: center;
+    color: var(--pal-text-secondary);
+    font-size: var(--ui-hint-size);
+    letter-spacing: var(--ui-hint-letter-spacing);
+}
+
+.sandbox__team-status svg {
+    width: 1em;
+    height: 1em;
+    vertical-align: -0.16em;
+}
+
+.sandbox__limits {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--space-xs);
+}
+
+.sandbox__limit-btn,
+.sandbox__end-btn {
+    min-height: 40px;
+    font-size: 0.92rem;
+}
+
+.sandbox__limit-btn.is-selected {
+    border-color: var(--pal-white-a68);
+}
+
+.sandbox__end-btn {
+    width: 100%;
+}
+
+.sandbox__score {
+    min-width: 240px;
+    display: grid;
+    align-content: center;
+    gap: var(--space-xs);
+}
+
+.sandbox__score .game__score-item {
+    display: inline-flex;
+    justify-content: center;
+}
+
+@media (max-width: 980px) {
+    .sandbox__footer {
+        grid-template-columns: 1fr;
+    }
+
+    .sandbox__score {
+        order: -1;
+        min-width: 0;
+        justify-items: center;
+    }
+}

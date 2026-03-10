@@ -6,12 +6,16 @@
   --color-white: #ffffff;
 
   /* Teams */
-  --color-resonant: #f2b35b;   /* warm lamp light */
-  --color-dissonant: #79c9ff;  /* cold daylight */
+  --color-resonant: #f2b35b;
+  /* warm lamp light */
+  --color-dissonant: #79c9ff;
+  /* cold daylight */
 
   /* Other cards */
-  --color-anomaly: #d7d9de;    /* white-gray */
-  --color-nightmare: #8f1515;  /* red-black direction */
+  --color-anomaly: #d7d9de;
+  /* white-gray */
+  --color-nightmare: #8f1515;
+  /* red-black direction */
   --color-hidden: #2b2b2b;
 
   /* Text */
@@ -64,7 +68,7 @@
   --pal-dissonant-main: #7ecfff;
   --pal-dissonant-light: #dff3ff;
   --pal-dissonant-text-dark: #082033;
-  --pal-dissonant-a40: rgba(126, 207, 255, 0.4);
+  --pal-dissonant-a40: rgba(57, 138, 185, 0.4);
   --pal-dissonant-a55: rgba(126, 207, 255, 0.55);
   --pal-dissonant-a70: rgba(126, 207, 255, 0.7);
 
@@ -77,6 +81,6 @@
   --pal-team-a70: var(--pal-resonant-a70);
   --pal-guide-btn-selected-bg: linear-gradient(180deg, rgba(242, 179, 91, 0.28), rgba(242, 179, 91, 0.14));
 
-  --pal-success-main: #4fd685;
-  --pal-qr-eye: rgba(255, 255, 255, 0.92);
+  --pal-success-main: #55e483;
+  --pal-qr-eye: rgba(176, 184, 196, 0.92);
 }

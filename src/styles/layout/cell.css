@@ -26,9 +26,52 @@
         opacity var(--cell-transition-duration) var(--cell-transition-ease);
 }
 
+.cell--reveal-anim {
+    animation: cell-reveal-glitch 380ms steps(2, end) both;
+}
+
+@keyframes cell-reveal-glitch {
+    0% {
+        transform: translate3d(0, 0, 0) scale(0.96);
+        opacity: 0.14;
+        filter: contrast(1) saturate(1);
+        box-shadow: 0 0 0 rgba(255, 255, 255, 0);
+    }
+
+    22% {
+        transform: translate3d(-12px, 4px, 0) scale(1.03);
+        opacity: 0.85;
+        filter: contrast(1.28) saturate(1.22);
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.12);
+    }
+
+    44% {
+        transform: translate3d(14px, -7px, 0) scale(0.995);
+        opacity: 0.92;
+        filter: contrast(1.38) saturate(1.3);
+        box-shadow: 0 0 14px rgba(255, 255, 255, 0.14);
+    }
+
+    66% {
+        transform: translate3d(-8px, 2px, 0) scale(1.01);
+        opacity: 1;
+        filter: contrast(1.12) saturate(1.08);
+        box-shadow: 0 0 7px rgba(255, 255, 255, 0.08);
+    }
+
+    100% {
+        transform: translate3d(0, 0, 0) scale(1);
+        opacity: 1;
+        filter: none;
+        box-shadow: 0 0 0 rgba(255, 255, 255, 0);
+    }
+}
+
 /* Текст всередині клітинки */
 .cell__content {
     display: block;
+    position: relative;
+    z-index: 2;
     max-width: 90%;
     overflow: hidden;
     padding: 0 8%;
@@ -41,6 +84,11 @@
     letter-spacing: var(--cell-content-letter-spacing);
     text-align: center;
     line-height: 1.2;
+    color: #fff;
+    text-shadow:
+        0 1px 2px rgba(0, 0, 0, 0.92),
+        0 3px 8px rgba(0, 0, 0, 0.82),
+        0 0 14px rgba(0, 0, 0, 0.6);
 }
 
 /* ─── СТАНИ (state modifiers) ─────────────── */
@@ -48,16 +96,136 @@
 /* Закрита картка (зворот) */
 .cell--hidden {
     color: var(--pal-text-disabled);
-    background-image: image-set(url("../../images/cards/shared/card-hidden.png") 1x,
-            url("../../images/cards/shared/card-hidden.png") 2x);
+    background-image: url("../../images/cards/shared/card-hidden.avif");
 }
 
-/* Відкрита картка — стилів немає */
+/* Всі відкриті картки масштабують background до клітинки */
+.cell.cell--revealed {
+    --cell-bg-size: 100% 100%;
+}
+
+/* На відкритих картках слово не показуємо */
+.cell.cell--revealed .cell__content {
+    display: none;
+}
+
+.cell.cell--revealed.cell--resonant-1 {
+    background-image: url("../../images/cards/resonant/card-resonant-1.avif");
+}
+
+.cell.cell--revealed.cell--resonant-2 {
+    background-image: url("../../images/cards/resonant/card-resonant-2.avif");
+}
+
+.cell.cell--revealed.cell--resonant-3 {
+    background-image: url("../../images/cards/resonant/card-resonant-3.avif");
+}
+
+.cell.cell--revealed.cell--resonant-4 {
+    background-image: url("../../images/cards/resonant/card-resonant-4.avif");
+}
+
+.cell.cell--revealed.cell--resonant-5 {
+    background-image: url("../../images/cards/resonant/card-resonant-5.avif");
+}
+
+.cell.cell--revealed.cell--resonant-6 {
+    background-image: url("../../images/cards/resonant/card-resonant-6.avif");
+}
+
+.cell.cell--revealed.cell--resonant-7 {
+    background-image: url("../../images/cards/resonant/card-resonant-7.avif");
+}
+
+.cell.cell--revealed.cell--resonant-8 {
+    background-image: url("../../images/cards/resonant/card-resonant-8.avif");
+}
+
+.cell.cell--revealed.cell--resonant-9 {
+    background-image: url("../../images/cards/resonant/card-resonant-9.avif");
+}
+
+.cell.cell--revealed.cell--dissonant-1 {
+    background-image: url("../../images/cards/dissonant/card-dissonant-1.avif");
+}
+
+.cell.cell--revealed.cell--dissonant-2 {
+    background-image: url("../../images/cards/dissonant/card-dissonant-2.avif");
+}
+
+.cell.cell--revealed.cell--dissonant-3 {
+    background-image: url("../../images/cards/dissonant/card-dissonant-3.avif");
+}
+
+.cell.cell--revealed.cell--dissonant-4 {
+    background-image: url("../../images/cards/dissonant/card-dissonant-4.avif");
+}
+
+.cell.cell--revealed.cell--dissonant-5 {
+    background-image: url("../../images/cards/dissonant/card-dissonant-5.avif");
+}
+
+.cell.cell--revealed.cell--dissonant-6 {
+    background-image: url("../../images/cards/dissonant/card-dissonant-6.avif");
+}
+
+.cell.cell--revealed.cell--dissonant-7 {
+    background-image: url("../../images/cards/dissonant/card-dissonant-7.avif");
+}
+
+.cell.cell--revealed.cell--dissonant-8 {
+    background-image: url("../../images/cards/dissonant/card-dissonant-8.avif");
+}
+
+.cell.cell--revealed.cell--dissonant-9 {
+    background-image: url("../../images/cards/dissonant/card-dissonant-9.avif");
+}
+
+.cell.cell--revealed.cell--anomaly-block {
+    background-image: url("../../images/cards/anomaly/card-anomaly-block.avif");
+}
+
+.cell.cell--revealed.cell--anomaly-block-2 {
+    background-image: url("../../images/cards/anomaly/card-anomaly-block 2.avif");
+}
+
+.cell.cell--revealed.cell--anomaly-blur {
+    background-image: url("../../images/cards/anomaly/card-anomaly-blur.avif");
+}
+
+.cell.cell--revealed.cell--anomaly-glitch {
+    background-image: url("../../images/cards/anomaly/card-anomaly-glitch.avif");
+}
+
+.cell.cell--revealed.cell--anomaly-hidenightmare {
+    background-image: url("../../images/cards/anomaly/card-anomaly-hidenightmare.avif");
+}
+
+.cell.cell--revealed.cell--anomaly-reset {
+    background-image: url("../../images/cards/anomaly/card-anomaly-reset.avif");
+}
+
+.cell.cell--revealed.cell--anomaly-speak {
+    background-image: url("../../images/cards/anomaly/card-anomaly-speak.avif");
+}
+
+.cell.cell--revealed.cell--nightmare {
+    background-image: url("../../images/cards/nightmare/card-nightmare.avif");
+}
 
 /* Guide: відгадані картки затемнюються */
 .guide .cell--revealed {
-    opacity: 0.58;
-    filter: saturate(0.88) brightness(0.92);
+    opacity: 1;
+    filter: none;
+}
+
+.guide .cell--revealed::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background: rgba(0, 0, 0, 0.22);
 }
 
 /* Guide: резонантні клітинки мають теплий ламповий підсвіт */
@@ -69,6 +237,7 @@
     content: "";
     position: absolute;
     inset: 0;
+    z-index: 1;
     pointer-events: none;
     background: linear-gradient(180deg, var(--pal-resonant-a40), rgba(0, 0, 0, 0));
 }
@@ -81,8 +250,39 @@
     content: "";
     position: absolute;
     inset: 0;
+    z-index: 1;
     pointer-events: none;
     background: linear-gradient(180deg, var(--pal-dissonant-a40), rgba(0, 0, 0, 0));
+}
+
+/* Guide: nightmare — небезпечний глибокий червоний (без неону) */
+.guide .cell--guide.cell--nightmare {
+    box-shadow: inset 0 0 0 2px rgba(198, 40, 52, 0.86);
+}
+
+.guide .cell--guide.cell--nightmare::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background:
+        linear-gradient(180deg, rgba(198, 40, 52, 0.46), rgba(60, 8, 12, 0.26));
+}
+
+/* Guide: anomaly — білувато-сірий напівпрозорий тон */
+.guide .cell--guide[class*="cell--anomaly-"] {
+    box-shadow: inset 0 0 0 2px rgba(224, 229, 236, 0.72);
+}
+
+.guide .cell--guide[class*="cell--anomaly-"]::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background:
+        linear-gradient(180deg, rgba(242, 246, 252, 0.34), rgba(196, 204, 214, 0.14));
 }
 
 /* Клікабельна (хід блукача) */
@@ -95,5 +295,4 @@
     opacity: 0.85;
 }
 
-/* Рольові модифікатори лишені лише для семантики класів.
-   Візуал клітинок зараз нейтральний для всіх ролей. */
+/* Рольові модифікатори керують і логікою, і візуалом. */

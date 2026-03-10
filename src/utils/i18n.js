@@ -51,6 +51,12 @@ export const TRANSLATIONS = {
         newGameFailed: 'Не вдалося створити нову гру. Спробуй ще раз.',
         continueGame: 'Продовжити гру',
         forceRejoin: 'Це я — перепідключитись',
+        sandboxBoard: 'Тест-дошка',
+        transitionIncoming: 'Подія',
+        transitionTurnPass: 'Хід переходить до іншої команди',
+        transitionAnomalyGeneric: 'Аномалія активована. Виконуємо ефект і передаємо хід',
+        transitionAnomalyReset: 'Аномалія RESET: усі слова оновлено, відкриті карти залишаються відкритими',
+        transitionNightmare: 'Кошмар активовано. Гру завершено',
     },
 
     en: {
@@ -101,6 +107,12 @@ export const TRANSLATIONS = {
         newGameFailed: 'Failed to start a new game. Please try again.',
         continueGame: 'Continue game',
         forceRejoin: 'That\'s me — reconnect',
+        sandboxBoard: 'Sandbox board',
+        transitionIncoming: 'Event',
+        transitionTurnPass: 'Turn passes to the other team',
+        transitionAnomalyGeneric: 'Anomaly triggered. Applying effect, then passing the turn',
+        transitionAnomalyReset: 'RESET anomaly: all words are refreshed, revealed cards stay revealed',
+        transitionNightmare: 'Nightmare triggered. Game over',
     },
 
     ru: {
@@ -151,6 +163,12 @@ export const TRANSLATIONS = {
         newGameFailed: 'Не удалось начать новую игру. Попробуй ещё раз.',
         continueGame: 'Продолжить игру',
         forceRejoin: 'Это я — переподключиться',
+        sandboxBoard: 'Тест-доска',
+        transitionIncoming: 'Событие',
+        transitionTurnPass: 'Ход переходит к другой команде',
+        transitionAnomalyGeneric: 'Аномалия активирована. Выполняем эффект и передаем ход',
+        transitionAnomalyReset: 'Аномалия RESET: все слова обновлены, открытые карты остаются открытыми',
+        transitionNightmare: 'Кошмар активирован. Игра завершена',
     }
 };
 
@@ -174,4 +192,20 @@ export function getAwakeningName(winner, language) {
 export function getTeamName(team, language) {
     const tr = t(language);
     return team === 'resonant' ? tr.resonant : tr.dissonant;
+}
+
+function pluralSlavic(n, one, few, many) {
+    const abs = Math.abs(Number(n)) % 100;
+    const last = abs % 10;
+    if (abs > 10 && abs < 20) return many;
+    if (last > 1 && last < 5) return few;
+    if (last === 1) return one;
+    return many;
+}
+
+export function formatCardCount(count, language) {
+    const n = Number(count) || 0;
+    if (language === 'en') return `${n} ${n === 1 ? 'card' : 'cards'}`;
+    if (language === 'ru') return `${n} ${pluralSlavic(n, 'карта', 'карты', 'карт')}`;
+    return `${n} ${pluralSlavic(n, 'карта', 'карти', 'карт')}`;
 }

@@ -5,6 +5,7 @@ import { getGuideCellClass } from '../utils/renderCell.js';
 import { t, DEFAULT_LANGUAGE, getTeamName } from '../utils/i18n.js';
 import { escapeHtml } from '../utils/sanitize.js';
 import { ICONS } from '../utils/icons.js';
+import { renderTurnTransitionOverlay } from '../utils/turnTransition.js';
 import { initGuestPage } from './initGuestPage.js';
 
 const MAX_HINT_BTNS = 8;
@@ -19,8 +20,12 @@ export async function initGuide(root) {
     if (!result) return;
 
     const { presence, store, team } = result;
+    let hasRenderedBoard = false;
+    let prevRevealed = new Set();
 
     function renderWaiting(lang = DEFAULT_LANGUAGE) {
+        hasRenderedBoard = false;
+        prevRevealed = new Set();
         root.innerHTML = `<div class="waiting-screen">
             <p>${t(lang).waitingLobby}</p>
         </div>`;
@@ -31,7 +36,7 @@ export async function initGuide(root) {
         const turn = state.turn;
         const isMyTurn = turn.team === team;
         const guideLocked = turn.guideLimit !== null;
-        const canAct = isMyTurn && !guideLocked && !state.gameOver;
+        const canAct = isMyTurn && !guideLocked && !state.gameOver && !state.turnTransition;
 
         document.body.classList.remove('team-resonant', 'team-dissonant');
         document.body.classList.add(`team-${team}`);
@@ -54,6 +59,12 @@ export async function initGuide(root) {
         `;
         }).join('');
 
+        const currentRevealed = new Set(
+            state.cells
+                .map((cell, idx) => (cell.revealed ? idx : -1))
+                .filter(idx => idx >= 0)
+        );
+
         root.innerHTML = `
         <div class="screen-layout guide-layout">
             <header class="screen-header">
@@ -67,8 +78,8 @@ export async function initGuide(root) {
             <main class="screen-body">
                 <div class="guide guide--${team}">
                     <div class="grid grid--5">
-                        ${state.cells.map(cell => `
-                            <div class="${getGuideCellClass(cell)}">
+                        ${state.cells.map((cell, i) => `
+                            <div class="${getGuideCellClass(cell)}" data-index="${i}">
                                 <span class="cell__content">${escapeHtml(cell.word)}</span>
                             </div>
                         `).join('')}
@@ -77,8 +88,18 @@ export async function initGuide(root) {
             </main>
 
             <footer class="screen-footer guide__footer"></footer>
+            ${renderTurnTransitionOverlay(state, lang)}
         </div>
     `;
+
+        root.querySelectorAll('.guide .grid .cell').forEach((el, idx) => {
+            if (!hasRenderedBoard) return;
+            if (!currentRevealed.has(idx) || prevRevealed.has(idx)) return;
+            el.classList.add('cell--reveal-anim');
+        });
+
+        prevRevealed = currentRevealed;
+        hasRenderedBoard = true;
 
         requestAnimationFrame(() => {
             root.querySelectorAll('.cell').forEach(cell => fitTextToCell(cell));

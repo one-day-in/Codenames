@@ -36,12 +36,6 @@
 
 .guide__meta {
     margin: 0;
-    font-size: var(--ui-hint-size);
-    font-weight: var(--ui-hint-weight);
-    font-style: italic;
-    letter-spacing: var(--ui-hint-letter-spacing);
-    text-transform: none;
-    line-height: var(--ui-hint-line-height);
     text-align: left;
     display: inline-flex;
     align-items: center;

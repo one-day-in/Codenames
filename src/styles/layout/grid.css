@@ -35,6 +35,14 @@
     flex-shrink: 0;
 }
 
+.game .grid,
+.guide .grid,
+.walker .grid {
+    max-width: var(--game-grid-max-width);
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .game .cell,
 .guide .cell,
 .walker .cell {

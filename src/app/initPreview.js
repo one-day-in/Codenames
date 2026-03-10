@@ -5,7 +5,7 @@ import { createBoard } from '../domain/boardFactory.js';
 import { getGameCellClass, getGuideCellClass } from '../utils/renderCell.js';
 import { fitTextAll, fitTextToCell } from '../utils/fitText.js';
 import { ICONS } from '../utils/icons.js';
-import { t, DEFAULT_LANGUAGE, getTeamName } from '../utils/i18n.js';
+import { t, DEFAULT_LANGUAGE, getTeamName, formatCardCount } from '../utils/i18n.js';
 
 const PREVIEW_NAV_CSS = `
 .preview-nav {
@@ -78,9 +78,13 @@ function makeMockState() {
     };
 }
 
-function makePreviewQr(url, size = 190) {
-    const color = '111111';
-    const bg = 'FFFFFF';
+function makePreviewQr(url, size = 190, team = 'neutral') {
+    const palette = {
+        resonant: { color: '5A2E00', bg: 'FFF3DE' },
+        dissonant: { color: '0A3558', bg: 'EAF6FF' },
+        neutral: { color: '1E2A36', bg: 'F2F6FB' },
+    };
+    const { color, bg } = palette[team] || palette.neutral;
     return `<img class="qr-image"
         src="https://api.qrserver.com/v1/create-qr-code/?size=${size}x${size}&color=${color}&bgcolor=${bg}&data=${encodeURIComponent(url)}"
         width="${size}" height="${size}" />`;
@@ -221,7 +225,7 @@ function renderWalker(state, team) {
     const canPlay = isMyTurn && guideLimit !== null;
     const teamTitle = getTeamName(team, DEFAULT_LANGUAGE);
     const walkerStatus = canPlay
-        ? `${tr.dreamwalker}: ${guideLimit} ${tr.steps}`
+        ? `${tr.dreamwalker}: ${formatCardCount(guideLimit, DEFAULT_LANGUAGE)}`
         : `${tr.dreamwalker}: ${ICONS.eyeClosed}`;
     const statusClass = canPlay
         ? 'walker__status walker__status--active'
@@ -235,7 +239,7 @@ function renderWalker(state, team) {
                 <div class="walker__meta">
                     <div class="${statusClass}">${walkerStatus}</div>
                     <div class="walker__actions">
-                        <span class="walker__end-hint">${tr.end}</span>
+                        <span class="walker__end-hint">${tr.endTurn}</span>
                         <button class="walker__action-btn walker__refresh-btn ${canPlay ? 'walker__refresh-btn--active' : 'walker__refresh-btn--muted'}" aria-label="${tr.endTurn}" ${!canPlay ? 'disabled' : ''}>${ICONS.refreshCw}</button>
                     </div>
                 </div>
@@ -370,9 +374,12 @@ export function initPreview(root) {
     document.head.appendChild(styleEl);
 
     const state = makeMockState();
+    const boardScreens = new Set(['game', 'guide-resonant', 'guide-dissonant', 'walker-resonant', 'walker-dissonant']);
     let qrModalPinned = false;
     let qrModalHover = false;
     let fullscreenBound = false;
+    let hasRenderedBoard = false;
+    let prevRevealed = new Set();
 
     function syncFullscreenIcon() {
         root.querySelectorAll('.fullscreen-btn').forEach(btn => {
@@ -441,6 +448,28 @@ export function initPreview(root) {
             </div>`;
 
         root.innerHTML = `${html}${nav}`;
+
+        if (boardScreens.has(id)) {
+            const currentRevealed = new Set(
+                state.cells
+                    .map((cell, idx) => (cell.revealed ? idx : -1))
+                    .filter(idx => idx >= 0)
+            );
+
+            root.querySelectorAll('.grid .cell[data-index]').forEach((el) => {
+                const idx = Number(el.dataset.index);
+                if (!hasRenderedBoard) return;
+                if (!currentRevealed.has(idx) || prevRevealed.has(idx)) return;
+                el.classList.add('cell--reveal-anim');
+            });
+
+            prevRevealed = currentRevealed;
+            hasRenderedBoard = true;
+        } else {
+            hasRenderedBoard = false;
+            prevRevealed = new Set();
+        }
+
         syncQrModalState();
 
         const qrHit = root.querySelector('.game__qr-hit');

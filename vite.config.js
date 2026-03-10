@@ -11,6 +11,7 @@ export default defineConfig({
         game:    resolve(__dirname, 'game.html'),
         guide:   resolve(__dirname, 'guide.html'),
         walker:  resolve(__dirname, 'walker.html'),
+        sandbox: resolve(__dirname, 'sandbox.html'),
         preview: resolve(__dirname, 'preview.html'),
       },
       output: {

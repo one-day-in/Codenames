@@ -1,5 +1,7 @@
 // src/utils/renderCell.js
 
+import { getAnomalyVariantKey } from './anomalyVariants.js';
+
 /* ─── Внутрішній генератор модифікатора ролі ────────
    Повертає клас виду:
      cell--nightmare
@@ -12,8 +14,8 @@ function getRoleVariantClass(cell) {
         return 'cell--nightmare';
     }
     if (cell.role === 'anomaly') {
-        const v = cell.imageVariant ?? cell.anomalyVariant ?? 1;
-        return `cell--anomaly-${v}`;
+        const key = getAnomalyVariantKey(cell);
+        return `cell--anomaly-${key}`;
     }
     // resonant | dissonant
     const v = cell.imageVariant ?? 1;

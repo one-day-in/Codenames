@@ -280,11 +280,7 @@ button.lang-toggle__btn.lang-toggle__btn--active:focus-visible {
     gap: var(--home-actions-gap);
     padding: var(--home-actions-pad);
     width: var(--home-actions-width);
-    border: var(--modal-surface-border);
     border-radius: var(--home-title-wrap-radius);
-    background: var(--modal-surface-bg);
-    box-shadow: var(--modal-surface-shadow);
-    backdrop-filter: blur(var(--modal-surface-blur));
     margin-top: var(--home-actions-margin-top);
     box-sizing: border-box;
 }

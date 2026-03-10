@@ -42,12 +42,6 @@
 
 .walker__status {
     margin: 0;
-    font-size: var(--ui-hint-size);
-    font-weight: var(--ui-hint-weight);
-    letter-spacing: var(--ui-hint-letter-spacing);
-    text-transform: none;
-    line-height: var(--ui-hint-line-height);
-    font-style: italic;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -98,12 +92,6 @@ button.walker__action-btn:focus-visible {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    font-size: var(--ui-hint-size);
-    font-weight: var(--ui-hint-weight);
-    letter-spacing: var(--ui-hint-letter-spacing);
-    text-transform: none;
-    line-height: var(--ui-hint-line-height);
-    font-style: italic;
     color: var(--pal-text-secondary);
     opacity: var(--ui-hint-opacity);
     user-select: none;

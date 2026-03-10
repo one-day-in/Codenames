@@ -10,10 +10,15 @@ import { getBaseUrl, getParams } from '../utils/url.js';
 import { ICONS } from '../utils/icons.js';
 import { onOrientationChange } from '../utils/resize.js';
 import { escapeHtml } from '../utils/sanitize.js';
+import { renderTurnTransitionOverlay } from '../utils/turnTransition.js';
 
-function makeQrImg(url, size = 130) {
-    const color = '111111';
-    const bg = 'FFFFFF';
+function makeQrImg(url, size = 130, team = 'neutral') {
+    const palette = {
+        resonant: { color: '5A2E00', bg: 'FFF3DE' },
+        dissonant: { color: '0A3558', bg: 'EAF6FF' },
+        neutral: { color: '1E2A36', bg: 'F2F6FB' },
+    };
+    const { color, bg } = palette[team] || palette.neutral;
     return `<img class="qr-image"
         src="https://api.qrserver.com/v1/create-qr-code/?size=${size}x${size}&color=${color}&bgcolor=${bg}&data=${encodeURIComponent(url)}"
         width="${size}" height="${size}" />`;
@@ -46,6 +51,8 @@ export async function initGame(root) {
     let qrModalPinned = false;
     let qrModalHover = false;
     let fullscreenBound = false;
+    let hasRenderedBoard = false;
+    let prevRevealed = new Set();
 
     function syncFullscreenIcon() {
         const fullscreenBtn = document.getElementById('fullscreenBtn');
@@ -140,6 +147,12 @@ export async function initGame(root) {
 
         document.body.className = `team-${state.turn.team}`;
 
+        const currentRevealed = new Set(
+            cells
+                .map((cell, idx) => (cell.revealed ? idx : -1))
+                .filter(idx => idx >= 0)
+        );
+
         root.innerHTML = `
         <div class="screen-layout game-layout">
             <header class="screen-header game__header">
@@ -203,8 +216,18 @@ export async function initGame(root) {
                 </div>
                 <button class="fullscreen-btn btn-icon" id="fullscreenBtn">${ICONS.maximize}</button>
             </footer>
+            ${renderTurnTransitionOverlay(state, lang)}
         </div>
         `;
+
+        root.querySelectorAll('.game .grid .cell').forEach((el, idx) => {
+            if (!hasRenderedBoard) return;
+            if (!currentRevealed.has(idx) || prevRevealed.has(idx)) return;
+            el.classList.add('cell--reveal-anim');
+        });
+
+        prevRevealed = currentRevealed;
+        hasRenderedBoard = true;
 
         document.getElementById('backBtn').addEventListener('click', () => {
             window.location.href = getBaseUrl() + '/index.html';
@@ -222,10 +245,12 @@ export async function initGame(root) {
 
         const qrHit = root.querySelector('.game__qr-hit');
         qrHit?.addEventListener('mouseenter', () => {
+            if (store.getState()?.turnTransition) return;
             qrModalHover = true;
             syncQrModalState();
         });
         qrHit?.addEventListener('mouseleave', () => {
+            if (store.getState()?.turnTransition) return;
             qrModalHover = false;
             syncQrModalState();
         });
@@ -265,6 +290,8 @@ export async function initGame(root) {
     }
 
     root.addEventListener('click', (event) => {
+        if (store.getState()?.turnTransition) return;
+
         const hubHit = event.target.closest('.game__qr-hit');
         if (hubHit) {
             event.preventDefault();

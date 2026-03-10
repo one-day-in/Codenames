@@ -2,10 +2,11 @@
 import { onOrientationChange } from '../utils/resize.js';
 import { fitTextAll } from '../utils/fitText.js';
 import { getGameCellClass } from '../utils/renderCell.js';
-import { t, DEFAULT_LANGUAGE, getAwakeningName, getTeamName } from '../utils/i18n.js';
+import { t, DEFAULT_LANGUAGE, getAwakeningName, getTeamName, formatCardCount } from '../utils/i18n.js';
 import { getBaseUrl } from '../utils/url.js';
 import { escapeHtml } from '../utils/sanitize.js';
 import { ICONS } from '../utils/icons.js';
+import { renderTurnTransitionOverlay } from '../utils/turnTransition.js';
 import { initGuestPage } from './initGuestPage.js';
 
 export async function initWalker(root) {
@@ -18,14 +19,20 @@ export async function initWalker(root) {
     if (!result) return;
 
     const { presence, store, team } = result;
+    let hasRenderedBoard = false;
+    let prevRevealed = new Set();
 
     function renderWaiting(lang = DEFAULT_LANGUAGE) {
+        hasRenderedBoard = false;
+        prevRevealed = new Set();
         root.innerHTML = `<div class="waiting-screen">
             <p>${t(lang).waitingLobby}</p>
         </div>`;
     }
 
     function renderAwake(state, lang) {
+        hasRenderedBoard = false;
+        prevRevealed = new Set();
         const tr = t(lang);
         const isWinner = state.winner === team;
         root.innerHTML = `
@@ -49,11 +56,16 @@ export async function initWalker(root) {
         const turn = state.turn;
         const isMyTurn = turn.team === team;
         const hasLimit = turn.guideLimit !== null;
-        const canPlay = isMyTurn && hasLimit && !state.gameOver;
+        const canPlay = isMyTurn && hasLimit && !state.gameOver && !state.turnTransition;
 
         const teamTitle = getTeamName(team, lang);
+        const currentRevealed = new Set(
+            state.cells
+                .map((cell, idx) => (cell.revealed ? idx : -1))
+                .filter(idx => idx >= 0)
+        );
         const walkerStatus = canPlay
-            ? `${tr.dreamwalker}: ${turn.guideLimit} ${tr.steps}`
+            ? `${tr.dreamwalker}: ${formatCardCount(turn.guideLimit, lang)}`
             : `${tr.dreamwalker}: ${ICONS.eyeClosed}`;
         const statusClass = canPlay
             ? 'walker__status walker__status--active'
@@ -70,7 +82,7 @@ export async function initWalker(root) {
                     <div class="walker__meta">
                         <div class="${statusClass}">${walkerStatus}</div>
                         <div class="walker__actions">
-                            <span class="walker__end-hint">${tr.end}</span>
+                            <span class="walker__end-hint">${tr.endTurn}</span>
                             <button class="walker__action-btn walker__refresh-btn ${canPlay ? 'walker__refresh-btn--active' : 'walker__refresh-btn--muted'}" id="refreshBtn" aria-label="${tr.endTurn}" ${!canPlay ? 'disabled' : ''}>${ICONS.refreshCw}</button>
                         </div>
                     </div>
@@ -93,8 +105,18 @@ export async function initWalker(root) {
             </main>
 
             <footer class="screen-footer walker__footer"></footer>
+            ${renderTurnTransitionOverlay(state, lang)}
         </div>
     `;
+
+        root.querySelectorAll('.walker .grid .cell').forEach((el, idx) => {
+            if (!hasRenderedBoard) return;
+            if (!currentRevealed.has(idx) || prevRevealed.has(idx)) return;
+            el.classList.add('cell--reveal-anim');
+        });
+
+        prevRevealed = currentRevealed;
+        hasRenderedBoard = true;
 
         requestAnimationFrame(() => fitTextAll(root));
 

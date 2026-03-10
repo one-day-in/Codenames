@@ -193,6 +193,9 @@ export async function initHome(root) {
                                 <button class="lobby__btn lobby__btn--newgame" id="newGameBtn">
                                     ${tr.newGame}
                                 </button>
+                                <button class="lobby__btn lobby__btn--sandbox" id="sandboxBtn">
+                                    ${tr.sandboxBoard}
+                                </button>
                             </div>
                         `
             }
@@ -229,6 +232,13 @@ export async function initHome(root) {
 
         document.getElementById('newGameBtn')
             ?.addEventListener('click', handleNewGame);
+
+        document.getElementById('sandboxBtn')
+            ?.addEventListener('click', () => {
+                if (!room?.id || !room?.guest_token) return;
+                window.location.href =
+                    `${getBaseUrl()}/sandbox.html?room=${room.id}&token=${room.guest_token}`;
+            });
 
         document.getElementById('logoutBtn')
             ?.addEventListener('click', async () => {
