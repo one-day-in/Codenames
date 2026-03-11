@@ -1,4 +1,4 @@
-import{o as E,g as S,e as G,r as H,f as I}from"./sanitize-CPdGnr9O.js";import{t as m,D as f,e as O,d as $,g as x,f as M,I as g}from"./teamEffects-BGG3rw3g.js";import{i as N}from"./initGuestPage-COS-wCl8.js";async function U(t){const v=await N(t,{roleType:"walker",invalidParamsHtml:`<div class="error-screen">
+import{o as E,g as S,e as G,r as H,f as I}from"./sanitize-BqGXgh6p.js";import{t as m,D as f,e as O,d as $,g as x,f as M,I as g}from"./url-CX8tVYqQ.js";import{i as N}from"./initGuestPage-7ahcCd-8.js";async function U(t){const v=await N(t,{roleType:"walker",invalidParamsHtml:`<div class="error-screen">
             <p>${m(f).wrongLink.replace(`
 `,"<br>")}</p>
         </div>`});if(!v)return;const{presence:b,store:l,team:d}=v;let o=!1,w=new Set;function h(e=f){o=!1,w=new Set,t.innerHTML=`<div class="waiting-screen">
