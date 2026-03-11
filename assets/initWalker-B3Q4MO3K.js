@@ -1,4 +1,4 @@
-import{o as E,e as S,r as G}from"./sanitize-C2FLv090.js";import{g as H,f as I}from"./renderCell-D2QPO2EK.js";import{t as w,D as f,a as O,g as $,f as x,I as g}from"./icons-CW5xgYQm.js";import{g as M}from"./url-NB_mxKzZ.js";import{i as N}from"./initGuestPage-cFLmhUzD.js";import"./keepAlive-By6PPzHl.js";async function F(t){const v=await N(t,{roleType:"walker",invalidParamsHtml:`<div class="error-screen">
+import{o as E,e as S,r as G}from"./sanitize-Dk4qHRqk.js";import{g as H,f as I}from"./renderCell-D2QPO2EK.js";import{t as w,D as f,a as O,g as $,f as x,I as g}from"./icons-C5SiWFC8.js";import{g as M}from"./url-NB_mxKzZ.js";import{i as N}from"./initGuestPage-nTvTMdD9.js";import"./keepAlive-By6PPzHl.js";async function F(t){const v=await N(t,{roleType:"walker",invalidParamsHtml:`<div class="error-screen">
             <p>${w(f).wrongLink.replace(`
 `,"<br>")}</p>
         </div>`});if(!v)return;const{presence:p,store:l,team:c}=v;let o=!1,m=new Set;function b(e=f){o=!1,m=new Set,t.innerHTML=`<div class="waiting-screen">

@@ -1,4 +1,4 @@
-import{a as w,b as C}from"./renderCell-D2QPO2EK.js";import{o as E,e as G,r as H}from"./sanitize-C2FLv090.js";import{t as _,D as $,g as M,I as N}from"./icons-CW5xgYQm.js";import{i as q}from"./initGuestPage-cFLmhUzD.js";import"./url-NB_mxKzZ.js";import"./keepAlive-By6PPzHl.js";const I=8;async function F(s){const v=await q(s,{roleType:"guide",invalidParamsHtml:`<div class="waiting-screen">
+import{a as w,b as C}from"./renderCell-D2QPO2EK.js";import{o as E,e as G,r as H}from"./sanitize-Dk4qHRqk.js";import{t as _,D as $,g as M,I as N}from"./icons-C5SiWFC8.js";import{i as q}from"./initGuestPage-nTvTMdD9.js";import"./url-NB_mxKzZ.js";import"./keepAlive-By6PPzHl.js";const I=8;async function F(s){const v=await q(s,{roleType:"guide",invalidParamsHtml:`<div class="waiting-screen">
             <p>${_($).scanQr}</p>
         </div>`});if(!v)return;const{presence:p,store:c,team:o}=v;let l=!1,u=new Set;function b(i=$){l=!1,u=new Set,s.innerHTML=`<div class="waiting-screen">
             <p>${_(i).waitingLobby}</p>
