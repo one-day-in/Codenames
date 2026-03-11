@@ -1,4 +1,4 @@
-import{k as I,o as O,c as x,g as N,e as D,r as H,f as T}from"./sanitize-d-swCcn9.js";import{I as m,d as M,g as v,e as U,f as Q,t as k,R as j}from"./url-6tX14MqV.js";import{r as K}from"./entry-GKl8-ezo.js";import{o as P}from"./rulesModal-DalhIthT.js";function W(n,i=130,t="neutral"){const a={resonant:{color:"5A2E00",bg:"FFF3DE"},dissonant:{color:"0A3558",bg:"EAF6FF"},neutral:{color:"1E2A36",bg:"F2F6FB"}},{color:s,bg:l}=a[t]||a.neutral;return`<img class="qr-image"
+import{k as I,o as O,c as x,a as N,g as D,e as H,r as M,f as T,R as U}from"./sanitize-BAG_KHiZ.js";import{I as m,b as Q,g as v,d as j,t as k}from"./url-BRusC3Pl.js";import{r as K}from"./entry-CX4-7Qy6.js";import{o as P}from"./rulesModal-D9jABPKW.js";function W(n,i=130,t="neutral"){const a={resonant:{color:"5A2E00",bg:"FFF3DE"},dissonant:{color:"0A3558",bg:"EAF6FF"},neutral:{color:"1E2A36",bg:"F2F6FB"}},{color:s,bg:l}=a[t]||a.neutral;return`<img class="qr-image"
         src="https://api.qrserver.com/v1/create-qr-code/?size=${i}x${i}&color=${s}&bgcolor=${l}&data=${encodeURIComponent(n)}"
         width="${i}" height="${i}" />`}function z({tr:n,presenceState:i,guestUrl:t,roles:a}){const s=[{team:"dissonant",role:"guide",label:n.guide,presenceRole:a.GUIDE_DISSONANT},{team:"dissonant",role:"walker",label:n.dreamwalker,presenceRole:a.WALKER_DISSONANT},{team:"resonant",role:"guide",label:n.guide,presenceRole:a.GUIDE_RESONANT},{team:"resonant",role:"walker",label:n.dreamwalker,presenceRole:a.WALKER_RESONANT}];return`
         <div class="game__qr-hub" aria-label="${n.qrHubLabel}">
@@ -36,7 +36,7 @@ import{k as I,o as O,c as x,g as N,e as D,r as H,f as T}from"./sanitize-d-swCcn9
                 </div>
             </div>
         </div>
-    `}function J(n,i){let t=!1,a=!1;function s(){const o=n.querySelector(".game__qr-hub");if(!o){t=!1,a=!1;return}const h=t||a;o.classList.toggle("is-open",h),o.classList.toggle("is-pinned",t)}function l(){t=!1,a=!1,s()}function c(){const o=n.querySelector(".game__qr-hit");o==null||o.addEventListener("mouseenter",()=>{i()||(a=!0,s())}),o==null||o.addEventListener("mouseleave",()=>{i()||(a=!1,s())}),s()}function p(o){if(i())return;if(o.target.closest(".game__qr-hit")){o.preventDefault(),t=!t,s();return}t&&(t=!1,s())}function g(o){o.key==="Escape"&&(t||a)&&l()}return{bind:c,close:l,handleEscape:g,handleRootClick:p}}function V({durationMs:n,onChange:i}){let t=!1,a=null,s=null;function l(g){!g||s===g||(s=g,t=!0,a&&clearTimeout(a),i(),a=setTimeout(()=>{t=!1,i()},n))}function c(){return t}function p(){a&&(clearTimeout(a),a=null)}return{dispose:p,isActive:c,trigger:l}}async function ne(n){const{roomId:t,token:a}=M();if(!t||!a){window.location.href=v()+"/index.html";return}const s=U(t);s.listen(),I(s);const l=x(t);if(await l.init(),!l.getState()){window.location.href=v()+"/index.html";return}function c(e,d){return`${v()}/${e}.html?room=${t}&token=${a}&team=${d}`}let p=!1,g=!1,o=new Set,h=!1;const b=J(n,()=>{var e;return!!((e=l.getState())!=null&&e.turnTransition)}),E=V({durationMs:280,onChange:()=>$()});function q(){const e=document.getElementById("fullscreenBtn");e&&(e.innerHTML=document.fullscreenElement?m.minimize:m.maximize)}function C(e){const d=k(e);document.body.className="",n.innerHTML=`
+    `}function J(n,i){let t=!1,a=!1;function s(){const o=n.querySelector(".game__qr-hub");if(!o){t=!1,a=!1;return}const h=t||a;o.classList.toggle("is-open",h),o.classList.toggle("is-pinned",t)}function l(){t=!1,a=!1,s()}function c(){const o=n.querySelector(".game__qr-hit");o==null||o.addEventListener("mouseenter",()=>{i()||(a=!0,s())}),o==null||o.addEventListener("mouseleave",()=>{i()||(a=!1,s())}),s()}function p(o){if(i())return;if(o.target.closest(".game__qr-hit")){o.preventDefault(),t=!t,s();return}t&&(t=!1,s())}function g(o){o.key==="Escape"&&(t||a)&&l()}return{bind:c,close:l,handleEscape:g,handleRootClick:p}}function V({durationMs:n,onChange:i}){let t=!1,a=null,s=null;function l(g){!g||s===g||(s=g,t=!0,a&&clearTimeout(a),i(),a=setTimeout(()=>{t=!1,i()},n))}function c(){return t}function p(){a&&(clearTimeout(a),a=null)}return{dispose:p,isActive:c,trigger:l}}async function ne(n){const{roomId:t,token:a}=Q();if(!t||!a){window.location.href=v()+"/index.html";return}const s=x(t);s.listen(),I(s);const l=N(t);if(await l.init(),!l.getState()){window.location.href=v()+"/index.html";return}function c(e,d){return`${v()}/${e}.html?room=${t}&token=${a}&team=${d}`}let p=!1,g=!1,o=new Set,h=!1;const $=J(n,()=>{var e;return!!((e=l.getState())!=null&&e.turnTransition)}),E=V({durationMs:280,onChange:()=>b()});function q(){const e=document.getElementById("fullscreenBtn");e&&(e.innerHTML=document.fullscreenElement?m.minimize:m.maximize)}function C(e){const d=k(e);document.body.className="",n.innerHTML=`
             <div class="app">
                 <div class="waiting-screen">
                     <p>${d.preparingGame}</p>
@@ -49,7 +49,7 @@ import{k as I,o as O,c as x,g as N,e as D,r as H,f as T}from"./sanitize-d-swCcn9
                         <button class="btn-back btn-icon" id="backBtn">${m.arrowLeft}</button>
                         <button class="btn-rules btn-icon game__rules-btn" id="rulesBtn" aria-label="${u.openRules}" title="${u.rules}">${m.book}</button>
                     </div>
-                    ${z({tr:u,presenceState:y,guestUrl:c,roles:j})}
+                    ${z({tr:u,presenceState:y,guestUrl:c,roles:U})}
                 </div>
             </header>
 
@@ -57,8 +57,8 @@ import{k as I,o as O,c as x,g as N,e as D,r as H,f as T}from"./sanitize-d-swCcn9
                 <div class="game">
                     <div class="grid grid--5">
                         ${_.map(r=>`
-                            <div class="${N(r,{forceReveal:E.isActive()})}">
-                                <span class="cell__content">${D(r.word)}</span>
+                            <div class="${D(r,{forceReveal:E.isActive()})}">
+                                <span class="cell__content">${H(r.word)}</span>
                             </div>
                         `).join("")}
                     </div>
@@ -76,7 +76,7 @@ import{k as I,o as O,c as x,g as N,e as D,r as H,f as T}from"./sanitize-d-swCcn9
                         <span class="game__score-arrow game__score-arrow--${e.turn.team}" aria-hidden="true">
                             ${e.turn.team==="dissonant"?m.arrowLeft:m.arrowRight}
                         </span>
-                        <span class="game__score-center-text">${e.gameOver?u.gameFinished:Q(e.turn.team,d)}</span>
+                        <span class="game__score-center-text">${e.gameOver?u.gameFinished:j(e.turn.team,d)}</span>
                     </span>
                     <span class="game__score-item game__score-item--resonant ${e.turn.team==="resonant"?"game__score-item--active game__score-item--expanded":""}">
                         <span class="game__score-main">${B} / ${A}</span>
@@ -85,6 +85,6 @@ import{k as I,o as O,c as x,g as N,e as D,r as H,f as T}from"./sanitize-d-swCcn9
                 </div>
                 <button class="fullscreen-btn btn-icon" id="fullscreenBtn">${m.maximize}</button>
             </footer>
-            ${H(e,d)}
+            ${M(e,d)}
         </div>
-        `,n.querySelectorAll(".game .grid .cell").forEach((r,f)=>{g&&(!w.has(f)||o.has(f)||r.classList.add("cell--reveal-anim"))}),o=w,g=!0,document.getElementById("backBtn").addEventListener("click",()=>{window.location.href=v()+"/index.html"}),document.getElementById("rulesBtn").addEventListener("click",()=>{P(d)}),document.getElementById("fullscreenBtn").addEventListener("click",()=>{var r,f,R;document.fullscreenElement?(R=document.exitFullscreen)==null||R.call(document):(f=(r=document.documentElement).requestFullscreen)==null||f.call(r)}),q(),b.bind(),requestAnimationFrame(()=>T(n))}function $(){var u;const e=l.getState(),d=l.getLanguage(),y=s.getPresenceState();if(((u=e==null?void 0:e.turnTransition)==null?void 0:u.kind)==="anomaly"&&e.turnTransition.anomalyKey==="glitch"&&E.trigger(e.turnTransition.id),!e){window.location.href=v()+"/index.html";return}if(e.phase==="lobby"){C(d),h||(h=!0,l.startGame().catch(_=>{K("game.startGame",_)}).finally(()=>{h=!1}));return}S(e,d,y)}l.subscribe($),s.onChange($),O(()=>T(n)),p||(document.addEventListener("fullscreenchange",q),p=!0),n.addEventListener("click",e=>{b.handleRootClick(e)}),document.addEventListener("keydown",e=>{b.handleEscape(e)}),$()}export{ne as initGame};
+        `,n.querySelectorAll(".game .grid .cell").forEach((r,f)=>{g&&(!w.has(f)||o.has(f)||r.classList.add("cell--reveal-anim"))}),o=w,g=!0,document.getElementById("backBtn").addEventListener("click",()=>{window.location.href=v()+"/index.html"}),document.getElementById("rulesBtn").addEventListener("click",()=>{P(d)}),document.getElementById("fullscreenBtn").addEventListener("click",()=>{var r,f,R;document.fullscreenElement?(R=document.exitFullscreen)==null||R.call(document):(f=(r=document.documentElement).requestFullscreen)==null||f.call(r)}),q(),$.bind(),requestAnimationFrame(()=>T(n))}function b(){var u;const e=l.getState(),d=l.getLanguage(),y=s.getPresenceState();if(((u=e==null?void 0:e.turnTransition)==null?void 0:u.kind)==="anomaly"&&e.turnTransition.anomalyKey==="glitch"&&E.trigger(e.turnTransition.id),!e){window.location.href=v()+"/index.html";return}if(e.phase==="lobby"){C(d),h||(h=!0,l.startGame().catch(_=>{K("game.startGame",_)}).finally(()=>{h=!1}));return}S(e,d,y)}l.subscribe(b),s.onChange(b),O(()=>T(n)),p||(document.addEventListener("fullscreenchange",q),p=!0),n.addEventListener("click",e=>{$.handleRootClick(e)}),document.addEventListener("keydown",e=>{$.handleEscape(e)}),b()}export{ne as initGame};
