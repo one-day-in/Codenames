@@ -1,10 +1,40 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="16" fill="#050505"/>
-  <ellipse cx="32" cy="31" rx="22" ry="24" fill="#2a1b07"/>
-  <ellipse cx="32" cy="27" rx="17" ry="18" fill="#f0be56" opacity="0.28"/>
-  <path d="M22 18.5 26 12h12l4 6.5-2.2 12.5H24.2Z" fill="#ffd76d" stroke="#5a3b0e" stroke-width="1.3"/>
-  <path d="M27.5 14.5v15.2M31 13.6v16.1M34.5 13.6v16.1M38 14.5v15.2" stroke="#fff3bc" stroke-opacity=".42" stroke-width=".8"/>
-  <rect x="30.7" y="30.6" width="2.6" height="12.4" rx="1.3" fill="#4e3812"/>
-  <ellipse cx="32" cy="49" rx="11.5" ry="3.8" fill="#0d0d0d" opacity=".82"/>
-  <ellipse cx="32" cy="48" rx="9.6" ry="2.7" fill="#251807"/>
+  <defs>
+    <radialGradient id="sceneGlow" cx="50%" cy="38%" r="54%">
+      <stop offset="0%" stop-color="#ffd778" stop-opacity="0.42"/>
+      <stop offset="46%" stop-color="#b67d20" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#050505" stop-opacity="1"/>
+    </radialGradient>
+    <radialGradient id="lampAura" cx="50%" cy="28%" r="48%">
+      <stop offset="0%" stop-color="#fff6cf" stop-opacity="0.95"/>
+      <stop offset="55%" stop-color="#ffd56a" stop-opacity="0.82"/>
+      <stop offset="100%" stop-color="#f0b83e" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="shade" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#fff2bb"/>
+      <stop offset="48%" stop-color="#ffd86f"/>
+      <stop offset="100%" stop-color="#e7b23a"/>
+    </linearGradient>
+    <linearGradient id="metal" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#7a5a20"/>
+      <stop offset="100%" stop-color="#211708"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="64" height="64" rx="14" fill="#050505"/>
+  <circle cx="32" cy="31" r="25.5" fill="url(#sceneGlow)"/>
+  <ellipse cx="31.5" cy="46.8" rx="16" ry="4.2" fill="#0b0b0b" opacity="0.86"/>
+  <ellipse cx="31.5" cy="45.9" rx="12.6" ry="3.2" fill="#251805"/>
+  <ellipse cx="31.5" cy="44.7" rx="8.8" ry="2.45" fill="#6f4a13"/>
+
+  <ellipse cx="31" cy="21.5" rx="15" ry="14" fill="url(#lampAura)"/>
+  <path d="M20.5 19.2 25.1 11.6h13.8l4.6 7.6-2.35 15H22.85z" fill="url(#shade)" stroke="#5b3a0e" stroke-width="1.35" stroke-linejoin="round"/>
+  <path d="M26.7 14.3v18.2M30.3 13.2v19.3M33.9 13.2v19.3M37.5 14.3v18.2" stroke="#fff4c3" stroke-opacity=".42" stroke-width=".9"/>
+  <rect x="30.15" y="33.2" width="2.7" height="11.8" rx="1.35" fill="url(#metal)"/>
+  <rect x="34.55" y="31.2" width="1.05" height="4.5" rx=".5" fill="#3f2b0d"/>
+  <circle cx="35.08" cy="36.35" r=".72" fill="#846127"/>
+
+  <path d="M43.8 39.2c1.3 0 2.35.84 2.35 2.08v7.3h-4.7v-7.3c0-1.24 1.06-2.08 2.35-2.08z" fill="#151515"/>
+  <rect x="42.2" y="48.4" width="3.2" height="6.7" rx="1.45" fill="#121212"/>
+  <ellipse cx="43.8" cy="56.1" rx="4.6" ry="1.28" fill="#0b0b0b" opacity=".72"/>
 </svg>
