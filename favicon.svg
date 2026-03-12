@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="bgGlow" cx="50%" cy="38%" r="58%">
+      <stop offset="0%" stop-color="#f6d57a" stop-opacity="0.34"/>
+      <stop offset="55%" stop-color="#8a5c12" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#050505" stop-opacity="1"/>
+    </radialGradient>
+    <linearGradient id="shadeGlow" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#fff4c3"/>
+      <stop offset="52%" stop-color="#ffd86f"/>
+      <stop offset="100%" stop-color="#e8b63d"/>
+    </linearGradient>
+    <linearGradient id="metal" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#7b5d22"/>
+      <stop offset="100%" stop-color="#23190a"/>
+    </linearGradient>
+    <filter id="softGlow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="2.6" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="64" height="64" rx="16" fill="#050505"/>
+  <circle cx="32" cy="30" r="27" fill="url(#bgGlow)"/>
+
+  <ellipse cx="32" cy="49" rx="11.5" ry="3.8" fill="#0d0d0d" opacity="0.8"/>
+  <ellipse cx="32" cy="48" rx="9.6" ry="2.7" fill="#251807"/>
+  <ellipse cx="32" cy="45.8" rx="6.6" ry="2.2" fill="#4a3410"/>
+
+  <path d="M22 18.5L26 12h12l4 6.5-2.2 12.5H24.2L22 18.5z" fill="url(#shadeGlow)" stroke="#5a3b0e" stroke-width="1.3" filter="url(#softGlow)"/>
+  <path d="M27.5 14.5v15.2M31 13.6v16.1M34.5 13.6v16.1M38 14.5v15.2" stroke="#fff3bc" stroke-opacity="0.42" stroke-width="0.8"/>
+
+  <rect x="30.7" y="30.6" width="2.6" height="12.4" rx="1.3" fill="url(#metal)"/>
+  <rect x="28.6" y="42.4" width="6.8" height="1.8" rx="0.9" fill="#6d4b16"/>
+</svg>
