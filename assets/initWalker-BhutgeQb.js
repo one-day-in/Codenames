@@ -1,8 +1,8 @@
-import{g as y,e as T,r as h,a as L,b as C,o as S,h as M,i as x,j as A}from"./revealedCells-DhaKyj1L.js";import{b as O,f as E,I as p,t as k,D as $}from"./url-Qg2x4s1h.js";import{i as G,b as I}from"./initGuestPage-j4cI67oa.js";import"./entry-BreUzD_f.js";import"./roomRepository-DwKmHnBd.js";function B({state:e,lang:s,team:d,syncStatus:r}){const t=k(s),i=e.turn,o=i.team===d,v=i.guideLimit!==null,l=o&&v&&!e.gameOver&&!e.turnTransition,u=v?Math.max((i.guideLimit??0)-(i.dreamwalkerMoves??0),0):0,a=O(d,s),m=l?`${t.dreamwalker}: <span class="walker__moves-value">${E(u,s)}</span>`:`${t.dreamwalker}: ${p.eyeClosed}`;return`
+import{g as y,e as T,r as h,a as L,b as C,o as S,h as M,i as x,j as A}from"./revealedCells-dP0TpZDF.js";import{b as O,f as E,I as p,t as k,D as $}from"./url-Qg2x4s1h.js";import{i as G,b as I}from"./initGuestPage-nDKbcvyT.js";import"./entry-DWqnp-B9.js";import"./roomRepository-DwKmHnBd.js";function B({state:e,lang:s,team:d,syncStatus:r}){const t=k(s),i=e.turn,o=i.team===d,v=i.guideLimit!==null,l=o&&v&&!e.gameOver&&!e.turnTransition,u=v?Math.max((i.guideLimit??0)-(i.dreamwalkerMoves??0),0):0,a=O(d,s),m=l?`${t.dreamwalker}: <span class="walker__moves-value">${E(u,s)}</span>`:`${t.dreamwalker}: ${p.eyeClosed}`;return`
         <div class="screen-layout walker-layout">
             <header class="screen-header">
+                <div class="walker__title ${l?"walker__title--active":"walker__title--muted"}">${a}</div>
                 <div class="walker__header">
-                    <div class="walker__title ${l?"walker__title--active":"walker__title--muted"}">${a}</div>
                     <div class="walker__meta">
                         <div class="${l?"walker__status walker__status--active":"walker__status walker__status--muted"}">${m}</div>
                         <div class="walker__actions">
