@@ -1,4 +1,4 @@
-import{C as G,m as ee,e as U,r as V,a as K,g as ne,c as te,p as q,d as re,i as ie,o as oe,f as ae,n as Q,j as F,k as z,q as le,l as se}from"./turnTransitionDismiss-Bfc4JFPk.js";import{t as R,e as H,I as x,f as ce,h as de,k as ue,D,n as me}from"./roomRepository-DF5mcqIV.js";import"./entry-F2HfFfEk.js";function _e(e){const n=R(e);let s=[];function l(){const i=Math.min(window.innerWidth,window.innerHeight),t=Math.max(window.innerWidth,window.innerHeight);return window.matchMedia("(pointer: coarse)").matches&&i<=768&&t<=1024}async function g(){var i;if(l())try{(i=screen.orientation)!=null&&i.lock&&await screen.orientation.lock("portrait")}catch{}}function d(){let i=document.getElementById("orientation-guard");return i||(i=document.createElement("div"),i.id="orientation-guard",i.className="orientation-guard",i.setAttribute("aria-live","polite"),i.innerHTML=`
+import{C as G,m as ee,e as U,r as V,a as K,g as ne,c as te,p as q,d as re,i as ie,o as oe,f as ae,n as Q,j as F,k as z,q as le,l as se}from"./turnTransitionDismiss-Bh8OQKDh.js";import{t as R,e as H,I as x,f as ce,h as de,k as ue,D,n as me}from"./roomRepository-DF5mcqIV.js";import"./entry-DOYXBYct.js";function _e(e){const n=R(e);let s=[];function l(){const i=Math.min(window.innerWidth,window.innerHeight),t=Math.max(window.innerWidth,window.innerHeight);return window.matchMedia("(pointer: coarse)").matches&&i<=768&&t<=1024}async function g(){var i;if(l())try{(i=screen.orientation)!=null&&i.lock&&await screen.orientation.lock("portrait")}catch{}}function d(){let i=document.getElementById("orientation-guard");return i||(i=document.createElement("div"),i.id="orientation-guard",i.className="orientation-guard",i.setAttribute("aria-live","polite"),i.innerHTML=`
                 <div class="orientation-guard__content">
                     <p class="orientation-guard__title">${n.rotatePortraitTitle}</p>
                     <p class="orientation-guard__text">${n.rotatePortraitText}</p>
@@ -95,8 +95,10 @@ import{C as G,m as ee,e as U,r as V,a as K,g as ne,c as te,p as q,d as re,i as i
 
             <footer class="screen-footer walker__footer">
                 <div class="walker__actions">
-                    <span class="walker__end-hint">${d.endTurn}</span>
-                    <button class="walker__action-btn walker__refresh-btn ${o?"walker__refresh-btn--active":"walker__refresh-btn--muted"}" id="refreshBtn" aria-label="${d.endTurn}" ${o?"":"disabled"}>${x.x}</button>
+                    <button class="walker__action-btn walker__refresh-btn ${o?"walker__refresh-btn--active":"walker__refresh-btn--muted"}" id="refreshBtn" aria-label="${d.endTurn}" ${o?"":"disabled"}>
+                        <span class="walker__action-label">${d.endTurn}</span>
+                        <span class="walker__action-icon">${x.x}</span>
+                    </button>
                 </div>
             </footer>
             ${V(e,n,{suppressedTransitionId:l})}
