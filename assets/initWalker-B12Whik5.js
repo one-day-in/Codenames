@@ -1,1 +1,0 @@
-import{initController as t}from"./initController-j4MyzpVE.js";import"./turnTransitionDismiss-CoxVPkPM.js";import"./entry-DcRVL3eF.js";import"./roomRepository-CR-8Ocs6.js";async function p(r){return t(r)}export{p as initWalker};
